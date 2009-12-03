@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin
+>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.file"
+            defaultHandler="com.aptana.cloudconnect.ui.internal.handlers.DeployHandler"
+            description="Deploy Project using Cloudconnect Web App"
+            id="com.aptana.cloudconnect.ui.command.Deploy"
+            name="Deploy Project...">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commandImages">
+      <image
+            commandId="com.aptana.cloudconnect.ui.command.Deploy"
+            icon="icons/cloud.png">
+      </image>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.aptana.cloudconnect.ui.toolbar">
+            <command
+                  commandId="com.aptana.cloudconnect.ui.command.Deploy"
+                  label="Deploy Project..."
+                  style="push"
+                  tooltip="Deploy Project using Cloudconnect Web App">
+               <visibleWhen
+                     checkEnabled="true">
+               </visibleWhen>
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="com.aptana.cloudconnect.ui.objectContribution"
+            objectClass="org.eclipse.core.resources.IResource">
+         <action
+               class="com.aptana.cloudconnect.ui.internal.actions.DeployProjectAction"
+               enablesFor="1"
+               icon="icons/cloud.png"
+               id="com.aptana.cloudconnect.ui.DeployProjectAction"
+               label="Deploy Project..."
+               menubarPath="additions"
+               tooltip="Deploy Project using Cloudconnect Web App">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>
