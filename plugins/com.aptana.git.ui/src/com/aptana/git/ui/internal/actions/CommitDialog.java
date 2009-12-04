@@ -449,6 +449,27 @@ public class CommitDialog extends StatusDialog implements IGitRepositoryListener
 		fMessage = commitMessage.getText();
 		updateStatus(Status.OK_STATUS);
 	}
+	
+	@Override
+	protected void createButtonsForButtonBar(Composite parent) {
+		// increment the number of columns in the button bar by 3
+		((GridLayout) parent.getLayout()).numColumns += 3;
+		((GridLayout) parent.getLayout()).makeColumnsEqualWidth = false;
+
+		Label deployToAptanaCloudLabel = new Label(parent, SWT.NONE);
+		deployToAptanaCloudLabel.setText("Deploy to Aptana Cloud:");
+		deployToAptanaCloudLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
+
+		Button deployToStagingLabel = new Button(parent, SWT.CHECK);
+		deployToStagingLabel.setText("Staging");
+		deployToStagingLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
+
+		Button deployToProductionLabel = new Button(parent, SWT.CHECK);
+		deployToProductionLabel.setText("Production");
+		deployToProductionLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false));
+
+		super.createButtonsForButtonBar(parent);
+	}
 
 	// TODO Change way dialog is composed to push buttons into commit message area like GitX?
 
