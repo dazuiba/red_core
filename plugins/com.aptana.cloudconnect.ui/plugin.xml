@@ -43,13 +43,73 @@
             adaptable="true"
             id="com.aptana.cloudconnect.ui.objectContribution"
             objectClass="org.eclipse.core.resources.IResource">
+         <menu
+               icon="icons/cloud.png"
+               id="com.aptana.cloudconnect.ui.accounts.menu"
+               label="Deploy Project">
+            <groupMarker
+                  name="additions">
+            </groupMarker>
+         </menu>
+         <menu
+               id="com.aptana.cloudconnect.ui.aptanaaccount.menu"
+               label="Aptana Account"
+               path="com.aptana.cloudconnect.ui.accounts.menu/additions">
+            <groupMarker
+                  name="additions">
+            </groupMarker>
+         </menu>
+         <menu
+               id="com.aptana.cloudconnect.ui.paulsaccount.menu"
+               label="Paul&apos;s Personal Account"
+               path="com.aptana.cloudconnect.ui.accounts.menu/additions">
+            <groupMarker
+                  name="additions">
+            </groupMarker>
+         </menu>
          <action
                class="com.aptana.cloudconnect.ui.internal.actions.DeployProjectAction"
                enablesFor="1"
                icon="icons/cloud.png"
-               id="com.aptana.cloudconnect.ui.DeployProjectAction"
-               label="Deploy Project..."
-               menubarPath="additions"
+               id="com.aptana.cloudconnect.ui.DeployProjectToDevelopmentActionPaul"
+               label="Development"
+               menubarPath="com.aptana.cloudconnect.ui.accounts.menu/com.aptana.cloudconnect.ui.paulsaccount.menu/additions"
+               tooltip="Deploy Project using Cloudconnect Web App">
+         </action>
+         <action
+               class="com.aptana.cloudconnect.ui.internal.actions.DeployProjectAction"
+               enablesFor="1"
+               icon="icons/cloud.png"
+               id="com.aptana.cloudconnect.ui.DeployProjectToStagingActionPaul"
+               label="Staging"
+               menubarPath="com.aptana.cloudconnect.ui.accounts.menu/com.aptana.cloudconnect.ui.paulsaccount.menu/additions"
+               tooltip="Deploy Project using Cloudconnect Web App">
+         </action>
+         <action
+               class="com.aptana.cloudconnect.ui.internal.actions.DeployProjectAction"
+               enablesFor="1"
+               icon="icons/cloud.png"
+               id="com.aptana.cloudconnect.ui.DeployProjectToProductionActionPaul"
+               label="Production"
+               menubarPath="com.aptana.cloudconnect.ui.accounts.menu/com.aptana.cloudconnect.ui.paulsaccount.menu/additions"
+               tooltip="Deploy Project using Cloudconnect Web App">
+         </action>
+         <action
+               class="com.aptana.cloudconnect.ui.internal.actions.DeployProjectAction"
+               enablesFor="1"
+               icon="icons/cloud.png"
+               id="com.aptana.cloudconnect.ui.DeployProjectToStagingActionAptana"
+               label="Staging"
+               menubarPath="com.aptana.cloudconnect.ui.accounts.menu/com.aptana.cloudconnect.ui.aptanaaccount.menu/additions"
+               tooltip="Deploy Project using Cloudconnect Web App">
+         </action>
+         <action
+               class="com.aptana.cloudconnect.ui.internal.actions.DeployProjectAction"
+               enablesFor="1"
+               icon="icons/cloud.png"
+               id="com.aptana.cloudconnect.ui.DeployProjectToProductionActionAptana"
+               label="Production"
+               menubarPath="com.aptana.cloudconnect.ui.accounts.menu/com.aptana.cloudconnect.ui.aptanaaccount.menu/additions"
                tooltip="Deploy Project using Cloudconnect Web App">
          </action>
       </objectContribution>

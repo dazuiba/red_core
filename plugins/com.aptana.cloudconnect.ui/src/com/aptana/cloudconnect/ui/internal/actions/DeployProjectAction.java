@@ -19,6 +19,7 @@ public class DeployProjectAction implements IObjectActionDelegate {
 		System.getProperty("CLOUDCONNECT_URL", "http://ec2-67-202-41-115.compute-1.amazonaws.com:81/user_session/new");
 	private URL cloudconnectURL;
 	
+	private String to;
 	private String projectName;
 
 	public DeployProjectAction() {
@@ -45,7 +46,7 @@ public class DeployProjectAction implements IObjectActionDelegate {
 				support.createBrowser(
 						IWorkbenchBrowserSupport.AS_EDITOR,
 						"Cloudconnect",
-						"Cloudconnect" + (projectName == null ? "" : " - Deploying " + projectName ),
+						"Cloudconnect" + (projectName == null ? "" : " - Deploying " + projectName + " to " + to),
 						"Cloudconnect Management Console").openURL(cloudconnectURL);
 			} else {
 				support.getExternalBrowser().openURL(cloudconnectURL);
@@ -56,6 +57,9 @@ public class DeployProjectAction implements IObjectActionDelegate {
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {
+		if (to == null) {
+			to = action.getText();
+		}
 		action.setEnabled(false);
 		action.setText("Deploy...");
 		projectName = null;
@@ -67,7 +71,7 @@ public class DeployProjectAction implements IObjectActionDelegate {
 					IResource resource = (IResource) firstElement;
 					action.setEnabled(true);
 					projectName = resource.getName();
-					action.setText("Deploy " + projectName + "...");
+					action.setText("To " + to);
 				}
 			}
 		}
