@@ -61,6 +61,8 @@ import com.aptana.editor.css.CSSSourceConfiguration;
 import com.aptana.editor.css.ICSSConstants;
 import com.aptana.editor.js.IJSConstants;
 import com.aptana.editor.js.JSSourceConfiguration;
+import com.aptana.editor.svg.ISVGConstants;
+import com.aptana.editor.svg.SVGSourceConfiguration;
 
 /**
  * @author Max Stepanov

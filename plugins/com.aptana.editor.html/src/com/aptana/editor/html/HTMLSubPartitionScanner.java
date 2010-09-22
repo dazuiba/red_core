@@ -46,6 +46,7 @@ import com.aptana.editor.common.text.rules.ISubPartitionScanner;
 import com.aptana.editor.common.text.rules.SubPartitionScanner;
 import com.aptana.editor.css.CSSSourceConfiguration;
 import com.aptana.editor.js.JSSourceConfiguration;
+import com.aptana.editor.svg.SVGSourceConfiguration;
 
 /**
  * @author Max Stepanov
