@@ -15,5 +15,15 @@
          </contentTypeBinding>
       </editor>
    </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="dtd"
+            id="com.aptana.contenttype.dtd"
+            name="DTD Source"
+            priority="normal">
+      </content-type>
+   </extension>
 
 </plugin>
