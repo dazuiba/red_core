@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.aptana.editor.dtd.DTDEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            default="true"
+            extensions="dtd"
+            id="com.aptana.editor.dtd"
+            name="Aptana DTD Editor">
+         <contentTypeBinding
+               contentTypeId="com.aptana.contenttype.dtd">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+
+</plugin>

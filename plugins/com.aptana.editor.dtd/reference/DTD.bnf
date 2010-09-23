@@ -1,0 +1,258 @@
+### 0
+DTD
+	:	intSubset
+	;
+
+### 1
+
+intSubset
+   	:	(markupdecl | DeclSep)*
+	;
+
+### 2	
+markupdecl
+	:	elementdecl
+	|	AttlistDecl
+	|	EntityDecl
+	|	NotationDecl
+	|	PI
+	|	Comment
+	;
+
+DeclSep
+	:	PEReference
+	|	S
+	;
+
+### 3
+
+elementdecl
+	:	'<!ELEMENT' S Name S contentspec S? '>'
+	;
+
+AttlistDecl
+	:	'<!ATTLIST' S Name AttDef* S? '>'
+	;
+
+EntityDecl
+	:	GEDecl
+	|	PEDecl
+	;
+
+NotationDecl
+	:	'<!NOTATION' S Name S (ExternalID | PublicID) S? '>'
+	;
+
+PI
+	:	<?' PITarget (S (Char* - (Char* '?>' Char*)))? '?>'
+	;
+
+Comment
+	:	'<!--' ((Char - '-') | ('-' (Char - '-')))* '-->'
+	;
+
+PEReference
+	:	'%' Name ';'
+	;
+	
+S
+	:	(#x20 | #x9 | #xD | #xA)+
+	;
+
+### 4
+
+Name
+	:	NameStartChar (NameChar)*
+	;
+	
+contentspec
+	:	'EMPTY'
+	|	'ANY'
+	|	Mixed
+	|	children
+	;
+
+AttDef
+	:	S Name S AttType S DefaultDecl
+	;
+	
+GEDecl
+	:	'<!ENTITY' S Name S EntityDef S? '>'
+	;
+
+PEDecl
+	:	'<!ENTITY' S '%' S Name S PEDef S? '>'
+	;
+
+ExternalID
+	:	'SYSTEM' S SystemLiteral
+	|	'PUBLIC' S PubidLiteral S SystemLiteral
+	;
+
+PublicID
+	:	'PUBLIC' S PubidLiteral
+	;
+
+PITarget
+	:	Name - (('X' | 'x') ('M' | 'm') ('L' | 'l'))
+	;
+
+Char
+	:	#x9
+	|	#xA
+	|	#xD
+	|	[#x20-#xD7FF]
+	|	[#xE000-#xFFFD]
+	|	[#x10000-#x10FFFF]
+	;
+
+### 5
+
+NameStartChar
+	:	":"
+	|	[A-Z]
+	|	"_"
+	|	[a-z]
+	|	[#xC0-#xD6]
+	|	[#xD8-#xF6]
+	|	[#xF8-#x2FF]
+	|	[#x370-#x37D]
+	|	[#x37F-#x1FFF]
+	|	[#x200C-#x200D]
+	|	[#x2070-#x218F]
+	|	[#x2C00-#x2FEF]
+	|	[#x3001-#xD7FF]
+	|	[#xF900-#xFDCF]
+	|	[#xFDF0-#xFFFD]
+	|	[#x10000-#xEFFFF]
+	;
+
+NameChar
+	:	NameStartChar
+	|	"-"
+	|	"."
+	|	[0-9]
+	|	#xB7
+	|	[#x0300-#x036F]
+	|	[#x203F-#x2040]
+	;
+
+Mixed
+	:	'(' S? '#PCDATA' (S? '|' S? Name)* S? ')*'
+	|	'(' S? '#PCDATA' S? ')'
+	;
+
+children
+	:	(choice | seq) ('?' | '*' | '+')?
+	;
+
+AttType
+	:	StringType
+	|	TokenizedType
+	|	EnumeratedType
+	;
+
+DefaultDecl
+	:	'#REQUIRED'
+	|	'#IMPLIED'
+	|	(('#FIXED' S)? AttValue)
+	;
+
+EntityDef
+	:	EntityValue
+	|	(ExternalID NDataDecl?)
+	;
+
+PEDef
+	:	EntityValue
+	|	ExternalID
+	;
+
+PubidLiteral
+	:	'"' PubidChar* '"'
+	|	"'" (PubidChar - "'")* "'"
+	;
+
+### 6
+
+choice
+	:	'(' S? cp ( S? '|' S? cp )+ S? ')'
+	;
+
+seq
+	:	'(' S? cp ( S? ',' S? cp )* S? ')'
+	;
+	
+StringType
+	:	'CDATA'
+	;
+
+TokenizedType
+	:	'ID'
+	|	'IDREF'
+	|	'IDREFS'
+	|	'ENTITY'
+	|	'ENTITIES'
+	|	'NMTOKEN'
+	|	'NMTOKENS'
+	;
+	
+EnumeratedType
+	:	NotationType
+	|	Enumeration
+	;
+
+AttValue
+	:	'"' ([^<&"] | Reference)* '"'
+	|	"'" ([^<&'] | Reference)* "'"
+	;
+	
+EntityValue
+	:	'"' ([^%&"] | PEReference | Reference)* '"'
+	| 	"'" ([^%&'] | PEReference | Reference)* "'"
+	;
+	
+NDataDecl
+	:	S 'NDATA' S Name
+	;
+	
+PubidChar
+	:	#x20
+	|	#xD
+	|	#xA
+	|	[a-zA-Z0-9]
+	|	[-'()+,./:=?;!*#@$_%]
+	;
+
+### 7
+
+cp
+	:	(Name | choice | seq) ('?' | '*' | '+')?
+	;
+
+NotationType
+	:	'NOTATION' S '(' S? Name (S? '|' S? Name)* S? ')'
+	;
+
+Enumeration
+	'(' S? Nmtoken (S? '|' S? Nmtoken)* S? ')'
+	;
+
+Reference
+	:	EntityRef
+	|	CharRef
+	;
+
+### 8
+
+Nmtoken
+	:	(NameChar)+
+	;
+
+EntityRef
+	:	'&' Name ';'
+	;
+
+PEReference
+	:	'%' Name ';'
+	;
