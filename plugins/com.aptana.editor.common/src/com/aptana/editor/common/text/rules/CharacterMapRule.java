@@ -32,7 +32,7 @@
  * 
  * Any modifications to this file must keep this entire header intact.
  */
-package com.aptana.editor.js.text.rules;
+package com.aptana.editor.common.text.rules;
 
 import java.util.HashMap;
 import java.util.Map;
