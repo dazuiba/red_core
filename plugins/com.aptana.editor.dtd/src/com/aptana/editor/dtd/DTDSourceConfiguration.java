@@ -25,12 +25,18 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	public static final String PREFIX = "__dtd__";
 	public static final String DEFAULT = "__dtd" + IDocument.DEFAULT_CONTENT_TYPE;
 	public static final String DTD_COMMENT = PREFIX + "comment";
+	public final static String STRING_DOUBLE = PREFIX + "string_double"; //$NON-NLS-1$
+	public final static String STRING_SINGLE = PREFIX + "string_single"; //$NON-NLS-1$
 
 	// TODO: add other content types
-	public static final String[] CONTENT_TYPES = new String[] { DEFAULT, DTD_COMMENT };
+	public static final String[] CONTENT_TYPES = new String[] { DEFAULT, DTD_COMMENT, STRING_DOUBLE, STRING_SINGLE };
 	private static final String[][] TOP_CONTENT_TYPES = new String[][] { { IDTDConstants.CONTENT_TYPE_DTD } };
 
-	private IPredicateRule[] partitioningRules = new IPredicateRule[] { new MultiLineRule("<!--", "-->", new Token(DTD_COMMENT), '\0', true) };
+	private IPredicateRule[] partitioningRules = new IPredicateRule[] {
+		new MultiLineRule("<!--", "-->", new Token(DTD_COMMENT), '\0', true),
+		new MultiLineRule("\"", "\"", new Token(DTD_COMMENT), '\0', true),
+		new MultiLineRule("\'", "\'", new Token(DTD_COMMENT), '\0', true)
+	};
 	private DTDScanner dtdScanner;
 
 	private static DTDSourceConfiguration instance;
@@ -151,8 +157,16 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 		reconciler.setDamager(dr, DEFAULT);
 		reconciler.setRepairer(dr, DEFAULT);
 
-		NonRuleBasedDamagerRepairer ndr = new NonRuleBasedDamagerRepairer(this.getToken("comment.block.xml"));
-		reconciler.setDamager(ndr, DTD_COMMENT);
-		reconciler.setRepairer(ndr, DTD_COMMENT);
+		NonRuleBasedDamagerRepairer commentDR = new NonRuleBasedDamagerRepairer(this.getToken("comment.block.dtd"));
+		reconciler.setDamager(commentDR, DTD_COMMENT);
+		reconciler.setRepairer(commentDR, DTD_COMMENT);
+		
+		NonRuleBasedDamagerRepairer singleQuotedStringDR = new NonRuleBasedDamagerRepairer(this.getToken("string.quoted.single.dtd"));
+		reconciler.setDamager(singleQuotedStringDR, STRING_SINGLE);
+		reconciler.setRepairer(singleQuotedStringDR, STRING_SINGLE);
+		
+		NonRuleBasedDamagerRepairer doubleQuotedStringDR = new NonRuleBasedDamagerRepairer(this.getToken("string.quoted.double.dtd"));
+		reconciler.setDamager(doubleQuotedStringDR, STRING_DOUBLE);
+		reconciler.setRepairer(doubleQuotedStringDR, STRING_DOUBLE);
 	}
 }
