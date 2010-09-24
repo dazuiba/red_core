@@ -22,47 +22,26 @@
 :};
 
 %terminals ANY, ATTRIBUTE, BOOLEAN, CONST, DOMSTRING, EXCEPTION, FLOAT, GETRAISES, IN, INTERFACE, LONG;
-%terminals MODULE, OBJECT, OCTET, RAISES, READONLY, SEQUENCE, SETRAISES, SHORT, TYPEDEF, UNSIGNED, VALUETYPE, TRUE;
+%terminals MODULE, OBJECT, OCTET, RAISES, READONLY, SEQUENCE, SETRAISES, SHORT, TYPEDEF, UNSIGNED, TRUE;
 %terminals FALSE, VOID, NUM_INTEGER, NUM_FLOAT, LBRACKET, RBRACKET, LPAREN, RPAREN, LCURLY, RCURLY, SEMICOLON, COMMA;
 %terminals COLON, DOUBLE_COLON, LESS_THAN, GREATER_THAN, EQUAL, IDENTIFIER, STRING, OTHER;
+%terminals OMITTABLE, DOUBLE, QUESTION, ELLIPSIS, OPTIONAL, GETTER, SETTER, CREATOR, DELETER, CALLER, STRINGIFIER, IMPLEMENTS;
 
 %goal Definitions;
 
-// 0
+// Level 0
 
 Definitions
 	=	ExtendedAttributeList Definition Definitions
 	|	// empty
 	;
 
-// 1
-
-ExtendedAttributeList
-	=	LBRACKET ExtendedAttribute ExtendedAttributes RBRACKET
-	|	// empty
-	;
-	
 Definition
 	=	Module
 	|	Interface
 	|	Exception
 	|	Typedef
-	|	Valuetype
-	|	Const
-	;
-
-// 2
-	
-ExtendedAttribute
-	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeRest
-	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeRest
-	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeRest
-	|	Other ExtendedAttributeRest
-	;
-
-ExtendedAttributes
-	=	COMMA ExtendedAttribute ExtendedAttributes
-	|	// empty
+	|	ImplementsStatement
 	;
 
 Module
@@ -70,87 +49,7 @@ Module
 	;
 
 Interface
-	=	INTERFACE IDENTIFIER InterfaceBody SEMICOLON
-	;
-
-Exception
-	=	EXCEPTION IDENTIFIER LCURLY ExceptionMembers RCURLY SEMICOLON
-	;
-
-Typedef
-	=	TYPEDEF Type TypedefRest
-	;
-
-Valuetype
-	=	VALUETYPE ValuetypeRest
-	;
-
-Const
-	=	CONST DeclarationType IDENTIFIER EQUAL ConstExpr SEMICOLON
-	;
-
-// 3
-
-ExtendedAttributeInner
-	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeInner
-	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeInner
-	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeInner
-	|	OtherOrComma ExtendedAttributeInner
-	|	// empty
-	;
-
-ExtendedAttributeRest
-	=	ExtendedAttribute
-	|	// empty
-	;
-
-InterfaceBody
-	=	InterfaceInheritance LCURLY InterfaceMembers RCURLY
-	|	// empty
-	;
-
-ExceptionMembers
-	=	ExtendedAttributeList ExceptionMember ExceptionMembers
-	|	// empty
-	;
-	
-Type
-	=	DeclarationType
-	|	SEQUENCE LESS_THAN Type GREATER_THAN
-	;
-
-TypedefRest
-	=	IDENTIFIER SEMICOLON
-	|	DOMSTRING SEMICOLON
-	;
-
-ValuetypeRest
-	=	IDENTIFIER BoxedType SEMICOLON
-	|	DOMSTRING SEQUENCE LESS_THAN UNSIGNED SHORT GREATER_THAN SEMICOLON
-	;
-
-DeclarationType
-	=	UnsignedIntegerType
-	|	ScopedName
-	|	ANY
-	|	BOOLEAN
-	|	OCTET
-	|	FLOAT
-	|	DOMSTRING
-	|	OBJECT
-	;
-	
-ConstExpr
-	=	BooleanLiteral
-	|	NUM_INTEGER
-	|	NUM_FLOAT
-	;
-
-// 4
-
-OtherOrComma
-	=	Other
-	|	COMMA
+	=	INTERFACE IDENTIFIER InterfaceInheritance LCURLY InterfaceMembers RCURLY SEMICOLON
 	;
 
 InterfaceInheritance
@@ -162,36 +61,182 @@ InterfaceMembers
 	=	ExtendedAttributeList InterfaceMember InterfaceMembers
 	|	// empty
 	;
-	
-ExceptionMember
-	=	DeclarationType IDENTIFIER SEMICOLON
+
+InterfaceMember
+	=	Const
+	|	AttributeOrOperation
 	;
 
-BoxedType
-	=	UnsignedIntegerType
-	|	ScopedName
-	|	BOOLEAN
-	|	OCTET
-	|	FLOAT
-	|	SEQUENCE LESS_THAN Type GREATER_THAN
+Exception
+	=	EXCEPTION IDENTIFIER LCURLY ExceptionMembers RCURLY SEMICOLON
 	;
 
-UnsignedIntegerType
-	=	UNSIGNED IntegerType
-	|	IntegerType
+ExceptionMembers
+	=	ExtendedAttributeList ExceptionMember ExceptionMembers
+	|	// empty
 	;
 
-ScopedName
-	=	DOUBLE_COLON ScopedNameAfterColon
-	|	IDENTIFIER ScopedNameParts
+Typedef
+	=	TYPEDEF Type IDENTIFIER SEMICOLON
 	;
-	
+
+ImplementsStatement
+	=	ScopedName IMPLEMENTS ScopedName SEMICOLON
+	;
+
+Const
+	=	CONST Type IDENTIFIER EQUAL ConstExpr SEMICOLON
+	;
+
+ConstExpr
+	=	BooleanLiteral
+	|	NUM_INTEGER
+	|	NUM_FLOAT
+	;
+
 BooleanLiteral
 	=	TRUE
 	|	FALSE
 	;
-	
-// 5
+
+AttributeOrOperation
+	=	STRINGIFIER StringifierAttributeOrOperation
+	|	Attribute
+	|	Operation
+	;
+
+StringifierAttributeOrOperation
+	=	Attribute
+	|	OperationRest
+	|	SEMICOLON
+	;
+
+Attribute
+	=	ReadOnly ATTRIBUTE Type IDENTIFIER GetRaises SetRaises SEMICOLON
+	;
+
+ReadOnly
+	=	READONLY
+	|	// empty
+	;
+
+GetRaises
+	=	GETRAISES ExceptionList
+	|	// empty
+	;
+
+SetRaises
+	=	SETRAISES ExceptionList
+	|	// empty
+	;
+
+Operation
+	=	OmittableSpecials OperationRest
+	;
+
+OmittableSpecials
+	=	OMITTABLE Specials
+	|	Specials
+	;
+
+Specials
+	=	Special Specials
+	|	// empty
+	;
+
+Special
+	=	GETTER
+	|	SETTER
+	|	CREATOR
+	|	DELETER
+	|	CALLER
+	;
+
+OperationRest
+	=	ReturnType OptionalIdentifier LPAREN ArgumentList RPAREN Raises SEMICOLON
+	;
+
+OptionalIdentifier
+	=	IDENTIFIER
+	|	// empty
+	;
+
+Raises
+	=	RAISES ExceptionList
+	|	// empty
+	;
+
+ExceptionList
+	=	LPAREN ScopedNameList RPAREN
+	;
+
+ArgumentList
+	=	Argument Arguments
+	|	// empty
+	;
+
+Arguments
+	=	COMMA Argument Arguments
+	|	// empty
+	;
+
+Argument
+	=	ExtendedAttributeList In Optional Type Ellipsis IDENTIFIER
+	;
+
+In
+	=	IN
+	|	// empty
+	;
+
+Optional
+	=	OPTIONAL
+	|	// empty
+	;
+
+Ellipsis
+	=	ELLIPSIS
+	|	// empty
+	;
+
+ExceptionMember
+	=	Const
+	|	ExceptionField
+	;
+
+ExceptionField
+	=	Type IDENTIFIER SEMICOLON
+	;
+
+ExtendedAttributeList
+	=	LBRACKET ExtendedAttribute ExtendedAttributes RBRACKET
+	|	// empty
+	;
+
+ExtendedAttributes
+	=	COMMA ExtendedAttribute ExtendedAttributes
+	|	// empty
+	;
+
+ExtendedAttribute
+	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeRest
+	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeRest
+	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeRest
+	|	Other ExtendedAttributeRest
+	;
+
+ExtendedAttributeRest
+	=	ExtendedAttribute
+	|	// empty
+	;
+
+ExtendedAttributeInner
+	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeInner
+	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeInner
+	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeInner
+	|	OtherOrComma ExtendedAttributeInner
+	|	// empty
+	;
 
 Other
 	=	NUM_INTEGER
@@ -199,45 +244,74 @@ Other
 	|	IDENTIFIER
 	|	STRING
 	|	OTHER
+	|	ELLIPSIS
 	|	COLON
 	|	DOUBLE_COLON
 	|	SEMICOLON
 	|	LESS_THAN
 	|	EQUAL
 	|	GREATER_THAN
-	|	DOMSTRING
+	|	QUESTION
 	|	FALSE
 	|	OBJECT
 	|	TRUE
 	|	ANY
 	|	ATTRIBUTE
 	|	BOOLEAN
+	|	CALLER
 	|	CONST
+	|	CREATOR
+	|	DELETER
+	|	DOUBLE
 	|	EXCEPTION
 	|	FLOAT
 	|	GETRAISES
+	|	GETTER
+	|	IMPLEMENTS
 	|	IN
 	|	INTERFACE
 	|	LONG
 	|	MODULE
 	|	OCTET
+	|	OMITTABLE
+	|	OPTIONAL
 	|	RAISES
 	|	SEQUENCE
 	|	SETRAISES
+	|	SETTER
 	|	SHORT
+	|	DOMSTRING
+	|	STRINGIFIER
 	|	TYPEDEF
 	|	UNSIGNED
-	|	VALUETYPE
+	|	VOID
 	;
 
-ScopedNameList
-	=	ScopedName ScopedNames
+OtherOrComma
+	=	Other
+	|	COMMA
 	;
 
-InterfaceMember
-	=	Const
-	|	Attribute
-	|	Operation
+Type
+	=	NullableType
+	|	ScopedName
+	|	ANY
+	|	OBJECT
+	;
+
+NullableType
+	=	UnsignedIntegerType Nullable
+	|	BOOLEAN Nullable
+	|	OCTET Nullable
+	|	FLOAT Nullable
+	|	DOUBLE Nullable
+	|	DOMSTRING Nullable
+	|	SEQUENCE LESS_THAN Type GREATER_THAN Nullable
+	;
+
+UnsignedIntegerType
+	=	UNSIGNED IntegerType
+	|	IntegerType
 	;
 
 IntegerType
@@ -245,108 +319,69 @@ IntegerType
 	|	LONG OptionalLong
 	;
 
-ScopedNameAfterColon
-	=	IDENTIFIER ScopedNameParts
-	|	DOMSTRING
-	;
-
-ScopedNameParts
-	=	DOUBLE_COLON ScopedNamePartsAfterColon
+OptionalLong
+	=	LONG
 	|	// empty
 	;
 
-// 6
+Nullable
+	=	QUESTION
+	|	// empty
+	;
+
+ReturnType
+	=	Type
+	|	VOID
+	;
+
+ScopedNameList
+	=	ScopedName ScopedNames
+	;
 
 ScopedNames
 	=	COMMA ScopedName ScopedNames
 	|	// empty
 	;
-	
-Attribute
-	=	ReadOnly ATTRIBUTE DeclarationType IDENTIFIER GetRaises SetRaises SEMICOLON
-	;
-	
-Operation
-	=	ReturnType IDENTIFIER LPAREN ArgumentList RPAREN Raises SEMICOLON
+
+ScopedName
+	=	AbsoluteScopedName
+	|	RelativeScopedName
 	;
 
-OptionalLong
-	=	LONG
-	|	// empty
+AbsoluteScopedName
+	=	DOUBLE_COLON IDENTIFIER ScopedNameParts
 	;
-	
-ScopedNamePartsAfterColon
+
+RelativeScopedName
 	=	IDENTIFIER ScopedNameParts
-	|	DOMSTRING
 	;
 
-// 7
-
-ReadOnly
-	=	READONLY
+ScopedNameParts
+	=	DOUBLE_COLON IDENTIFIER ScopedNameParts
 	|	// empty
 	;
-	
-GetRaises
-	=	GETRAISES ExceptionList
-	|	// empty
-	;
-	
-SetRaises
-	=	SETRAISES ExceptionList
-	|	// empty
-	;
-
-ReturnType
-	=	DeclarationType
-	|	VOID
-	;
-
-Raises
-	=	RAISES ExceptionList
-	|	// empty
-	;
-	
-ArgumentList
-	=	Argument Arguments
-	|	// empty
-	;
-	
-// 8
-
-ExceptionList
-	=	LPAREN ScopedNameList RPAREN
-	;
-	
-Arguments
-	=	COMMA Argument Arguments
-	|	// empty
-	;
-	
-Argument
-	=	ExtendedAttributeList IN DeclarationType IDENTIFIER
-	;
-	
-// 9
 
 /*
+
 ExtendedAttributeNoArg
 	=	IDENTIFIER
 	;
-	
+
 ExtendedAttributeArgList
 	=	IDENTIFIER LPAREN ArgumentList RPAREN
 	;
-	
+
 ExtendedAttributeIdent
 	=	IDENTIFIER EQUAL IDENTIFIER
 	;
-	
+
 ExtendedAttributeScopedName
 	=	IDENTIFIER EQUAL ScopedName
 	;
-	
+
 ExtendedAttributeNamedArgList
 	=	IDENTIFIER EQUAL IDENTIFIER LPAREN ArgumentList RPAREN
 	;
+
 */
+
