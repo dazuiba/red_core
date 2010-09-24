@@ -1,0 +1,353 @@
+Definitions
+	:	ExtendedAttributeList Definition Definitions
+	|	// ε
+	;
+
+Definition
+	:	Module
+	|	Interface
+	|	Exception
+	|	Typedef
+	|	ImplementsStatement
+	;
+
+Module
+	:	MODULE IDENTIFIER LCURLY Definitions RCURLY SEMICOLON
+	;
+
+Interface
+	:	INTERFACE IDENTIFIER InterfaceInheritance LCURLY InterfaceMembers RCURLY SEMICOLON
+	;
+
+InterfaceInheritance
+	:	COLON ScopedNameList
+	|	// ε
+	;
+
+InterfaceMembers
+	:	ExtendedAttributeList InterfaceMember InterfaceMembers
+	|	// ε
+	;
+
+InterfaceMember
+	:	Const
+	|	AttributeOrOperation
+	;
+
+Exception
+	:	EXCEPTION IDENTIFIER LCURLY ExceptionMembers RCURLY SEMICOLON
+	;
+
+ExceptionMembers
+	:	ExtendedAttributeList ExceptionMember ExceptionMembers
+	|	// ε
+	;
+
+Typedef
+	:	TYPEDEF Type IDENTIFIER SEMICOLON
+	;
+
+ImplementsStatement
+	:	ScopedName IMPLEMENTS ScopedName SEMICOLON
+	;
+
+Const
+	:	CONST Type IDENTIFIER EQUAL ConstExpr SEMICOLON
+	;
+
+ConstExpr
+	:	BooleanLiteral
+	|	NUM_INTEGER
+	|	NUM_FLOAT
+	;
+
+BooleanLiteral
+	:	TRUE
+	|	FALSE
+	;
+
+AttributeOrOperation
+	:	STRINGIFIER StringifierAttributeOrOperation
+	|	Attribute
+	|	Operation
+	;
+
+StringifierAttributeOrOperation
+	:	Attribute
+	|	OperationRest
+	|	SEMICOLON
+	;
+
+Attribute
+	:	ReadOnly ATTRIBUTE Type IDENTIFIER GetRaises SetRaises SEMICOLON
+	;
+
+ReadOnly
+	:	READONLY
+	|	// ε
+	;
+
+GetRaises
+	:	GETRAISES ExceptionList
+	|	// ε
+	;
+
+SetRaises
+	:	SETRAISES ExceptionList
+	|	// ε
+	;
+
+Operation
+	:	OmittableSpecials OperationRest
+	;
+
+OmittableSpecials
+	:	OMITTABLE Specials
+	|	Specials
+	;
+
+Specials
+	:	Special Specials
+	|	// ε
+	;
+
+Special
+	:	GETTER
+	|	SETTER
+	|	CREATOR
+	|	DELETER
+	|	CALLER
+	;
+
+OperationRest
+	:	ReturnType OptionalIdentifier LPAREN ArgumentList RPAREN Raises SEMICOLON
+	;
+
+OptionalIdentifier
+	:	IDENTIFIER
+	|	// ε
+	;
+
+Raises
+	:	RAISES ExceptionList
+	|	// ε
+	;
+
+ExceptionList
+	:	LPAREN ScopedNameList RPAREN
+	;
+
+ArgumentList
+	:	Argument Arguments
+	|	// ε
+	;
+
+Arguments
+	:	COMMA Argument Arguments
+	|	// ε
+	;
+
+Argument
+	:	ExtendedAttributeList In Optional Type Ellipsis IDENTIFIER
+	;
+
+In
+	:	IN
+	|	// ε
+	;
+
+Optional
+	:	OPTIONAL
+	|	// ε
+	;
+
+Ellipsis
+	:	ELLIPSIS
+	|	// ε
+	;
+
+ExceptionMember
+	:	Const
+	|	ExceptionField
+	;
+
+ExceptionField
+	:	Type IDENTIFIER SEMICOLON
+	;
+
+ExtendedAttributeList
+	:	LBRACKET ExtendedAttribute ExtendedAttributes RBRACKET
+	|	// ε
+	;
+
+ExtendedAttributes
+	:	COMMA ExtendedAttribute ExtendedAttributes
+	|	// ε
+	;
+
+ExtendedAttribute
+	:	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeRest
+	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeRest
+	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeRest
+	|	Other ExtendedAttributeRest
+	;
+
+ExtendedAttributeRest
+	:	ExtendedAttribute
+	|	// ε
+	;
+
+ExtendedAttributeInner
+	:	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeInner
+	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeInner
+	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeInner
+	|	OtherOrComma ExtendedAttributeInner
+	|	// ε
+	;
+
+Other
+	:	NUM_INTEGER
+	|	NUM_FLOAT
+	|	IDENTIFIER
+	|	STRING
+	|	OTHER
+	|	ELLIPSIS
+	|	COLON
+	|	DOUBLE_COLON
+	|	SEMICOLON
+	|	LESS_THAN
+	|	EQUAL
+	|	GREATER_THAN
+	|	QUESTION
+	|	FALSE
+	|	OBJECT
+	|	TRUE
+	|	ANY
+	|	ATTRIBUTE
+	|	BOOLEAN
+	|	CALLER
+	|	CONST
+	|	CREATOR
+	|	DELETER
+	|	DOUBLE
+	|	EXCEPTION
+	|	FLOAT
+	|	GETRAISES
+	|	GETTER
+	|	IMPLEMENTS
+	|	IN
+	|	INTERFACE
+	|	LONG
+	|	MODULE
+	|	OCTET
+	|	OMITTABLE
+	|	OPTIONAL
+	|	RAISES
+	|	SEQUENCE
+	|	SETRAISES
+	|	SETTER
+	|	SHORT
+	|	DOMSTRING
+	|	STRINGIFIER
+	|	TYPEDEF
+	|	UNSIGNED
+	|	VOID
+	;
+
+OtherOrComma
+	:	Other
+	|	COMMA
+	;
+
+Type
+	:	NullableType
+	|	ScopedName
+	|	ANY
+	|	OBJECT
+	;
+
+NullableType
+	:	UnsignedIntegerType Nullable
+	|	BOOLEAN Nullable
+	|	OCTET Nullable
+	|	FLOAT Nullable
+	|	DOUBLE Nullable
+	|	DOMSTRING Nullable
+	|	SEQUENCE LESS_THAN Type GREATER_THAN Nullable
+	;
+
+UnsignedIntegerType
+	:	UNSIGNED IntegerType
+	|	IntegerType
+	;
+
+IntegerType
+	:	SHORT
+	|	LONG OptionalLong
+	;
+
+OptionalLong
+	:	LONG
+	|	// ε
+	;
+
+Nullable
+	:	QUESTION
+	|	// ε
+	;
+
+ReturnType
+	:	Type
+	|	VOID
+	;
+
+ScopedNameList
+	:	ScopedName ScopedNames
+	;
+
+ScopedNames
+	:	COMMA ScopedName ScopedNames
+	|	// ε
+	;
+
+ScopedName
+	:	AbsoluteScopedName
+	|	RelativeScopedName
+	;
+
+AbsoluteScopedName
+	:	DOUBLE_COLON IDENTIFIER ScopedNameParts
+	;
+
+RelativeScopedName
+	:	IDENTIFIER ScopedNameParts
+	;
+
+ScopedNameParts
+	:	DOUBLE_COLON IDENTIFIER ScopedNameParts
+	|	// ε
+	;
+
+/*
+
+ExtendedAttributeNoArg
+	:	IDENTIFIER
+	;
+
+ExtendedAttributeArgList
+	:	IDENTIFIER LPAREN ArgumentList RPAREN
+	;
+
+ExtendedAttributeIdent
+	:	IDENTIFIER EQUAL IDENTIFIER
+	;
+
+ExtendedAttributeScopedName
+	:	IDENTIFIER EQUAL ScopedName
+	;
+
+ExtendedAttributeNamedArgList
+	:	IDENTIFIER EQUAL IDENTIFIER LPAREN ArgumentList RPAREN
+	;
+
+*/
