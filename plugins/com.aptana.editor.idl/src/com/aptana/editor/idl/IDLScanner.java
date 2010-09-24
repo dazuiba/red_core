@@ -14,8 +14,8 @@ import org.eclipse.jface.text.rules.WordRule;
 
 import com.aptana.editor.common.text.rules.CharacterMapRule;
 import com.aptana.editor.common.text.rules.WhitespaceDetector;
-import com.aptana.editor.ide.text.rules.IDLNumberRule;
 import com.aptana.editor.idl.parsing.lexer.IDLTokenType;
+import com.aptana.editor.idl.text.rules.IDLNumberRule;
 
 public class IDLScanner extends RuleBasedScanner
 {

@@ -32,7 +32,7 @@
  * 
  * Any modifications to this file must keep this entire header intact.
  */
-package com.aptana.editor.ide.text.rules;
+package com.aptana.editor.idl.text.rules;
 
 import org.eclipse.jface.text.rules.IWordDetector;
 
