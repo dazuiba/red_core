@@ -54,32 +54,42 @@ public class IDLScanner extends RuleBasedScanner
 		
 		// TODO: rule for other
 		// TODO: rule for ::
+		// TODO: rule for ...
 		
 		WordRule wordRule = new WordRule(new WordDetector(), createToken(IDLTokenType.IDENTIFIER));
 		wordRule.addWord("any", createToken(IDLTokenType.ANY));
 		wordRule.addWord("attribute", createToken(IDLTokenType.ATTRIBUTE));
 		wordRule.addWord("boolean", createToken(IDLTokenType.BOOLEAN));
+		wordRule.addWord("caller", createToken(IDLTokenType.CALLER));
 		wordRule.addWord("const", createToken(IDLTokenType.CONST));
+		wordRule.addWord("creator", createToken(IDLTokenType.CREATOR));
+		wordRule.addWord("deleter", createToken(IDLTokenType.DELETER));
 		wordRule.addWord("DOMString", createToken(IDLTokenType.DOMSTRING));
+		wordRule.addWord("double", createToken(IDLTokenType.DOUBLE));
 		wordRule.addWord("exception", createToken(IDLTokenType.EXCEPTION));
 		wordRule.addWord("false", createToken(IDLTokenType.FALSE));
 		wordRule.addWord("float", createToken(IDLTokenType.FLOAT));
 		wordRule.addWord("getraises", createToken(IDLTokenType.GETRAISES));
+		wordRule.addWord("getter", createToken(IDLTokenType.GETTER));
+		wordRule.addWord("implements", createToken(IDLTokenType.IMPLEMENTS));
 		wordRule.addWord("in", createToken(IDLTokenType.IN));
 		wordRule.addWord("interface", createToken(IDLTokenType.INTERFACE));
 		wordRule.addWord("long", createToken(IDLTokenType.LONG));
 		wordRule.addWord("module", createToken(IDLTokenType.MODULE));
 		wordRule.addWord("Object", createToken(IDLTokenType.OBJECT));
 		wordRule.addWord("octet", createToken(IDLTokenType.OCTET));
+		wordRule.addWord("omittable", createToken(IDLTokenType.OMITTABLE));
+		wordRule.addWord("optional", createToken(IDLTokenType.OPTIONAL));
 		wordRule.addWord("raises", createToken(IDLTokenType.RAISES));
 		wordRule.addWord("readonly", createToken(IDLTokenType.READONLY));
 		wordRule.addWord("sequence", createToken(IDLTokenType.SEQUENCE));
 		wordRule.addWord("setraises", createToken(IDLTokenType.SETRAISES));
+		wordRule.addWord("setter", createToken(IDLTokenType.SETTER));
 		wordRule.addWord("short", createToken(IDLTokenType.SHORT));
+		wordRule.addWord("stringifier", createToken(IDLTokenType.STRINGIFIER));
 		wordRule.addWord("true", createToken(IDLTokenType.TRUE));
 		wordRule.addWord("typedef", createToken(IDLTokenType.TYPEDEF));
 		wordRule.addWord("unsigned", createToken(IDLTokenType.UNSIGNED));
-		wordRule.addWord("valuetype", createToken(IDLTokenType.VALUETYPE));
 		wordRule.addWord("void", createToken(IDLTokenType.VOID));
 		rules.add(wordRule);
 		
@@ -97,6 +107,7 @@ public class IDLScanner extends RuleBasedScanner
 		cmRule.add(',', createToken(IDLTokenType.COMMA));
 		cmRule.add('[', createToken(IDLTokenType.LBRACKET));
 		cmRule.add(']', createToken(IDLTokenType.RBRACKET));
+		cmRule.add('?', createToken(IDLTokenType.QUESTION));
 		rules.add(cmRule);
 		
 		// numbers
