@@ -19,6 +19,7 @@ public enum DTDTokenType
 	LPAREN("source.dtd"),
 	PIPE("source.dtd"),
 	RPAREN("source.dtd"),
+	RPAREN_STAR("source.dtd"),
 	QUESTION("source.dtd"),
 	STAR("source.dtd"),
 	PLUS("source.dtd"),
@@ -35,7 +36,11 @@ public enum DTDTokenType
 	NMTOKEN_TYPE("keyword.operator.dtd"),
 	NMTOKENS_TYPE("keyword.operator.dtd"),
 	NDATA("keyword.operator.dtd"),
-	NOTATION_TYPE("keyword.operator.dtd");
+	NOTATION_TYPE("keyword.operator.dtd"),
+	ENTITY_REF("source.dtd"),
+	PE_REF("source.dtd"),
+	NAME("source.dtd"),
+	PERCENT("keyword.operator.dtd");
 	
 	private short _index;
 	private String _scope;

@@ -3,6 +3,7 @@ package com.aptana.editor.idl;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
+import org.eclipse.jface.text.rules.EndOfLineRule;
 import org.eclipse.jface.text.rules.IPredicateRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.ITokenScanner;
@@ -24,13 +25,19 @@ public class IDLSourceConfiguration implements IPartitioningConfiguration, ISour
 {
 	public static final String PREFIX = "__idl__";
 	public static final String DEFAULT = "__idl" + IDocument.DEFAULT_CONTENT_TYPE;
-	public static final String IDL_COMMENT = PREFIX + "comment";
+	public final static String IDL_SINGLELINE_COMMENT = PREFIX + "singleline_comment";
+	public static final String IDL_MULTILINE_COMMENT = PREFIX + "multiline_comment";
+	public final static String IDL_DOC_COMMENT = PREFIX + "doc_comment";
 
 	// TODO: add other content types
-	public static final String[] CONTENT_TYPES = new String[] { DEFAULT, IDL_COMMENT };
+	public static final String[] CONTENT_TYPES = new String[] { DEFAULT, IDL_MULTILINE_COMMENT, IDL_SINGLELINE_COMMENT, IDL_DOC_COMMENT };
 	private static final String[][] TOP_CONTENT_TYPES = new String[][] { { IIDLConstants.CONTENT_TYPE_IDL } };
 
-	private IPredicateRule[] partitioningRules = new IPredicateRule[] { new MultiLineRule("/*", "*/", new Token(IDL_COMMENT), '\0', true) };
+	private IPredicateRule[] partitioningRules = new IPredicateRule[] {
+		new EndOfLineRule("//", new Token(IDL_SINGLELINE_COMMENT)),
+		new MultiLineRule("/**", "*/", new Token(IDL_DOC_COMMENT), '\0', true),
+		new MultiLineRule("/*", "*/", new Token(IDL_MULTILINE_COMMENT), '\0', true)
+	};
 	private IDLScanner idlScanner;
 
 	private static IDLSourceConfiguration instance;
@@ -46,7 +53,10 @@ public class IDLSourceConfiguration implements IPartitioningConfiguration, ISour
 		{
 			IContentTypeTranslator c = CommonEditorPlugin.getDefault().getContentTypeTranslator();
 
-			c.addTranslation(new QualifiedContentType(IIDLConstants.CONTENT_TYPE_IDL), new QualifiedContentType("text.idl"));
+			c.addTranslation(new QualifiedContentType(IIDLConstants.CONTENT_TYPE_IDL), new QualifiedContentType("source.idl"));
+			c.addTranslation(new QualifiedContentType(IDL_SINGLELINE_COMMENT), new QualifiedContentType("comment.line.double-slash.idl"));
+			c.addTranslation(new QualifiedContentType(IDL_DOC_COMMENT), new QualifiedContentType("comment.block.documentation.idl"));
+			c.addTranslation(new QualifiedContentType(IDL_MULTILINE_COMMENT), new QualifiedContentType("comment.block.idl"));
 
 			instance = new IDLSourceConfiguration();
 		}
@@ -150,9 +160,17 @@ public class IDLSourceConfiguration implements IPartitioningConfiguration, ISour
 
 		reconciler.setDamager(dr, DEFAULT);
 		reconciler.setRepairer(dr, DEFAULT);
+		
+		NonRuleBasedDamagerRepairer docCommentDR = new NonRuleBasedDamagerRepairer(this.getToken("comment.block.documentation.idl"));
+		reconciler.setDamager(docCommentDR, IDL_DOC_COMMENT);
+		reconciler.setRepairer(docCommentDR, IDL_DOC_COMMENT);
 
-		NonRuleBasedDamagerRepairer ndr = new NonRuleBasedDamagerRepairer(this.getToken("comment.block.idl"));
-		reconciler.setDamager(ndr, IDL_COMMENT);
-		reconciler.setRepairer(ndr, IDL_COMMENT);
+		NonRuleBasedDamagerRepairer multilineCommentDR = new NonRuleBasedDamagerRepairer(this.getToken("comment.block.idl"));
+		reconciler.setDamager(multilineCommentDR, IDL_MULTILINE_COMMENT);
+		reconciler.setRepairer(multilineCommentDR, IDL_MULTILINE_COMMENT);
+		
+		NonRuleBasedDamagerRepairer singlelineCommentDR = new NonRuleBasedDamagerRepairer(this.getToken("comment.line.double-slash.idl"));
+		reconciler.setDamager(singlelineCommentDR, IDL_SINGLELINE_COMMENT);
+		reconciler.setRepairer(singlelineCommentDR, IDL_SINGLELINE_COMMENT);
 	}
 }

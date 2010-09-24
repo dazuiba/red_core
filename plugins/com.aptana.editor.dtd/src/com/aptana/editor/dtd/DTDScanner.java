@@ -14,6 +14,9 @@ import org.eclipse.jface.text.rules.WordRule;
 import com.aptana.editor.common.text.rules.CharacterMapRule;
 import com.aptana.editor.common.text.rules.WhitespaceDetector;
 import com.aptana.editor.dtd.parsing.lexer.DTDTokenType;
+import com.aptana.editor.dtd.text.rules.DTDEntityDetector;
+import com.aptana.editor.dtd.text.rules.DTDNameDetector;
+import com.aptana.editor.dtd.text.rules.DTDOperatorDetector;
 
 public class DTDScanner extends RuleBasedScanner
 {
@@ -35,7 +38,7 @@ public class DTDScanner extends RuleBasedScanner
 		 */
 		public boolean isWordPart(char c)
 		{
-			return Character.isLetterOrDigit(c) || c == '!';
+			return Character.isLetter(c) || c == '!';
 		}
 	}
 	
@@ -48,12 +51,14 @@ public class DTDScanner extends RuleBasedScanner
 		
 		rules.add(new WhitespaceRule(new WhitespaceDetector()));
 		
-		// TODO: Name
-		// TODO: <?
-		// TODO: ?>
-		// TODO: )*
-		// TODO: EntityRef
-		// TODO: PERef
+		// TODO: comment, string, pubid?
+		// TODO: att value, entity value
+		
+		WordRule operatorRule = new WordRule(new DTDOperatorDetector(), Token.UNDEFINED);
+		operatorRule.addWord("<?", createToken(DTDTokenType.PI_START));
+		operatorRule.addWord("?>", createToken(DTDTokenType.PI_END));
+		operatorRule.addWord(")*", createToken(DTDTokenType.RPAREN_STAR));
+		rules.add(operatorRule);
 		
 		WordRule wordRule = new WordRule(new WordDetector(), Token.UNDEFINED);
 		wordRule.addWord("<!ATTLIST", createToken(DTDTokenType.ATTLIST));
@@ -80,6 +85,9 @@ public class DTDScanner extends RuleBasedScanner
 		wordRule.addWord("SYSTEM", createToken(DTDTokenType.SYSTEM));
 		rules.add(wordRule);
 		
+		// PERef
+		rules.add(new WordRule(new DTDEntityDetector('%'), createToken(DTDTokenType.PE_REF)));
+		
 		CharacterMapRule cmRule = new CharacterMapRule();
 		cmRule.add('>', createToken(DTDTokenType.GREATER_THAN));
 		cmRule.add('(', createToken(DTDTokenType.LPAREN));
@@ -89,7 +97,14 @@ public class DTDScanner extends RuleBasedScanner
 		cmRule.add('*', createToken(DTDTokenType.STAR));
 		cmRule.add('+', createToken(DTDTokenType.PLUS));
 		cmRule.add(',', createToken(DTDTokenType.COMMA));
+		cmRule.add('%', createToken(DTDTokenType.PERCENT));
 		rules.add(cmRule);
+		
+		// Name
+		rules.add(new WordRule(new DTDNameDetector(), createToken(DTDTokenType.NAME)));
+		
+		// EntityRef
+		rules.add(new WordRule(new DTDEntityDetector('&'), createToken(DTDTokenType.ENTITY_REF)));
 
 		this.setRules(rules.toArray(new IRule[rules.size()]));
 		//this.setDefaultReturnToken(this.createToken("text"));

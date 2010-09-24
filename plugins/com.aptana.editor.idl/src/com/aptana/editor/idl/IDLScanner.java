@@ -16,6 +16,7 @@ import com.aptana.editor.common.text.rules.CharacterMapRule;
 import com.aptana.editor.common.text.rules.WhitespaceDetector;
 import com.aptana.editor.idl.parsing.lexer.IDLTokenType;
 import com.aptana.editor.idl.text.rules.IDLNumberRule;
+import com.aptana.editor.idl.text.rules.IDLOperatorDetector;
 
 public class IDLScanner extends RuleBasedScanner
 {
@@ -52,9 +53,12 @@ public class IDLScanner extends RuleBasedScanner
 		
 		rules.add(new SingleLineRule("\"", "\"", createToken(IDLTokenType.STRING)));
 		
-		// TODO: rule for other
-		// TODO: rule for ::
-		// TODO: rule for ...
+		// TODO: rule for other, but I think that is to catch errors and not necessary here
+		
+		WordRule operatorRule = new WordRule(new IDLOperatorDetector(), Token.UNDEFINED);
+		operatorRule.addWord("::", createToken(IDLTokenType.DOUBLE_COLON));
+		operatorRule.addWord("...", createToken(IDLTokenType.ELLIPSIS));
+		rules.add(operatorRule);
 		
 		WordRule wordRule = new WordRule(new WordDetector(), createToken(IDLTokenType.IDENTIFIER));
 		wordRule.addWord("any", createToken(IDLTokenType.ANY));
@@ -110,8 +114,7 @@ public class IDLScanner extends RuleBasedScanner
 		cmRule.add('?', createToken(IDLTokenType.QUESTION));
 		rules.add(cmRule);
 		
-		// numbers
-		// TODO: rule for integer
+		// NOTE: this combines integer and float
 		rules.add(new IDLNumberRule(createToken(IDLTokenType.NUM_FLOAT)));
 
 		this.setRules(rules.toArray(new IRule[rules.size()]));

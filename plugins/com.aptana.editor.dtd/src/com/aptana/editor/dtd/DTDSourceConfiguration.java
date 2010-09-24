@@ -34,8 +34,8 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 
 	private IPredicateRule[] partitioningRules = new IPredicateRule[] {
 		new MultiLineRule("<!--", "-->", new Token(DTD_COMMENT), '\0', true),
-		new MultiLineRule("\"", "\"", new Token(DTD_COMMENT), '\0', true),
-		new MultiLineRule("\'", "\'", new Token(DTD_COMMENT), '\0', true)
+		new MultiLineRule("\"", "\"", new Token(STRING_DOUBLE), '\0', true),
+		new MultiLineRule("\'", "\'", new Token(STRING_SINGLE), '\0', true)
 	};
 	private DTDScanner dtdScanner;
 
@@ -52,7 +52,10 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 		{
 			IContentTypeTranslator c = CommonEditorPlugin.getDefault().getContentTypeTranslator();
 
-			c.addTranslation(new QualifiedContentType(IDTDConstants.CONTENT_TYPE_DTD), new QualifiedContentType("text.dtd"));
+			c.addTranslation(new QualifiedContentType(IDTDConstants.CONTENT_TYPE_DTD), new QualifiedContentType("source.dtd"));
+			c.addTranslation(new QualifiedContentType(DTD_COMMENT), new QualifiedContentType("comment.block.multiline.dtd"));
+			c.addTranslation(new QualifiedContentType(STRING_DOUBLE), new QualifiedContentType("string.quoted.double.dtd"));
+			c.addTranslation(new QualifiedContentType(STRING_SINGLE), new QualifiedContentType("string.quoted.single.dtd"));
 
 			instance = new DTDSourceConfiguration();
 		}
