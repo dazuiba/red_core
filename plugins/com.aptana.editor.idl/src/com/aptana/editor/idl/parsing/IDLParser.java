@@ -15,43 +15,48 @@ import com.aptana.parsing.IParseState;
 public class IDLParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9pjLmTqL4KKlVl$4Y8g9HGrAbA2c#YYYGP10c90m0HG55IgAFQAIYy20McXzzv1a2f5L52" +
-		"g85sQL46GegA03HMYFk$CpeR9cYWUznnpZku$zzzvRzwyUJF$p#vTm3s5qYYEKl2X8X9H2L" +
-		"LH5hSX7ZSY3XLG0tSW1jV3Zrjm4yhXPfJ1hKX2PLo3Qr4IDo0M2IYFsr47rw64Y1mBPpwyY" +
-		"ixXpHZc#YB3dAyVkkNgzVxtSaLboLKCbrzahal2cEkoyEMIRy9OLu4mvYeInbnN1iyIsgjl" +
-		"47IKNz46RT4EhT41BV0I8l0oNf7N48sdxJZajU8siwy#tc5i8to0RLY4jxBapCWIQsUPdsF" +
-		"FNAl7zj#PW$#k7FntM$vMU00kql0mMc8nykYu9fdhteEzs8TwU0BxCO1hyI8VHpo6oKYJCn" +
-		"on2lVWNjJ5VRWVjV4WyYELsLhXIJp5d0uZDg41Lj2pbjdIi5jxqcX$ZAtaVDfkY5RCzedsj" +
-		"yGpXWUHeyaBUAyjhL6OkGkX89hpNfI#nfnn9wwWDngFq7SLemwZYewwcdqHI6PRSJN5iW7L" +
-		"DMUWflRFHuhcQDGYBs6SIpJ7fPY5X$2yTC0OlCQg##9nwShsDBo8tj89wNgFvl1ItxTjfIr" +
-		"68K8#n78Y0czZEJx43cp08In3KpJ3erWfH$02XijwF8ldC5C#agsoHPR9KdH25tING#Y9hk" +
-		"X1xiLM7w8$1cCYXc0eXc4a1cA4f64qnc8ync42CHAJC0LJCHslOmQjD#HLpCOyBCIRqaCwI" +
-		"Zlf8frb8zx5KhoFDNXFFiLghCDwRCGMRCT7s2LhvGDP8wjbbQp40G37S12VaW$Z23x3KNZu" +
-		"$5m#yJnSLLv4yZif7$VcCfwZ$3ox1RdBKNmcHVWiYl4fNCdzZ#Q#gzDKN9#WaZoBfNdcol3" +
-		"KWQShdFbKZhYmPlI5DLkbCAzNPShDw$q$ryNcYWjZhagvjAxON5gNB$Ci1JF1ogIY8tLqOQ" +
-		"g4ebdY4hFC69Wbqino0nM67LiaIwpTav1ZpnrMZ#sFpS4VbuFVP$dBiYU1#gSE5S#jL48gh" +
-		"bx8kk$abP#ADvA$ZJ4SKPFQ89xPrOWBl#n#xl5DL4m9Z6Z0N#juPbCHFghZijHCFdhAQa#0" +
-		"ovDZjEsX7QTjkr#nNxEVLnETEv6QB47V$QpKJrMYl7ugj83FandbPxM1lY0NC5p4S89Xl#R" +
-		"YZ4lGIEG#tyPV$5YzDpxkMfAkC8NAnM7Bg$SeXfVYM5x97EVZI1yvcUpmylAgoEW2McbwUA" +
-		"ato#5RLqfRWIkUkkyX#fMcg41kp5O53OTlOpLgCm$VsyBKcnxEKvbLnF0UGz$jZ2X8NwgEK" +
-		"FrLU3bSNM5TawgXW8QQnwVdhgNRXQWuewmQj4#4zoZa9nVYay$3Dd2yAzJ7UOKt$ZexxOZJ" +
-		"0P#d5zkxoDsCFPTs1dah$vyB#IonK$K5#Za$d6ZwpXcxBksgn7LcZkh1sDm0VjgofZ7aCyQ" +
-		"UI7iwwozgxFMq5z5ECkj$zEBoEjHEpa#0cq8#IIuPyBj9H0rYWB7JYAR4iyGGnYfkHhG8oJ" +
-		"UFlk44JQS9UQWPFvfW$UvOOXmn$YBMd7AXxKx8skU#O7YIuTQ6fuV4pJ2izcifUHRHZ#0xv" +
-		"CutVPC9xXt$yS3jRtp33FCTSqUOzcp3omYrpkh4I8BFnbrf#XOIQuW6n1JEsPlSa9XABAQz" +
-		"ZhpMn2uXDXARY4x42c8BiOheICmXjfbztS5s5uBljRkJs6xydTdkRVBjDhp7MhzwBuQHDnY" +
-		"xZnbtWkq3nlS9SP0uHF1zS0yJdCzH#y8pvHuXzX5xYQE46hkVE7PX7cUlOQxVMM3Qz$FMtA" +
-		"gb7D$BuQPld$6vLdzUmn66emmND5pCVhR$DbXFjE4IXcCCnnhs6uutdFWtyvVxeyyP6H8JQ" +
-		"VNn7NRBPpFcHok#n3zSSmkhNIEaBzLmy6pMDlnoI5nBgxRpnlUSWXNJmN2ovMjlE5sT5zFk" +
-		"7f8xkETjB5#wuPvcJdMcUrar$9R3Mck6sFMpsivcTSx$ECvHPwblTZcjc1DMtc1T9$ziZ8a" +
-		"v$LSnWJWS1oH3DIH3VWkuv1TaVkGp#K6EcjRtXhyZlfLtvHrvMvR8Mx9O5ib2MI1lodoP9t" +
-		"DbZioMMVA6p9GPyhfCbsaoLQR8P9aa4sM2Z9TnCbR6o6WPfVCTaoyCVsxu175SDiicEI$dv" +
-		"6VvINwKiu4QzVsqgUrKq1DW6I73PPXL#vTMUu$ibezbb#oK7R9Tjj6pGePARnaYVMGvhVTb" +
-		"W0mc3oJtafuoYFoU6TjDt$jcvcel$OJVvxptvxqxh8#a8vkFj0cn0#lusgf$dRv$HHmWzij" +
-		"1u#TthfpKhNtPPRPoybiNwTIR7gf0bm0LdPS0rQydMoIo$m8S$kDo2L0RHr0TUwbr8gYGNM" +
-		"faXqewWdhJQy4XGCNg8K3jxIL0pUWIe2hs45vgDqUZFltrgT2KQluprBPmiq4TZg$3d4dCG" +
-		"Rr1NUvIGNkoWPUwso4yMWChFCYsWZ#N89arrIG74Q$XK4qhUBI2hi0rLkOQAvCRSCyQ4etO" +
-		"ruXsO$OtPhkg1gYr7G9Kt0u1$iFnQAJIJgMTGgPcez9sgRCLmFy9NZJz7UbpiHG=");
+		"U9pjM0TuLLKI$kzxZ#YoBWl8AiQL1GiMX8qRGXG98ef6YX3GDGY44ae2eOc2DAbIfNT2YwW" +
+		"WHNeJK4IA81t51e85451Kn4BP7VzpxkJbyl82kllvFkKZx$llb3DdPiwvzvux4o1m7CLm8s" +
+		"x0tNWOz#DUt8RRKGQnY4C2gY0Hjw0gQgCqud4Vxi2$y4$4u25KG7cKHKayY9jmC#x4zVWxh" +
+		"aCft8e7K0wLKH6LS1VkGGdKnJzGN4HcHo8EzkAZo4IAq7ekZzY#xRkezkrIZ5yVet0UCVw2" +
+		"g$wF67#AG8mhVliOiYm2w$Xh168KYK2CeZP65cOW4#CGZR4OWXvu1dqm4FtnB0PZD99H20L" +
+		"bBmhWtxIiRYtV3MlP7ICn2iliTIAUG4zqesKjpihYB3DlTzXv7sC$3k0JV4gx36lNFgnT5j" +
+		"BFasSMBZllw9$jQ4OUeu$OqJRdMTTYNTSxPbtSZvoiswCHPcAbl2$$mKluoTf5eJ5txaKin" +
+		"7HSoPtxCCJBjtPtTglMZrIyGEqmgssAV3pdFyCy1EZtQsPtaDazZdgeZmP8GLliuOolF1aa" +
+		"muVMZ7ur8xsFRnYz8PhX4DhX97RXFOqIZUQ4hW1FepEweAkypVlxD#8QhAJN$FZ0jPQbKXz" +
+		"DQ3tBMhiUMiX9Hfc8BHvTDAFbf#vxkozByJasCPyeUhmMrPYFuGrgaAzfvQU8TKWYNyVAdP" +
+		"0ic$0e#SU8rt3Q#Xs73HZBQ5coZglVX0socbw#b7LoWZiIHLqQfHDeIOiDb5fXeto78#Y0N" +
+		"dWI7UK8rkAuV267vP0SH6$##XBzY04OPENdC1GZC9pS66oNhp01up49KyXDnbHCmJJYURoC" +
+		"sPY3kNW52p1VFi0IBC9ohC2hb5TXDTRW3N9B#NjJDcCzCtjTDk8jMO#Ts8otiGDRiKrUatq" +
+		"uB5jmJBx75pWgnt42f$0TVW3m8yx0uHtqytxdu$pBS3bFu$nyOg$W#rs0fqr1xcPXFaT5UA" +
+		"UkubqkohiLpVqrxtKn#mwNu5j#0y#Ac$ZUtynpuLQU5QLuMfJcUM5E1NCwWAT29E8ym9CdB" +
+		"YAHOYCI9UdIllrFKIx5#Bt4Y8j0ZAIBP1rbBv9rn9uJ8pvi35CttiyOTxDcTBXoOnaTrl9E" +
+		"LepbzLgHjMCbLgFHzhHoEClCAnTsNaxs3cjMOtTDM3k7bMNUUJhCyyAZ2NcCnjhHwhzuNUV" +
+		"kkSFUhHft4UpjNBjyl2$nh5VgSC$DpfKAwwMSoWcCtogezR5kD#VyRQpZghBgTEZ5pugl6M" +
+		"kp5gne7g7V1DQJEHd4SqP3HZUHKj6QqTrd89tFWCDwreqIJpu#62NxcIXaxwz1DNgD2QuWZ" +
+		"ZLabQ2rgslCLSM6wE8PBIQeY#FJbc1rngF9n$06XdVb9aHDZzoIy0Nb#ketGAzHzYjadZcJ" +
+		"cKCl2PHYBUTdBcRViYryz1dB2j9XzrACaezFUGrBpQyWVvM3gAnoSQ84kOhsNGYmjZTFQYp" +
+		"x8qCVihYIV5rMrZxkL2AljHcjDj#ZHChrY0Ps98O$CrgBcPNbhnPHsbQhPLYzcZV0#2b4Yy" +
+		"9s3qtMrrDoH6n#mDcUC7$#dRom3lEV0G85NPqZv6dZd7PbtnsKhoDD4VwHZY1IpPWxJk$mh" +
+		"IN6g9n6dbMaRwFEFvLj#qS4$pAvFmMu7$4gRwTSadAwxbU0SbVIJ9MtNjYdVmkndllw8EbA" +
+		"ueIh3nGdOeYEH1AHJ0pHEOl8FqQaUFoqepoIw4JuYT7gPmmndfX0J2GoS#SG6EhXXoaTeNI" +
+		"Kqh5AnoaTo9WzI0SHaqByTV3mSqB65X3pbLz2B5P#gQwZL9ZyPb8$b9Jx4vXCVXlfQXsRHw" +
+		"oXhXxfSDLDKTg5cAhyCgNHn0gYBZ6Do20swzWgWlSqa4Xa4IPEJM8wCPkOopYC7p3htgjpz" +
+		"ddot45ioPs$lvBIPAKdGsr2rjkNuFiOs4$i8heH2ua3Ehy##Lx48i#SGyHX7Pz3$WXnLCSs" +
+		"48E9OvwSDYarpxJU3tyDNhfxR1Z7fsU1F#3Id7UOkYobHvJkKNfCunOvtpf$xs3#nPJUgBI" +
+		"aqjkLbb5QLccvN#uxzpD0NVRzZGlHpoUQXUYAUlBq$SfrrVRmAKeRAMsYD5LfSq$CXQfB2$" +
+		"7NriFV5oPUHgWjQNlrsJTyZdxzBWMQ6dZcTzRn$XvTjgzhiyyUyuugRQFqQg#i$02blPNUI" +
+		"$HJleyYohoFuNBC2ypZe4jHNEcg2zZFEbSEL0aPdq5TzRpdkz$h45s571vd0Lbk65ak$tLL" +
+		"iWB1FvalIsI1SekLBY8MoYnvMMRA37b9NfGNPBeyBraoJQRA59aiaoHJ9ie46I$ZPAoCaT4" +
+		"oIaRA21akmsIe397dPB0Cae4oGFfBFtbM#aeVwIszfAVqa6UakuqpM#OfVKNfN6AET9EkSb" +
+		"REo6av9J#vcTlhZvgnA$qWkmqdtyetdjKSzV1TfBCyBPqaJJfAEgzF4KyI7OWdYFPgboRjf" +
+		"8aq9jTMMajBoP1MqePI0sbahoa4ArtvN3wH0x9VPtrehny7exqbgTACD5NurCf7EPcIRWrQ" +
+		"kRc$8Q#h$2QnHjPQleKqby$aKtBlSMrxY7Tab#oK7R9Tjicx8Jw#TZbP9Ikj$AgEVgdq62$" +
+		"JMKyxhAZz15ZPExdGbFLkC$OVZLaFSWTijrETj27739hR$v3wORuEBH1WLHTWBn35Uje9eg" +
+		"KYdJxIBNNOMUJWKVglQliLiAhr4R2rxUEa6QIf5Wwx3ny1zY5EBZnC7$L8#QMtrMy3qaJcL" +
+		"PyylrIiVVq4M8z7iG9s2B0ETWZOMfWL5BiNnwArhUrDNmOaaMU5nSuXu86FVOH3cEucu87f" +
+		"6A0zpHyF5HJtXC1qV#6HZ$sLZt3OhHZuRBV2TuCzZEbvmFxDiQXZknG$0VPIZiLTbCjJx$O" +
+		"qGBkV0PC2h9y=");
 
 	/*
 	 * (non-Javadoc)
@@ -70,161 +75,189 @@ public class IDLParser extends Parser implements IParser {
 	protected Symbol invokeReduceAction(int rule_num, int offset) {
 		switch(rule_num) {
 			case 2: // Definitions = 
-			case 4: // ExtendedAttributeList = 
-			case 16: // ExtendedAttributes = 
-			case 27: // ExtendedAttributeInner = 
-			case 29: // ExtendedAttributeRest = 
-			case 31: // InterfaceBody = 
-			case 33: // ExceptionMembers = 
-			case 54: // InterfaceInheritance = 
-			case 56: // InterfaceMembers = 
-			case 113: // ScopedNameParts = 
-			case 115: // ScopedNames = 
-			case 119: // OptionalLong = 
-			case 123: // ReadOnly = 
-			case 125: // GetRaises = 
-			case 127: // SetRaises = 
-			case 131: // Raises = 
-			case 133: // ArgumentList = 
-			case 136: // Arguments = 
+			case 11: // InterfaceInheritance = 
+			case 13: // InterfaceMembers = 
+			case 18: // ExceptionMembers = 
+			case 35: // ReadOnly = 
+			case 37: // GetRaises = 
+			case 39: // SetRaises = 
+			case 44: // Specials = 
+			case 52: // OptionalIdentifier = 
+			case 54: // Raises = 
+			case 57: // ArgumentList = 
+			case 59: // Arguments = 
+			case 62: // In = 
+			case 64: // Optional = 
+			case 66: // Ellipsis = 
+			case 71: // ExtendedAttributeList = 
+			case 73: // ExtendedAttributes = 
+			case 79: // ExtendedAttributeRest = 
+			case 84: // ExtendedAttributeInner = 
+			case 149: // OptionalLong = 
+			case 151: // Nullable = 
+			case 156: // ScopedNames = 
+			case 162: // ScopedNameParts = 
 			{
 				return new Symbol(null);
 			}
 			case 0: // $goal = Definitions
-			case 5: // Definition = Module
-			case 6: // Definition = Interface
-			case 7: // Definition = Exception
-			case 8: // Definition = Typedef
-			case 9: // Definition = Valuetype
-			case 10: // Definition = Const
-			case 28: // ExtendedAttributeRest = ExtendedAttribute
-			case 34: // Type = DeclarationType
-			case 40: // DeclarationType = UnsignedIntegerType
-			case 41: // DeclarationType = ScopedName
-			case 42: // DeclarationType = ANY
-			case 43: // DeclarationType = BOOLEAN
-			case 44: // DeclarationType = OCTET
-			case 45: // DeclarationType = FLOAT
-			case 46: // DeclarationType = DOMSTRING
-			case 47: // DeclarationType = OBJECT
-			case 48: // ConstExpr = BooleanLiteral
-			case 49: // ConstExpr = NUM_INTEGER
-			case 50: // ConstExpr = NUM_FLOAT
-			case 51: // OtherOrComma = Other
-			case 52: // OtherOrComma = COMMA
-			case 58: // BoxedType = UnsignedIntegerType
-			case 59: // BoxedType = ScopedName
-			case 60: // BoxedType = BOOLEAN
-			case 61: // BoxedType = OCTET
-			case 62: // BoxedType = FLOAT
-			case 65: // UnsignedIntegerType = IntegerType
-			case 68: // BooleanLiteral = TRUE
-			case 69: // BooleanLiteral = FALSE
-			case 70: // Other = NUM_INTEGER
-			case 71: // Other = NUM_FLOAT
-			case 72: // Other = IDENTIFIER
-			case 73: // Other = STRING
-			case 74: // Other = OTHER
-			case 75: // Other = COLON
-			case 76: // Other = DOUBLE_COLON
-			case 77: // Other = SEMICOLON
-			case 78: // Other = LESS_THAN
-			case 79: // Other = EQUAL
-			case 80: // Other = GREATER_THAN
-			case 81: // Other = DOMSTRING
-			case 82: // Other = FALSE
-			case 83: // Other = OBJECT
-			case 84: // Other = TRUE
-			case 85: // Other = ANY
-			case 86: // Other = ATTRIBUTE
-			case 87: // Other = BOOLEAN
-			case 88: // Other = CONST
-			case 89: // Other = EXCEPTION
-			case 90: // Other = FLOAT
-			case 91: // Other = GETRAISES
-			case 92: // Other = IN
-			case 93: // Other = INTERFACE
-			case 94: // Other = LONG
-			case 95: // Other = MODULE
-			case 96: // Other = OCTET
-			case 97: // Other = RAISES
-			case 98: // Other = SEQUENCE
-			case 99: // Other = SETRAISES
-			case 100: // Other = SHORT
-			case 101: // Other = TYPEDEF
-			case 102: // Other = UNSIGNED
-			case 103: // Other = VALUETYPE
-			case 105: // InterfaceMember = Const
-			case 106: // InterfaceMember = Attribute
-			case 107: // InterfaceMember = Operation
-			case 108: // IntegerType = SHORT
-			case 111: // ScopedNameAfterColon = DOMSTRING
-			case 118: // OptionalLong = LONG
-			case 121: // ScopedNamePartsAfterColon = DOMSTRING
-			case 122: // ReadOnly = READONLY
-			case 128: // ReturnType = DeclarationType
-			case 129: // ReturnType = VOID
+			case 3: // Definition = Module
+			case 4: // Definition = Interface
+			case 5: // Definition = Exception
+			case 6: // Definition = Typedef
+			case 7: // Definition = ImplementsStatement
+			case 14: // InterfaceMember = Const
+			case 15: // InterfaceMember = AttributeOrOperation
+			case 22: // ConstExpr = BooleanLiteral
+			case 23: // ConstExpr = NUM_INTEGER
+			case 24: // ConstExpr = NUM_FLOAT
+			case 25: // BooleanLiteral = TRUE
+			case 26: // BooleanLiteral = FALSE
+			case 28: // AttributeOrOperation = Attribute
+			case 29: // AttributeOrOperation = Operation
+			case 30: // StringifierAttributeOrOperation = Attribute
+			case 31: // StringifierAttributeOrOperation = OperationRest
+			case 32: // StringifierAttributeOrOperation = SEMICOLON
+			case 34: // ReadOnly = READONLY
+			case 42: // OmittableSpecials = Specials
+			case 45: // Special = GETTER
+			case 46: // Special = SETTER
+			case 47: // Special = CREATOR
+			case 48: // Special = DELETER
+			case 49: // Special = CALLER
+			case 51: // OptionalIdentifier = IDENTIFIER
+			case 61: // In = IN
+			case 63: // Optional = OPTIONAL
+			case 65: // Ellipsis = ELLIPSIS
+			case 67: // ExceptionMember = Const
+			case 68: // ExceptionMember = ExceptionField
+			case 78: // ExtendedAttributeRest = ExtendedAttribute
+			case 85: // Other = NUM_INTEGER
+			case 86: // Other = NUM_FLOAT
+			case 87: // Other = IDENTIFIER
+			case 88: // Other = STRING
+			case 89: // Other = OTHER
+			case 90: // Other = ELLIPSIS
+			case 91: // Other = COLON
+			case 92: // Other = DOUBLE_COLON
+			case 93: // Other = SEMICOLON
+			case 94: // Other = LESS_THAN
+			case 95: // Other = EQUAL
+			case 96: // Other = GREATER_THAN
+			case 97: // Other = QUESTION
+			case 98: // Other = FALSE
+			case 99: // Other = OBJECT
+			case 100: // Other = TRUE
+			case 101: // Other = ANY
+			case 102: // Other = ATTRIBUTE
+			case 103: // Other = BOOLEAN
+			case 104: // Other = CALLER
+			case 105: // Other = CONST
+			case 106: // Other = CREATOR
+			case 107: // Other = DELETER
+			case 108: // Other = DOUBLE
+			case 109: // Other = EXCEPTION
+			case 110: // Other = FLOAT
+			case 111: // Other = GETRAISES
+			case 112: // Other = GETTER
+			case 113: // Other = IMPLEMENTS
+			case 114: // Other = IN
+			case 115: // Other = INTERFACE
+			case 116: // Other = LONG
+			case 117: // Other = MODULE
+			case 118: // Other = OCTET
+			case 119: // Other = OMITTABLE
+			case 120: // Other = OPTIONAL
+			case 121: // Other = RAISES
+			case 122: // Other = SEQUENCE
+			case 123: // Other = SETRAISES
+			case 124: // Other = SETTER
+			case 125: // Other = SHORT
+			case 126: // Other = DOMSTRING
+			case 127: // Other = STRINGIFIER
+			case 128: // Other = TYPEDEF
+			case 129: // Other = UNSIGNED
+			case 130: // Other = VOID
+			case 131: // OtherOrComma = Other
+			case 132: // OtherOrComma = COMMA
+			case 133: // Type = NullableType
+			case 134: // Type = ScopedName
+			case 135: // Type = ANY
+			case 136: // Type = OBJECT
+			case 145: // UnsignedIntegerType = IntegerType
+			case 146: // IntegerType = SHORT
+			case 148: // OptionalLong = LONG
+			case 150: // Nullable = QUESTION
+			case 152: // ReturnType = Type
+			case 153: // ReturnType = VOID
+			case 157: // ScopedName = AbsoluteScopedName
+			case 158: // ScopedName = RelativeScopedName
 			{
 				return _symbols[offset + 1];
 			}
-			case 14: // ExtendedAttribute = Other ExtendedAttributeRest
-			case 21: // Valuetype = VALUETYPE ValuetypeRest
-			case 26: // ExtendedAttributeInner = OtherOrComma ExtendedAttributeInner
-			case 36: // TypedefRest = IDENTIFIER SEMICOLON
-			case 37: // TypedefRest = DOMSTRING SEMICOLON
-			case 53: // InterfaceInheritance = COLON ScopedNameList
-			case 64: // UnsignedIntegerType = UNSIGNED IntegerType
-			case 66: // ScopedName = DOUBLE_COLON ScopedNameAfterColon
-			case 67: // ScopedName = IDENTIFIER ScopedNameParts
-			case 104: // ScopedNameList = ScopedName ScopedNames
-			case 109: // IntegerType = LONG OptionalLong
-			case 110: // ScopedNameAfterColon = IDENTIFIER ScopedNameParts
-			case 112: // ScopedNameParts = DOUBLE_COLON ScopedNamePartsAfterColon
-			case 120: // ScopedNamePartsAfterColon = IDENTIFIER ScopedNameParts
-			case 124: // GetRaises = GETRAISES ExceptionList
-			case 126: // SetRaises = SETRAISES ExceptionList
-			case 130: // Raises = RAISES ExceptionList
-			case 132: // ArgumentList = Argument Arguments
+			case 10: // InterfaceInheritance = COLON ScopedNameList
+			case 27: // AttributeOrOperation = STRINGIFIER StringifierAttributeOrOperation
+			case 36: // GetRaises = GETRAISES ExceptionList
+			case 38: // SetRaises = SETRAISES ExceptionList
+			case 40: // Operation = OmittableSpecials OperationRest
+			case 41: // OmittableSpecials = OMITTABLE Specials
+			case 43: // Specials = Special Specials
+			case 53: // Raises = RAISES ExceptionList
+			case 56: // ArgumentList = Argument Arguments
+			case 77: // ExtendedAttribute = Other ExtendedAttributeRest
+			case 83: // ExtendedAttributeInner = OtherOrComma ExtendedAttributeInner
+			case 137: // NullableType = UnsignedIntegerType Nullable
+			case 138: // NullableType = BOOLEAN Nullable
+			case 139: // NullableType = OCTET Nullable
+			case 140: // NullableType = FLOAT Nullable
+			case 141: // NullableType = DOUBLE Nullable
+			case 142: // NullableType = DOMSTRING Nullable
+			case 144: // UnsignedIntegerType = UNSIGNED IntegerType
+			case 147: // IntegerType = LONG OptionalLong
+			case 154: // ScopedNameList = ScopedName ScopedNames
+			case 160: // RelativeScopedName = IDENTIFIER ScopedNameParts
 			{
 				return _symbols[offset + 2];
 			}
 			case 1: // Definitions = ExtendedAttributeList Definition Definitions
-			case 15: // ExtendedAttributes = COMMA ExtendedAttribute ExtendedAttributes
-			case 20: // Typedef = TYPEDEF Type TypedefRest
-			case 32: // ExceptionMembers = ExtendedAttributeList ExceptionMember ExceptionMembers
-			case 38: // ValuetypeRest = IDENTIFIER BoxedType SEMICOLON
-			case 55: // InterfaceMembers = ExtendedAttributeList InterfaceMember InterfaceMembers
-			case 57: // ExceptionMember = DeclarationType IDENTIFIER SEMICOLON
-			case 114: // ScopedNames = COMMA ScopedName ScopedNames
-			case 134: // ExceptionList = LPAREN ScopedNameList RPAREN
-			case 135: // Arguments = COMMA Argument Arguments
+			case 12: // InterfaceMembers = ExtendedAttributeList InterfaceMember InterfaceMembers
+			case 17: // ExceptionMembers = ExtendedAttributeList ExceptionMember ExceptionMembers
+			case 55: // ExceptionList = LPAREN ScopedNameList RPAREN
+			case 58: // Arguments = COMMA Argument Arguments
+			case 69: // ExceptionField = Type IDENTIFIER SEMICOLON
+			case 72: // ExtendedAttributes = COMMA ExtendedAttribute ExtendedAttributes
+			case 155: // ScopedNames = COMMA ScopedName ScopedNames
+			case 159: // AbsoluteScopedName = DOUBLE_COLON IDENTIFIER ScopedNameParts
+			case 161: // ScopedNameParts = DOUBLE_COLON IDENTIFIER ScopedNameParts
 			{
 				return _symbols[offset + 3];
 			}
-			case 3: // ExtendedAttributeList = LBRACKET ExtendedAttribute ExtendedAttributes RBRACKET
-			case 11: // ExtendedAttribute = LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeRest
-			case 12: // ExtendedAttribute = LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeRest
-			case 13: // ExtendedAttribute = LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeRest
-			case 18: // Interface = INTERFACE IDENTIFIER InterfaceBody SEMICOLON
-			case 23: // ExtendedAttributeInner = LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeInner
-			case 24: // ExtendedAttributeInner = LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeInner
-			case 25: // ExtendedAttributeInner = LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeInner
-			case 30: // InterfaceBody = InterfaceInheritance LCURLY InterfaceMembers RCURLY
-			case 35: // Type = SEQUENCE LESS_THAN Type GREATER_THAN
-			case 63: // BoxedType = SEQUENCE LESS_THAN Type GREATER_THAN
-			case 137: // Argument = ExtendedAttributeList IN DeclarationType IDENTIFIER
+			case 19: // Typedef = TYPEDEF Type IDENTIFIER SEMICOLON
+			case 20: // ImplementsStatement = ScopedName IMPLEMENTS ScopedName SEMICOLON
+			case 70: // ExtendedAttributeList = LBRACKET ExtendedAttribute ExtendedAttributes RBRACKET
+			case 74: // ExtendedAttribute = LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeRest
+			case 75: // ExtendedAttribute = LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeRest
+			case 76: // ExtendedAttribute = LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeRest
+			case 80: // ExtendedAttributeInner = LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeInner
+			case 81: // ExtendedAttributeInner = LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeInner
+			case 82: // ExtendedAttributeInner = LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeInner
 			{
 				return _symbols[offset + 4];
 			}
-			case 17: // Module = MODULE IDENTIFIER LCURLY Definitions RCURLY SEMICOLON
-			case 19: // Exception = EXCEPTION IDENTIFIER LCURLY ExceptionMembers RCURLY SEMICOLON
-			case 22: // Const = CONST DeclarationType IDENTIFIER EQUAL ConstExpr SEMICOLON
+			case 143: // NullableType = SEQUENCE LESS_THAN Type GREATER_THAN Nullable
+			{
+				return _symbols[offset + 5];
+			}
+			case 8: // Module = MODULE IDENTIFIER LCURLY Definitions RCURLY SEMICOLON
+			case 16: // Exception = EXCEPTION IDENTIFIER LCURLY ExceptionMembers RCURLY SEMICOLON
+			case 21: // Const = CONST Type IDENTIFIER EQUAL ConstExpr SEMICOLON
+			case 60: // Argument = ExtendedAttributeList In Optional Type Ellipsis IDENTIFIER
 			{
 				return _symbols[offset + 6];
 			}
-			case 39: // ValuetypeRest = DOMSTRING SEQUENCE LESS_THAN UNSIGNED SHORT GREATER_THAN SEMICOLON
-			case 116: // Attribute = ReadOnly ATTRIBUTE DeclarationType IDENTIFIER GetRaises SetRaises SEMICOLON
-			case 117: // Operation = ReturnType IDENTIFIER LPAREN ArgumentList RPAREN Raises SEMICOLON
+			case 9: // Interface = INTERFACE IDENTIFIER InterfaceInheritance LCURLY InterfaceMembers RCURLY SEMICOLON
+			case 33: // Attribute = ReadOnly ATTRIBUTE Type IDENTIFIER GetRaises SetRaises SEMICOLON
+			case 50: // OperationRest = ReturnType OptionalIdentifier LPAREN ArgumentList RPAREN Raises SEMICOLON
 			{
 				return _symbols[offset + 7];
 			}
