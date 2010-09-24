@@ -44,7 +44,7 @@ NotationDecl
 	;
 
 PI
-	:	<?' PITarget (S (Char* - (Char* '?>' Char*)))? '?>'
+	:	'<?' PITarget (S (Char* - (Char* '?>' Char*)))? '?>'
 	;
 
 Comment
