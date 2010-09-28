@@ -37,7 +37,7 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 		new MultiLineRule("\"", "\"", new Token(STRING_DOUBLE), '\0', true),
 		new MultiLineRule("\'", "\'", new Token(STRING_SINGLE), '\0', true)
 	};
-	private DTDScanner dtdScanner;
+	private DTDSourceScanner dtdScanner;
 
 	private static DTDSourceConfiguration instance;
 
@@ -107,7 +107,7 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	{
 		if (dtdScanner == null)
 		{
-			dtdScanner = new DTDScanner();
+			dtdScanner = new DTDSourceScanner();
 		}
 
 		return dtdScanner;
