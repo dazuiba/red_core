@@ -38,73 +38,20 @@ import org.eclipse.jface.preference.IPreferenceStore;
 
 import com.aptana.editor.xml.XMLEditor;
 
-public class SVGSourceEditor extends XMLEditor {
-
-<<<<<<< HEAD:plugins/com.aptana.editor.svg/src/com/aptana/editor/svg/SVGSourceEditor.java
-    @Override
-    protected void initializeEditor() {
-        super.initializeEditor();
-
-        setSourceViewerConfiguration(new SVGSourceViewerConfiguration(getPreferenceStore(), this));
-        setDocumentProvider(new SVGDocumentProvider());
-    }
-
+public class SVGSourceEditor extends XMLEditor
+{
 	@Override
 	protected IPreferenceStore getOutlinePreferenceStore()
-=======
-	/**
-	 * CharacterMapRule
-	 */
-	public CharacterMapRule()
-	{
-		characterTokenMap = new HashMap<Character, IToken>();
-	}
-
-	/**
-	 * add
-	 * 
-	 * @param c
-	 * @param token
-	 */
-	public void add(char c, IToken token)
-	{
-		characterTokenMap.put(c, token);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.rules.IPredicateRule#evaluate(org.eclipse.jface.text.rules.ICharacterScanner,
-	 * boolean)
-	 */
-	public IToken evaluate(ICharacterScanner scanner, boolean resume)
-	{
-		successToken = characterTokenMap.get((char) scanner.read());
-
-		if (successToken == null)
-		{
-			scanner.unread();
-			successToken = Token.UNDEFINED;
-		}
-
-		return successToken;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.rules.IPredicateRule#getSuccessToken()
-	 */
-	public IToken getSuccessToken()
-	{
-		return successToken;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.eclipse.jface.text.rules.IRule#evaluate(org.eclipse.jface.text.rules.ICharacterScanner)
-	 */
-	public IToken evaluate(ICharacterScanner scanner)
->>>>>>> development:plugins/com.aptana.editor.js/src/com/aptana/editor/js/text/rules/CharacterMapRule.java
 	{
 		return SVGEditorPlugin.getDefault().getPreferenceStore();
+	}
+
+	@Override
+	protected void initializeEditor()
+	{
+		super.initializeEditor();
+
+		setSourceViewerConfiguration(new SVGSourceViewerConfiguration(getPreferenceStore(), this));
+		setDocumentProvider(new SVGDocumentProvider());
 	}
 }
