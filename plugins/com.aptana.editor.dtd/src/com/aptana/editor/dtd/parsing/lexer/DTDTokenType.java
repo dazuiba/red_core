@@ -4,43 +4,52 @@ import java.util.EnumSet;
 
 public enum DTDTokenType
 {
-	ELEMENT("keyword.operator.dtd"),
-	GREATER_THAN("source.dtd"),
-	ATTLIST("keyword.operator.dtd"),
-	NOTATION("keyword.operator.dtd"),
-	PI_START("source.dtd"),
-	PI_END("source.dtd"),
-	EMPTY("keyword.operator.dtd"),
-	ANY("keyword.operator.dtd"),
-	ENTITY("keyword.operator.dtd"),
-	SYSTEM("keyword.operator.dtd"),
-	PUBLIC("keyword.operator.dtd"),
-	PCDATA("keyword.operator.dtd"),
-	LPAREN("source.dtd"),
-	PIPE("source.dtd"),
-	RPAREN("source.dtd"),
-	RPAREN_STAR("source.dtd"),
-	QUESTION("source.dtd"),
-	STAR("source.dtd"),
-	PLUS("source.dtd"),
-	FIXED("keyword.operator.dtd"),
-	IMPLIED("keyword.operator.dtd"),
-	REQUIRED("keyword.operator.dtd"),
-	COMMA("source.dtd"),
-	CDATA_TYPE("keyword.operator.dtd"),
-	ID_TYPE("keyword.operator.dtd"),
-	IDREF_TYPE("keyword.operator.dtd"),
-	IDREFS_TYPE("keyword.operator.dtd"),
-	ENTITY_TYPE("keyword.operator.dtd"),
-	ENTITIES_TYPE("keyword.operator.dtd"),
-	NMTOKEN_TYPE("keyword.operator.dtd"),
-	NMTOKENS_TYPE("keyword.operator.dtd"),
-	NDATA("keyword.operator.dtd"),
-	NOTATION_TYPE("keyword.operator.dtd"),
-	ENTITY_REF("source.dtd"),
-	PE_REF("source.dtd"),
-	NAME("source.dtd"),
-	PERCENT("keyword.operator.dtd");
+	UNDEFINED(""),	// -1
+	EOF(""),	// 0
+	GREATER_THAN("source.dtd"), // 1
+	NAME("source.dtd"),	// 2
+	LPAREN("source.dtd"),	 // 3
+	RPAREN("source.dtd"),	// 4
+	PIPE("source.dtd"),	// 5
+	QUESTION("source.dtd"),	// 6
+	STAR("source.dtd"),	// 7
+	PLUS("source.dtd"),	// 8
+	PUBLIC("keyword.operator.dtd"),	 // 9
+	SYSTEM_LITERAL("source.dtd"),	// 10
+	NMTOKEN("source.dtd"),	// 11
+	SYSTEM("keyword.operator.dtd"),	 // 12
+	PI_START("source.dtd"),	// 13
+	ENTITY("keyword.operator.dtd"),	// 14
+	ELEMENT("keyword.operator.dtd"),	// 15
+	ATTLIST("keyword.operator.dtd"),	// 16
+	NOTATION("keyword.operator.dtd"),	// 17
+	PUBID_LITERAL("source.dtd"),	// 18
+	RPAREN_STAR("source.dtd"),	// 19
+	ATT_VALUE("source.dtd"),	// 20
+	PE_REF("source.dtd"),	// 21
+	COMMENT(""),	// 22
+	ENTITY_VALUE("source.dtd"),	// 23
+	COMMA("source.dtd"),	// 24
+	NOT_PI_END("source.dtd"),	// 25
+	PI_END("source.dtd"),	// 26
+	PERCENT("keyword.operator.dtd"),	// 27
+	NOTATION_TYPE("keyword.operator.dtd"),	// 28
+	PCDATA("keyword.operator.dtd"),	// 29
+	FIXED("keyword.operator.dtd"),	// 30
+	NDATA("keyword.operator.dtd"),	// 31
+	EMPTY("keyword.operator.dtd"),	// 32
+	ANY("keyword.operator.dtd"),	// 33
+	REQUIRED("keyword.operator.dtd"),	// 34
+	IMPLIED("keyword.operator.dtd"),	// 35
+	CDATA_TYPE("keyword.operator.dtd"),	// 36
+	ID_TYPE("keyword.operator.dtd"),	// 37
+	IDREF_TYPE("keyword.operator.dtd"),	// 38
+	IDREFS_TYPE("keyword.operator.dtd"),	// 39
+	ENTITY_TYPE("keyword.operator.dtd"),	// 40
+	ENTITIES_TYPE("keyword.operator.dtd"),	// 41
+	NMTOKEN_TYPE("keyword.operator.dtd"),	// 42
+	NMTOKENS_TYPE("keyword.operator.dtd");	// 43
+	//ENTITY_REF("source.dtd"),
 	
 	private short _index;
 	private String _scope;
