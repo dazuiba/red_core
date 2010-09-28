@@ -1,0 +1,260 @@
+// java -jar beaver.jar -T -w DTD.grammar
+%package "com.aptana.editor.dtd.parsing";
+
+%class "DTDParser";
+
+%import "com.aptana.parsing.IParseState";
+%import "com.aptana.parsing.IParser";
+%import "com.aptana.parsing.ast.IParseNode";
+
+%implements "IParser";
+
+%embed {:
+	private DTDScanner _scanner;
+	
+	/*
+	 * (non-Javadoc)
+	 * @see com.aptana.parsing.IParser#parse(com.aptana.parsing.IParseState)
+	 */
+	@Override
+	public synchronized IParseNode parse(IParseState parseState) throws java.lang.Exception
+	{
+		// grab source
+		char[] characters = parseState.getSource();
+
+		// make sure we have some source
+		String source = (characters != null) ? new String(characters) : "";
+
+		// send source to the scanner
+		this._scanner.setSource(source);
+
+		// parse
+		return (IParseNode) parse(this._scanner);
+	}
+:};
+
+%init {:
+		this._scanner = new DTDScanner();
+:};
+
+%terminals ELEMENT, GREATER_THAN, ATTLIST, NOTATION, PI_START, PI_END, EMPTY, ANY;
+%terminals ENTITY, SYSTEM, PUBLIC, PCDATA, LPAREN, PIPE, RPAREN, RPAREN_STAR, QUESTION;
+%terminals STAR, PLUS, FIXED, IMPLIED, REQUIRED, COMMA, CDATA_TYPE, ID_TYPE, IDREF_TYPE;
+%terminals IDREFS_TYPE, ENTITY_TYPE, ENTITIES_TYPE, NMTOKEN_TYPE, NMTOKENS_TYPE, NDATA;
+%terminals NOTATION_TYPE, PE_REF, NAME, PERCENT, ATT_VALUE, ENTITY_VALUE;
+%terminals COMMENT, NOT_PI_END, PUBID_LITERAL, SYSTEM_LITERAL, NMTOKEN;
+
+%goal DTD;
+
+// 0
+
+DTD
+	=	Declarations
+	;
+
+// 1
+
+Declarations
+	=	Declarations Declaration
+	|	Declaration
+	;
+
+Declaration
+	=	MarkupDecl
+	|	PE_REF
+	;
+
+// 2
+
+MarkupDecl
+	=	ElementDecl
+	|	AttlistDecl
+	|	EntityDecl
+	|	NotationDecl
+	|	PI
+	|	COMMENT
+	;
+
+// 3
+
+ElementDecl
+	=	ELEMENT NAME ContentSpec GREATER_THAN
+	;
+
+AttlistDecl
+	=	ATTLIST NAME GREATER_THAN
+	|	ATTLIST NAME AttDefs GREATER_THAN
+	;
+	
+AttDefs
+	=	AttDefs AttDef
+	|	AttDef
+	;
+
+EntityDecl
+	=	GEDecl
+	|	PEDecl
+	;
+
+NotationDecl
+	=	NOTATION NAME ExternalID GREATER_THAN
+	|	NOTATION NAME PublicID GREATER_THAN
+	;
+
+PI
+	=	PI_START NAME NOT_PI_END PI_END
+	;
+
+// 4
+
+ContentSpec
+	=	EMPTY
+	|	ANY
+	|	Mixed
+	|	Children
+	;
+
+AttDef
+	=	NAME AttType DefaultDecl
+	;
+	
+GEDecl
+	=	ENTITY NAME EntityDef GREATER_THAN
+	;
+
+PEDecl
+	=	ENTITY PERCENT NAME PEDef GREATER_THAN
+	;
+
+ExternalID
+	=	SYSTEM SYSTEM_LITERAL
+	|	PUBLIC PUBID_LITERAL SYSTEM_LITERAL
+	;
+
+PublicID
+	=	PUBLIC PUBID_LITERAL
+	;
+
+// 5
+
+Mixed
+	=	LPAREN PCDATA RPAREN_STAR
+	|	LPAREN PCDATA Names RPAREN_STAR
+	|	LPAREN PCDATA RPAREN
+	;
+	
+Names
+	=	Names PIPE NAME
+	|	PIPE NAME
+	;
+
+Children
+	=	Choice
+	|	Choice QUESTION
+	|	Choice STAR
+	|	Choice PLUS
+	|	Seq
+	|	Seq QUESTION
+	|	Seq STAR
+	|	Seq PLUS
+	;
+
+AttType
+	=	StringType
+	|	TokenizedType
+	|	EnumeratedType
+	;
+
+DefaultDecl
+	=	REQUIRED
+	|	IMPLIED
+	|	ATT_VALUE
+	|	FIXED ATT_VALUE
+	;
+
+EntityDef
+	=	ENTITY_VALUE
+	|	ExternalID
+	|	ExternalID NDataDecl
+	;
+
+PEDef
+	=	ENTITY_VALUE
+	|	ExternalID
+	;
+
+// 6
+
+Choice
+	=	LPAREN Cp ChoiceCps RPAREN
+	;
+
+ChoiceCps
+	=	ChoiceCps PIPE Cp
+	|	PIPE Cp
+	;
+
+Seq
+	=	LPAREN Cp RPAREN
+	|	LPAREN Cp SeqCps RPAREN
+	;
+	
+SeqCps
+	=	SeqCps COMMA Cp
+	|	COMMA Cp
+	;
+
+StringType
+	=	CDATA_TYPE
+	;
+
+TokenizedType
+	=	ID_TYPE
+	|	IDREF_TYPE
+	|	IDREFS_TYPE
+	|	ENTITY_TYPE
+	|	ENTITIES_TYPE
+	|	NMTOKEN_TYPE
+	|	NMTOKENS_TYPE
+	;
+	
+EnumeratedType
+	=	NotationType
+	|	Enumeration
+	;
+	
+NDataDecl
+	=	NDATA NAME
+	;
+
+// 7
+
+Cp
+	=	NAME
+	|	NAME QUESTION
+	|	NAME STAR
+	|	NAME PLUS
+	|	Choice
+	|	Choice QUESTION
+	|	Choice STAR
+	|	Choice PLUS
+	|	Seq
+	|	Seq QUESTION
+	|	Seq STAR
+	|	Seq PLUS
+	;
+
+NotationType
+	=	NOTATION_TYPE LPAREN NAME RPAREN
+	|	NOTATION_TYPE LPAREN NAME Names RPAREN
+	;
+
+Enumeration
+	=	LPAREN NMTOKEN RPAREN
+	|	LPAREN NMTOKEN NmTokens RPAREN
+	;
+
+NmTokens
+	=	NmTokens NMTOKEN
+	|	NMTOKEN
+	;
