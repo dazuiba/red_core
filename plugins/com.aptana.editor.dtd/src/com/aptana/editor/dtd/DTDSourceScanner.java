@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.IWordDetector;
+import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WhitespaceRule;
@@ -18,7 +19,7 @@ import com.aptana.editor.dtd.text.rules.DTDEntityDetector;
 import com.aptana.editor.dtd.text.rules.DTDNameDetector;
 import com.aptana.editor.dtd.text.rules.DTDOperatorDetector;
 
-public class DTDScanner extends RuleBasedScanner
+public class DTDSourceScanner extends RuleBasedScanner
 {
 	/**
 	 * A key word detector.
@@ -45,7 +46,7 @@ public class DTDScanner extends RuleBasedScanner
 	/**
 	 * DTDScanner
 	 */
-	public DTDScanner()
+	public DTDSourceScanner()
 	{
 		List<IRule> rules = new ArrayList<IRule>();
 		
@@ -53,6 +54,8 @@ public class DTDScanner extends RuleBasedScanner
 		
 		// TODO: comment, string, pubid?
 		// TODO: att value, entity value
+		
+		rules.add(new MultiLineRule("<!--", "-->", new Token(DTDTokenType.COMMENT), '\0', true));
 		
 		WordRule operatorRule = new WordRule(new DTDOperatorDetector(), Token.UNDEFINED);
 		operatorRule.addWord("<?", createToken(DTDTokenType.PI_START));
@@ -104,7 +107,7 @@ public class DTDScanner extends RuleBasedScanner
 		rules.add(new WordRule(new DTDNameDetector(), createToken(DTDTokenType.NAME)));
 		
 		// EntityRef
-		rules.add(new WordRule(new DTDEntityDetector('&'), createToken(DTDTokenType.ENTITY_REF)));
+		//rules.add(new WordRule(new DTDEntityDetector('&'), createToken(DTDTokenType.ENTITY_REF)));
 
 		this.setRules(rules.toArray(new IRule[rules.size()]));
 		//this.setDefaultReturnToken(this.createToken("text"));
