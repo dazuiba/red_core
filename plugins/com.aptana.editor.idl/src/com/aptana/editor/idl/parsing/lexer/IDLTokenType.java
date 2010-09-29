@@ -60,7 +60,10 @@ public enum IDLTokenType
 	RCURLY("meta.brace.curly.idl"), // 51
 	RPAREN("meta.brace.round.idl"), // 52
 	RBRACKET("meta.brace.square.idl"), // 53
-	READONLY("keyword.operator.idl"); // 54
+	READONLY("keyword.operator.idl"), // 54
+	COMMENT(""),
+	DOC_COMMENT(""),
+	MULTILINE_COMMENT("");
 
 	private short _index;
 	private String _scope;
