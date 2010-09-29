@@ -1,6 +1,7 @@
 package com.aptana.editor.dtd.parsing;
 
 import java.util.ArrayList;
+import com.aptana.editor.dtd.parsing.ast.*;
 import beaver.*;
 import com.aptana.parsing.IParser;
 import com.aptana.parsing.ast.IParseNode;
@@ -15,26 +16,26 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9oTbGTmL5KKXl$tTXCLI4J4650W5eG4Ge0GI0CXf0c8OaS4qIWM41LfAaWLmT4P7Hr7Pnn" +
-		"dL8g5Ahqe22fYxmgAbMB1tb7v$T$TixfPbsNntVdkAVUySykxkmV05ip4nGWZ7OVWK1o6Ap" +
-		"4S8VXndYlu0LgX4ox0I1AbA4CvAZaRP#1Cd8MpSGxEnNaOY75eX5uOWMkGXWPe#8zTQtO9k" +
-		"kC45A0V9l0zd8RJCG3dOn1wu6JqH5CtrWRjq1AP$1HDS2HEHKTSZoBqGLySWx4ureqVxoAF" +
-		"GcCSuRHkoCA9Q8sJq1Qvo4DxvAE3PGhwBgxlwlfYt8WPo44p78V9QfqnIYt88lWIij4RDQW" +
-		"I5#8MpNS9BaAXeeTXF39mE2xdL$mIet4Ply0eVewZSHC$uSVy2DFH72tuFhTXAhVoNRx3jr" +
-		"6D2fo2eHYC$XY2It4LhiQrk05Z#3BgC17NyKLCmIIknCtQtJI#m2rQVKYhBz3EEsbrXLfzU" +
-		"wszlYSVdliAsTeHx4jrqqmvsbLmEf7JQ8DChJWufHuwowOwiQXTR7PmNhxcIrCUJpklrCwh" +
-		"jVT8nf0RYvnfTuq7NwcvxaOltOwMkX5XVTDq6myYc#cyMZWjIrylaYEsZqJ#jqzJ2svSkcv" +
-		"90saPQhxDxYcJ9yrpjxATOi9gMKxwpjz8U7ela1cYI3V5Swt28Znz9SzQlZmbYWdsxEjc#k" +
-		"PFSvbAjIFFZGI#XYQ1MPFXdXoH7UW7Gi$TeaBSO$QzuZvnltX0L8e1ua4nLZmaPblimsAEw" +
-		"Vt4EDExcXmSDzVGEBikpXveSeB98IQdc9nciecO9nuHZuaoyRYOBnQ8XMAcnTuQpKzodqHH" +
-		"WZDO5EzB5JsBnLByU$QtcrmYRZFzZYJlBnTtYfLchpAvpEGAqTVqkyHeiThijMA6M2ysY8r" +
-		"YdLWZdX5Zn2QBVKviZZcBjyJsWzXdPfAn737yG3aqtzQOTpgcEdVSN5LnTgt9w1drJpMNrh" +
-		"FJtfaQuzihCVx$h2s5jKzCu1kPubht7CGyZUFiwKbYw$RZdnKHtCS$#GVtydV#nb$v2tys$" +
-		"qz8yF13rszt$VDYCrTmEPTnAP$W4Yxc8Yxa0iwdVgryLkYMSfFGxUJ6X1b$53$mUwVlvkjy" +
-		"ZQzAUqNtzqs#mQUvWUlv59$aEgxb6gxcAdjF$mjyr6dwb#0ypkKSViTl#OsDVotsY1tE#io" +
-		"yknAkOQVh$r8tIDNBKvtpXQUA5w73VYX0MDKm9CAgUxxmL1iZT9Ol8AXOiUGhlb3#BgxQ#I" +
-		"AakkYhgeL4sCaYXwywvma$XlfsiUme9VNmLHqzmzV$l#Teg$nbobqcNwvahknooNBPlJLUc" +
-		"OGgerInUP9vJaP9RbThdchjjqPprKYlTJNFGv#$0R#SdMO=");
+		"U9oTbMTqL4KOXj#xkHiHY1enM21WB90i8KgowI6QiDc0NK15ewBObQ1H81Q4WA8Som$zu$4" +
+		"S#m4KAO8YLK1G4RkYO2$OU##Kr$VEdJrUrdLPkFSyNxlVp3SpTyuCW7Mu4UV0HJPsGoViZe" +
+		"jmCIv026SZ2yr9yJw881$7uNYSW5Dn6gVpFRIWAxUX2dMeHWrgSIA6OXY6uoISZ5Cm0kFH1" +
+		"KVY4X9XTEPRoC5voCNUE1e3KOyZq0td9tBGtSl1GIZ1VZW0Xw47eZZ6L2t041o5FR0lziHU" +
+		"oCF1E0I7eWBxe2yAKOH#A4P$EpvFbXbPRcGbhiPKzCBX6819UlT7czxUQCM1fbQGKYCR4SU" +
+		"5Y4cUYKirYhFuiKRKZa6u0jVmHRJn6zo0SVoQN$5BRk97$11DwCbt#GxVncI#oOtSWC6u4W" +
+		"qu0yVYMbo7qp4Ivs8qnk0oJC0eN8NBCPOlyGLqO28NutgCmnG#p#Sq5rTpAT7ylH6NQYvTD" +
+		"PCinIkJulxS6pMkcEh7LT7H2eK0yyN$RxqromBDob#nFbf3RmLpbTDDg#VelxdcFuHjVfQg" +
+		"9NAY9YUaMBQolBsGhTNpg#PhHHtznnxeAUctpTCg#POl$Sp$oh1URw#u#jkTrN#ENbT$Ajl" +
+		"K2f9df2DPRAIhNUEDnJ6v5MeTaPqZ8jf3Jk0jrdVVwcvrbVPOI6zOUwj1lKQrl$sSQitPKV" +
+		"kmyS8ssiLgO5e7p5CWoZmx7NfwYJentFftYhl4tU8U4HVDubuH4$U9yJRtVl60jGUBTcjFi" +
+		"7fOKgqHINvBaZ$HwZQhEwoUOlLKg$F5T353p1JbuY4nIpmivWJMuUP0$vr4HOerc9qSonGz" +
+		"yyLSSPFrRxLw7icjrewcQRzGt28MMN#nrGkiNY9ki$RjOhHOPlqLuWwnKgmIgyLoiLGy9Lh" +
+		"56flxZ5YRgAknRH2RCfcZyZQd#VQzLEwE#j1J7R2BCgcRee$w9B$1wfZLpJlHrqYhsmDpsI" +
+		"WrTbV6ba6zZXInCHcs7ReJTLftL3VmhUr$ujDynQtSpB$v5$$a7$oTlzdehqZny0CZtpTod" +
+		"NYMY$Wu5$8nFie5dCz7E8zpEOUpzKrxaKyBxL6k5MjIzlYB#9a$6ViBliPN#Ogib$a6N#Tw" +
+		"hkQJNCMLNC4dk9pBk9HBR3kT09nbB9q9V90pEOC$yWUpKxteT#9RyQdnFh7HprEEuJCZjqY" +
+		"qc1lBE#NATTQMo#vdwP#24hYw#xA4gvFVE$qTtOG#0nJpg3CtshyKAxzKyJATwX6rYSWVA5" +
+		"qlNG$NwAWXf3lG4Q40s$kLyXDKRKT8DujZ2UbkSGnzrN#D#gvHh52wK7wjTAtyHdqVb8QOf" +
+		"LgvHT95HYT8xpUfJfFc6rUjk6plbcjMpf1$02bgba8=");
 
 	private DTDScanner _scanner;
 	
@@ -55,7 +56,12 @@ public class DTDParser extends Parser implements IParser {
 		this._scanner.setSource(source);
 
 		// parse
-		return (IParseNode) parse(this._scanner);
+		IParseNode result = (IParseNode) parse(this._scanner);
+		
+		// save reference to result
+		parseState.setParseResult(result);
+		
+		return result;
 	}
 
 	public DTDParser() {
@@ -67,13 +73,56 @@ public class DTDParser extends Parser implements IParser {
 
 	protected Symbol invokeReduceAction(int rule_num, int offset) {
 		switch(rule_num) {
-			case 1: // Declarations = Declarations Declaration
+			case 0: // DTD = Declarations.d
+			{
+					final Symbol _symbol_d = _symbols[offset + 1];
+					final ArrayList _list_d = (ArrayList) _symbol_d.value;
+					final beaver.Symbol[] d = _list_d == null ? new beaver.Symbol[0] : (beaver.Symbol[]) _list_d.toArray(new beaver.Symbol[_list_d.size()]);
+					
+		return new DTDParseRootNode(d);
+			}
+			case 1: // DTD = 
+			{
+					
+		return new DTDParseRootNode();
+			}
+			case 2: // Declarations = Declarations Declaration
 			{
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
 			}
-			case 2: // Declarations = Declaration
+			case 3: // Declarations = Declaration
 			{
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
+			}
+			case 10: // MarkupDecl = PI.p
+			{
+					final Symbol _symbol_p = _symbols[offset + 1];
+					final String p = (String) _symbol_p.value;
+					
+		String content = p.substring(2, p.length() - 2);
+		
+		return new DTDProcessingInstructionNode(content);
+			}
+			case 11: // ElementDecl = ELEMENT NAME.n ContentSpec GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					
+		return new DTDElementDeclarationNode(n);
+			}
+			case 12: // AttlistDecl = ATTLIST NAME.n GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					
+		return new DTDAttributeListDeclarationNode(n);
+			}
+			case 13: // AttlistDecl = ATTLIST NAME.n AttDefs GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					
+		return new DTDAttributeListDeclarationNode(n);
 			}
 			case 14: // AttDefs = AttDefs AttDef
 			{
@@ -83,6 +132,34 @@ public class DTDParser extends Parser implements IParser {
 			{
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 			}
+			case 18: // NotationDecl = NOTATION NAME.n ExternalID GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					
+		return new DTDNotationDeclarationNode(n);
+			}
+			case 19: // NotationDecl = NOTATION NAME.n PublicID GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					
+		return new DTDNotationDeclarationNode(n);
+			}
+			case 25: // GEDecl = ENTITY NAME.n EntityDef GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					
+		return new DTDGEntityDeclarationNode(n);
+			}
+			case 26: // PEDecl = ENTITY PERCENT NAME.n PEDef GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 3];
+					final String n = (String) _symbol_n.value;
+					
+		return new DTDPEntityDeclarationNode(n);
+			}
 			case 89: // NmTokens = NmTokens NMTOKEN
 			{
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
@@ -91,15 +168,12 @@ public class DTDParser extends Parser implements IParser {
 			{
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 			}
-			case 0: // DTD = Declarations
-			case 3: // Declaration = MarkupDecl
-			case 4: // Declaration = PE_REF
-			case 5: // MarkupDecl = ElementDecl
-			case 6: // MarkupDecl = AttlistDecl
-			case 7: // MarkupDecl = EntityDecl
-			case 8: // MarkupDecl = NotationDecl
-			case 9: // MarkupDecl = PI
-			case 10: // MarkupDecl = COMMENT
+			case 4: // Declaration = MarkupDecl
+			case 5: // Declaration = PE_REF
+			case 6: // MarkupDecl = ElementDecl
+			case 7: // MarkupDecl = AttlistDecl
+			case 8: // MarkupDecl = EntityDecl
+			case 9: // MarkupDecl = NotationDecl
 			case 16: // EntityDecl = GEDecl
 			case 17: // EntityDecl = PEDecl
 			case 20: // ContentSpec = EMPTY
@@ -160,7 +234,6 @@ public class DTDParser extends Parser implements IParser {
 			{
 				return _symbols[offset + 2];
 			}
-			case 12: // AttlistDecl = ATTLIST NAME GREATER_THAN
 			case 24: // AttDef = NAME AttType DefaultDecl
 			case 28: // ExternalID = PUBLIC STRING SYSTEM_LITERAL
 			case 30: // Mixed = LPAREN PCDATA RPAREN_STAR
@@ -173,11 +246,6 @@ public class DTDParser extends Parser implements IParser {
 			{
 				return _symbols[offset + 3];
 			}
-			case 11: // ElementDecl = ELEMENT NAME ContentSpec GREATER_THAN
-			case 13: // AttlistDecl = ATTLIST NAME AttDefs GREATER_THAN
-			case 18: // NotationDecl = NOTATION NAME ExternalID GREATER_THAN
-			case 19: // NotationDecl = NOTATION NAME PublicID GREATER_THAN
-			case 25: // GEDecl = ENTITY NAME EntityDef GREATER_THAN
 			case 31: // Mixed = LPAREN PCDATA Names RPAREN_STAR
 			case 55: // Choice = LPAREN Cp ChoiceCps RPAREN
 			case 59: // Seq = LPAREN Cp SeqCps RPAREN
@@ -186,7 +254,6 @@ public class DTDParser extends Parser implements IParser {
 			{
 				return _symbols[offset + 4];
 			}
-			case 26: // PEDecl = ENTITY PERCENT NAME PEDef GREATER_THAN
 			case 86: // NotationType = NOTATION_TYPE LPAREN NAME Names RPAREN
 			{
 				return _symbols[offset + 5];

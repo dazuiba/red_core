@@ -3,6 +3,7 @@
 
 %class "DTDParser";
 
+%import "com.aptana.editor.dtd.parsing.ast.*";
 %import "com.aptana.parsing.IParseState";
 %import "com.aptana.parsing.IParser";
 %import "com.aptana.parsing.ast.IParseNode";
@@ -29,7 +30,12 @@
 		this._scanner.setSource(source);
 
 		// parse
-		return (IParseNode) parse(this._scanner);
+		IParseNode result = (IParseNode) parse(this._scanner);
+		
+		// save reference to result
+		parseState.setParseResult(result);
+		
+		return result;
 	}
 :};
 
@@ -42,14 +48,23 @@
 %terminals STAR, PLUS, FIXED, IMPLIED, REQUIRED, COMMA, CDATA_TYPE, ID_TYPE, IDREF_TYPE;
 %terminals IDREFS_TYPE, ENTITY_TYPE, ENTITIES_TYPE, NMTOKEN_TYPE, NMTOKENS_TYPE, NDATA;
 %terminals NOTATION_TYPE, PE_REF, NAME, PERCENT, STRING;
-%terminals COMMENT, SYSTEM_LITERAL, NMTOKEN;
+%terminals SYSTEM_LITERAL, NMTOKEN;
+
+%typeof NAME, PI = "String";
 
 %goal DTD;
 
 // 0
 
 DTD
-	=	Declarations
+	=	Declarations.d
+	{:
+		return new DTDParseRootNode(d);
+	:}
+	|
+	{:
+		return new DTDParseRootNode();
+	:}
 	;
 
 // 1
@@ -71,19 +86,33 @@ MarkupDecl
 	|	AttlistDecl
 	|	EntityDecl
 	|	NotationDecl
-	|	PI
-	|	COMMENT
+	|	PI.p
+	{:
+		String content = p.substring(2, p.length() - 2);
+		
+		return new DTDProcessingInstructionNode(content);
+	:}
+//	|	COMMENT
 	;
 
 // 3
 
 ElementDecl
-	=	ELEMENT NAME ContentSpec GREATER_THAN
+	=	ELEMENT NAME.n ContentSpec GREATER_THAN
+	{:
+		return new DTDElementDeclarationNode(n);
+	:}
 	;
 
 AttlistDecl
-	=	ATTLIST NAME GREATER_THAN
-	|	ATTLIST NAME AttDefs GREATER_THAN
+	=	ATTLIST NAME.n GREATER_THAN
+	{:
+		return new DTDAttributeListDeclarationNode(n);
+	:}
+	|	ATTLIST NAME.n AttDefs GREATER_THAN
+	{:
+		return new DTDAttributeListDeclarationNode(n);
+	:}
 	;
 	
 AttDefs
@@ -97,8 +126,14 @@ EntityDecl
 	;
 
 NotationDecl
-	=	NOTATION NAME ExternalID GREATER_THAN
-	|	NOTATION NAME PublicID GREATER_THAN
+	=	NOTATION NAME.n ExternalID GREATER_THAN
+	{:
+		return new DTDNotationDeclarationNode(n);
+	:}
+	|	NOTATION NAME.n PublicID GREATER_THAN
+	{:
+		return new DTDNotationDeclarationNode(n);
+	:}
 	;
 
 // 4
@@ -115,11 +150,17 @@ AttDef
 	;
 	
 GEDecl
-	=	ENTITY NAME EntityDef GREATER_THAN
+	=	ENTITY NAME.n EntityDef GREATER_THAN
+	{:
+		return new DTDGEntityDeclarationNode(n);
+	:}
 	;
 
 PEDecl
-	=	ENTITY PERCENT NAME PEDef GREATER_THAN
+	=	ENTITY PERCENT NAME.n PEDef GREATER_THAN
+	{:
+		return new DTDPEntityDeclarationNode(n);
+	:}
 	;
 
 ExternalID
