@@ -38,7 +38,7 @@ public class IDLSourceConfiguration implements IPartitioningConfiguration, ISour
 		new MultiLineRule("/**", "*/", new Token(IDL_DOC_COMMENT), '\0', true),
 		new MultiLineRule("/*", "*/", new Token(IDL_MULTILINE_COMMENT), '\0', true)
 	};
-	private IDLScanner idlScanner;
+	private IDLSourceScanner idlScanner;
 
 	private static IDLSourceConfiguration instance;
 
@@ -108,7 +108,7 @@ public class IDLSourceConfiguration implements IPartitioningConfiguration, ISour
 	{
 		if (idlScanner == null)
 		{
-			idlScanner = new IDLScanner();
+			idlScanner = new IDLSourceScanner();
 		}
 
 		return idlScanner;
