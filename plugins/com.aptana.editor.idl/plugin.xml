@@ -25,5 +25,12 @@
             priority="normal">
       </content-type>
    </extension>
+   <extension
+         point="com.aptana.parsing.parser">
+      <parser
+            class="com.aptana.editor.idl.parsing.IDLParser"
+            language="text/idl">
+      </parser>
+   </extension>
 
 </plugin>
