@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.jface.text.rules.IRule;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.IWordDetector;
+import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
@@ -18,7 +19,7 @@ import com.aptana.editor.idl.parsing.lexer.IDLTokenType;
 import com.aptana.editor.idl.text.rules.IDLNumberRule;
 import com.aptana.editor.idl.text.rules.IDLOperatorDetector;
 
-public class IDLScanner extends RuleBasedScanner
+public class IDLSourceScanner extends RuleBasedScanner
 {
 	/**
 	 * A key word detector.
@@ -45,13 +46,17 @@ public class IDLScanner extends RuleBasedScanner
 	/**
 	 * DTDScanner
 	 */
-	public IDLScanner()
+	public IDLSourceScanner()
 	{
 		List<IRule> rules = new ArrayList<IRule>();
 		
 		rules.add(new WhitespaceRule(new WhitespaceDetector()));
 		
 		rules.add(new SingleLineRule("\"", "\"", createToken(IDLTokenType.STRING)));
+		
+		// Already handled by partitioning, but we need this for the parser
+		rules.add(new MultiLineRule("/**", "*/",createToken(IDLTokenType.DOC_COMMENT), '\0', true));
+		rules.add(new MultiLineRule("/*", "*/", createToken(IDLTokenType.MULTILINE_COMMENT), '\0', true));
 		
 		// TODO: rule for other, but I think that is to catch errors and not necessary here
 		
