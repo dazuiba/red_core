@@ -32,107 +32,9 @@
 // Level 0
 
 Definitions
-	=	Definitions ExtendedAttributeList Definition
-	|	Definitions Definition
-	|	ExtendedAttributeList Definition
-	|	Definition
+	=	ExtendedAttributeList Definition Definitions
+	|	// empty
 	;
-
-ExtendedAttributeList
-	=	LBRACKET ExtendedAttributes RBRACKET
-	|	LBRACKET RBRACKET
-	;
-
-ExtendedAttributes
-	=	ExtendedAttributes COMMA ExtendedAttribute
-	|	ExtendedAttribute
-	;
-
-ExtendedAttribute
-	=	ExtendedAttributeNoArg
-	|	ExtendedAttributeArgList
-	|	ExtendedAttributeNamedArgList
-	|	ExtendedAttributeIdent
-	|	ExtendedAttributeScopedName
-	;
-
-ExtendedAttributeNoArg
-	=	IDENTIFIER
-	;
-
-ExtendedAttributeArgList
-	=	IDENTIFIER LPAREN RPAREN
-	|	IDENTIFIER LPAREN ArgumentList RPAREN
-	;
-
-ExtendedAttributeNamedArgList
-	=	IDENTIFIER EQUAL IDENTIFIER LPAREN RPAREN
-	|	IDENTIFIER EQUAL IDENTIFIER LPAREN ArgumentList RPAREN
-	;
-
-ExtendedAttributeIdent
-	=	IDENTIFIER EQUAL IDENTIFIER
-	;
-
-ExtendedAttributeScopedName
-	=	IDENTIFIER EQUAL ScopedName
-	;
-
-ArgumentList
-	=	ArgumentList COMMA Argument
-	|	Argument
-	;
-
-Argument
-	=	ExtendedAttributeList? IN? OPTIONAL? Type Ellipsis? IDENTIFIER
-	;
-
-Type
-	=	NullableType
-	|	ScopedName
-	|	ANY
-	|	OBJECT
-	;
-
-NullableType
-	=	UnsignedIntegerType
-	|	UnsignedIntegerType QUESTION
-	|	BOOLEAN
-	|	BOOLEAN QUESTION
-	|	OCTET
-	|	OCTET QUESTION
-	|	FLOAT
-	|	FLOAT QUESTION
-	|	DOUBLE
-	|	DOUBLE QUESTION
-	|	DOMSTRING
-	|	DOMSTRING QUESTION
-	|	SEQUENCE LESS_THAN Type GREATER_THAN
-	|	SEQUENCE LESS_THAN Type GREATER_THAN QUESTION
-	;
-
-UnsignedIntegerType
-	=	UNSIGNED SHORT
-	|	UNSIGNED LONG
-	|	UNSIGNED LONG LONG
-	|	IntegerType
-	;
-
-ScopedName
-	=	AbsoluteScopedName
-	|	RelativeScopedName
-	;
-
-AbsoluteScopedName
-	=	AbsoluteScopedName DOUBLE_COLON IDENTIFIER
-	|	DOUBLE_COLON IDENTIFIER
-	;
-
-RelativeScopedName
-	=	IDENTIFIER AbsoluteScopedName
-	;
-
-// ***
 
 Definition
 	=	Module
@@ -268,6 +170,35 @@ ExceptionList
 	=	LPAREN ScopedNameList RPAREN
 	;
 
+ArgumentList
+	=	Argument Arguments
+	|	// empty
+	;
+
+Arguments
+	=	COMMA Argument Arguments
+	|	// empty
+	;
+
+Argument
+	=	ExtendedAttributeList In Optional Type Ellipsis IDENTIFIER
+	;
+
+In
+	=	IN
+	|	// empty
+	;
+
+Optional
+	=	OPTIONAL
+	|	// empty
+	;
+
+Ellipsis
+	=	ELLIPSIS
+	|	// empty
+	;
+
 ExceptionMember
 	=	Const
 	|	ExceptionField
@@ -275,6 +206,127 @@ ExceptionMember
 
 ExceptionField
 	=	Type IDENTIFIER SEMICOLON
+	;
+
+ExtendedAttributeList
+	=	LBRACKET ExtendedAttribute ExtendedAttributes RBRACKET
+	|	// empty
+	;
+
+ExtendedAttributes
+	=	COMMA ExtendedAttribute ExtendedAttributes
+	|	// empty
+	;
+
+ExtendedAttribute
+	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeRest
+	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeRest
+	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeRest
+	|	Other ExtendedAttributeRest
+	;
+
+ExtendedAttributeRest
+	=	ExtendedAttribute
+	|	// empty
+	;
+
+ExtendedAttributeInner
+	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeInner
+	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeInner
+	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeInner
+	|	OtherOrComma ExtendedAttributeInner
+	|	// empty
+	;
+
+Other
+	=	NUM_INTEGER
+	|	NUM_FLOAT
+	|	IDENTIFIER
+	|	STRING
+	|	OTHER
+	|	ELLIPSIS
+	|	COLON
+	|	DOUBLE_COLON
+	|	SEMICOLON
+	|	LESS_THAN
+	|	EQUAL
+	|	GREATER_THAN
+	|	QUESTION
+	|	FALSE
+	|	OBJECT
+	|	TRUE
+	|	ANY
+	|	ATTRIBUTE
+	|	BOOLEAN
+	|	CALLER
+	|	CONST
+	|	CREATOR
+	|	DELETER
+	|	DOUBLE
+	|	EXCEPTION
+	|	FLOAT
+	|	GETRAISES
+	|	GETTER
+	|	IMPLEMENTS
+	|	IN
+	|	INTERFACE
+	|	LONG
+	|	MODULE
+	|	OCTET
+	|	OMITTABLE
+	|	OPTIONAL
+	|	RAISES
+	|	SEQUENCE
+	|	SETRAISES
+	|	SETTER
+	|	SHORT
+	|	DOMSTRING
+	|	STRINGIFIER
+	|	TYPEDEF
+	|	UNSIGNED
+	|	VOID
+	;
+
+OtherOrComma
+	=	Other
+	|	COMMA
+	;
+
+Type
+	=	NullableType
+	|	ScopedName
+	|	ANY
+	|	OBJECT
+	;
+
+NullableType
+	=	UnsignedIntegerType Nullable
+	|	BOOLEAN Nullable
+	|	OCTET Nullable
+	|	FLOAT Nullable
+	|	DOUBLE Nullable
+	|	DOMSTRING Nullable
+	|	SEQUENCE LESS_THAN Type GREATER_THAN Nullable
+	;
+
+UnsignedIntegerType
+	=	UNSIGNED IntegerType
+	|	IntegerType
+	;
+
+IntegerType
+	=	SHORT
+	|	LONG OptionalLong
+	;
+
+OptionalLong
+	=	LONG
+	|	// empty
+	;
+
+Nullable
+	=	QUESTION
+	|	// empty
 	;
 
 ReturnType
@@ -290,3 +342,46 @@ ScopedNames
 	=	COMMA ScopedName ScopedNames
 	|	// empty
 	;
+
+ScopedName
+	=	AbsoluteScopedName
+	|	RelativeScopedName
+	;
+
+AbsoluteScopedName
+	=	DOUBLE_COLON IDENTIFIER ScopedNameParts
+	;
+
+RelativeScopedName
+	=	IDENTIFIER ScopedNameParts
+	;
+
+ScopedNameParts
+	=	DOUBLE_COLON IDENTIFIER ScopedNameParts
+	|	// empty
+	;
+
+/*
+
+ExtendedAttributeNoArg
+	=	IDENTIFIER
+	;
+
+ExtendedAttributeArgList
+	=	IDENTIFIER LPAREN ArgumentList RPAREN
+	;
+
+ExtendedAttributeIdent
+	=	IDENTIFIER EQUAL IDENTIFIER
+	;
+
+ExtendedAttributeScopedName
+	=	IDENTIFIER EQUAL ScopedName
+	;
+
+ExtendedAttributeNamedArgList
+	=	IDENTIFIER EQUAL IDENTIFIER LPAREN ArgumentList RPAREN
+	;
+
+*/
+
