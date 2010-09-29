@@ -10,6 +10,8 @@
 %implements "IParser";
 
 %embed {:
+	private IDLScanner _scanner;
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.aptana.parsing.IParser#parse(com.aptana.parsing.IParseState)
@@ -17,24 +19,143 @@
 	@Override
 	public synchronized IParseNode parse(IParseState parseState) throws java.lang.Exception
 	{
-		return null;
+		// grab source
+		char[] characters = parseState.getSource();
+
+		// make sure we have some source
+		String source = (characters != null) ? new String(characters) : "";
+
+		// send source to the scanner
+		this._scanner.setSource(source);
+
+		// parse
+		return (IParseNode) parse(this._scanner);
 	}
+:};
+
+%init {:
+		this._scanner = new IDLScanner();
 :};
 
 %terminals ANY, ATTRIBUTE, BOOLEAN, CONST, DOMSTRING, EXCEPTION, FLOAT, GETRAISES, IN, INTERFACE, LONG;
 %terminals MODULE, OBJECT, OCTET, RAISES, READONLY, SEQUENCE, SETRAISES, SHORT, TYPEDEF, UNSIGNED, TRUE;
-%terminals FALSE, VOID, NUM_INTEGER, NUM_FLOAT, LBRACKET, RBRACKET, LPAREN, RPAREN, LCURLY, RCURLY, SEMICOLON, COMMA;
-%terminals COLON, DOUBLE_COLON, LESS_THAN, GREATER_THAN, EQUAL, IDENTIFIER, STRING, OTHER;
-%terminals OMITTABLE, DOUBLE, QUESTION, ELLIPSIS, OPTIONAL, GETTER, SETTER, CREATOR, DELETER, CALLER, STRINGIFIER, IMPLEMENTS;
+%terminals FALSE, VOID, NUMBER, LBRACKET, RBRACKET, LPAREN, RPAREN, LCURLY, RCURLY, SEMICOLON, COMMA;
+%terminals COLON, DOUBLE_COLON, LESS_THAN, GREATER_THAN, EQUAL, IDENTIFIER;
+%terminals OMITTABLE, DOUBLE, QUESTION, ELLIPSIS, OPTIONAL, GETTER, SETTER, CREATOR, DELETER, CALLER;
+%terminals STRINGIFIER, IMPLEMENTS;
 
 %goal Definitions;
 
 // Level 0
 
 Definitions
-	=	ExtendedAttributeList Definition Definitions
-	|	// empty
+	=	Definitions ExtendedAttributeList Definition
+	|	Definitions Definition
+	|	ExtendedAttributeList Definition
+	|	Definition
 	;
+
+ExtendedAttributeList
+	=	LBRACKET ExtendedAttributes RBRACKET
+	|	LBRACKET RBRACKET
+	;
+
+ExtendedAttributes
+	=	ExtendedAttributes COMMA ExtendedAttribute
+	|	ExtendedAttribute
+	;
+
+ExtendedAttribute
+	=	ExtendedAttributeNoArg
+	|	ExtendedAttributeArgList
+	|	ExtendedAttributeNamedArgList
+	|	ExtendedAttributeIdent
+	|	ExtendedAttributeScopedName
+	;
+
+ExtendedAttributeNoArg
+	=	IDENTIFIER
+	;
+
+ExtendedAttributeArgList
+	=	IDENTIFIER LPAREN RPAREN
+	|	IDENTIFIER LPAREN ArgumentList RPAREN
+	;
+
+ExtendedAttributeNamedArgList
+	=	IDENTIFIER EQUAL IDENTIFIER LPAREN RPAREN
+	|	IDENTIFIER EQUAL IDENTIFIER LPAREN ArgumentList RPAREN
+	;
+
+ExtendedAttributeIdent
+	=	IDENTIFIER EQUAL IDENTIFIER
+	;
+
+ExtendedAttributeScopedName
+	=	IDENTIFIER EQUAL ScopedName
+	;
+
+ArgumentList
+	=	ArgumentList COMMA Argument
+	|	Argument
+	;
+
+Argument
+	=	ExtendedAttributeList? IN? OPTIONAL? Type ELLIPSIS? IDENTIFIER
+	;
+
+Type
+	=	NullableType
+	|	ScopedName
+	|	ANY
+	|	OBJECT
+	;
+
+NullableType
+	=	UnsignedIntegerType
+	|	UnsignedIntegerType QUESTION
+	|	BOOLEAN
+	|	BOOLEAN QUESTION
+	|	OCTET
+	|	OCTET QUESTION
+	|	FLOAT
+	|	FLOAT QUESTION
+	|	DOUBLE
+	|	DOUBLE QUESTION
+	|	DOMSTRING
+	|	DOMSTRING QUESTION
+	|	SEQUENCE LESS_THAN Type GREATER_THAN
+	|	SEQUENCE LESS_THAN Type GREATER_THAN QUESTION
+	;
+
+UnsignedIntegerType
+	=	UNSIGNED SHORT
+	|	UNSIGNED LONG
+	|	UNSIGNED LONG LONG
+	|	IntegerType
+	;
+
+IntegerType
+	=	SHORT
+	|	LONG
+	|	LONG LONG
+	;
+
+ScopedName
+	=	AbsoluteScopedName
+	|	RelativeScopedName
+	;
+
+AbsoluteScopedName
+	=	AbsoluteScopedName DOUBLE_COLON IDENTIFIER
+	|	DOUBLE_COLON IDENTIFIER
+	;
+
+RelativeScopedName
+	=	IDENTIFIER AbsoluteScopedName
+	;
+
+// ***
 
 Definition
 	=	Module
@@ -90,8 +211,7 @@ Const
 
 ConstExpr
 	=	BooleanLiteral
-	|	NUM_INTEGER
-	|	NUM_FLOAT
+	|	NUMBER
 	;
 
 BooleanLiteral
@@ -170,35 +290,6 @@ ExceptionList
 	=	LPAREN ScopedNameList RPAREN
 	;
 
-ArgumentList
-	=	Argument Arguments
-	|	// empty
-	;
-
-Arguments
-	=	COMMA Argument Arguments
-	|	// empty
-	;
-
-Argument
-	=	ExtendedAttributeList In Optional Type Ellipsis IDENTIFIER
-	;
-
-In
-	=	IN
-	|	// empty
-	;
-
-Optional
-	=	OPTIONAL
-	|	// empty
-	;
-
-Ellipsis
-	=	ELLIPSIS
-	|	// empty
-	;
-
 ExceptionMember
 	=	Const
 	|	ExceptionField
@@ -206,127 +297,6 @@ ExceptionMember
 
 ExceptionField
 	=	Type IDENTIFIER SEMICOLON
-	;
-
-ExtendedAttributeList
-	=	LBRACKET ExtendedAttribute ExtendedAttributes RBRACKET
-	|	// empty
-	;
-
-ExtendedAttributes
-	=	COMMA ExtendedAttribute ExtendedAttributes
-	|	// empty
-	;
-
-ExtendedAttribute
-	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeRest
-	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeRest
-	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeRest
-	|	Other ExtendedAttributeRest
-	;
-
-ExtendedAttributeRest
-	=	ExtendedAttribute
-	|	// empty
-	;
-
-ExtendedAttributeInner
-	=	LPAREN ExtendedAttributeInner RPAREN ExtendedAttributeInner
-	|	LBRACKET ExtendedAttributeInner RBRACKET ExtendedAttributeInner
-	|	LCURLY ExtendedAttributeInner RCURLY ExtendedAttributeInner
-	|	OtherOrComma ExtendedAttributeInner
-	|	// empty
-	;
-
-Other
-	=	NUM_INTEGER
-	|	NUM_FLOAT
-	|	IDENTIFIER
-	|	STRING
-	|	OTHER
-	|	ELLIPSIS
-	|	COLON
-	|	DOUBLE_COLON
-	|	SEMICOLON
-	|	LESS_THAN
-	|	EQUAL
-	|	GREATER_THAN
-	|	QUESTION
-	|	FALSE
-	|	OBJECT
-	|	TRUE
-	|	ANY
-	|	ATTRIBUTE
-	|	BOOLEAN
-	|	CALLER
-	|	CONST
-	|	CREATOR
-	|	DELETER
-	|	DOUBLE
-	|	EXCEPTION
-	|	FLOAT
-	|	GETRAISES
-	|	GETTER
-	|	IMPLEMENTS
-	|	IN
-	|	INTERFACE
-	|	LONG
-	|	MODULE
-	|	OCTET
-	|	OMITTABLE
-	|	OPTIONAL
-	|	RAISES
-	|	SEQUENCE
-	|	SETRAISES
-	|	SETTER
-	|	SHORT
-	|	DOMSTRING
-	|	STRINGIFIER
-	|	TYPEDEF
-	|	UNSIGNED
-	|	VOID
-	;
-
-OtherOrComma
-	=	Other
-	|	COMMA
-	;
-
-Type
-	=	NullableType
-	|	ScopedName
-	|	ANY
-	|	OBJECT
-	;
-
-NullableType
-	=	UnsignedIntegerType Nullable
-	|	BOOLEAN Nullable
-	|	OCTET Nullable
-	|	FLOAT Nullable
-	|	DOUBLE Nullable
-	|	DOMSTRING Nullable
-	|	SEQUENCE LESS_THAN Type GREATER_THAN Nullable
-	;
-
-UnsignedIntegerType
-	=	UNSIGNED IntegerType
-	|	IntegerType
-	;
-
-IntegerType
-	=	SHORT
-	|	LONG OptionalLong
-	;
-
-OptionalLong
-	=	LONG
-	|	// empty
-	;
-
-Nullable
-	=	QUESTION
-	|	// empty
 	;
 
 ReturnType
@@ -342,46 +312,3 @@ ScopedNames
 	=	COMMA ScopedName ScopedNames
 	|	// empty
 	;
-
-ScopedName
-	=	AbsoluteScopedName
-	|	RelativeScopedName
-	;
-
-AbsoluteScopedName
-	=	DOUBLE_COLON IDENTIFIER ScopedNameParts
-	;
-
-RelativeScopedName
-	=	IDENTIFIER ScopedNameParts
-	;
-
-ScopedNameParts
-	=	DOUBLE_COLON IDENTIFIER ScopedNameParts
-	|	// empty
-	;
-
-/*
-
-ExtendedAttributeNoArg
-	=	IDENTIFIER
-	;
-
-ExtendedAttributeArgList
-	=	IDENTIFIER LPAREN ArgumentList RPAREN
-	;
-
-ExtendedAttributeIdent
-	=	IDENTIFIER EQUAL IDENTIFIER
-	;
-
-ExtendedAttributeScopedName
-	=	IDENTIFIER EQUAL ScopedName
-	;
-
-ExtendedAttributeNamedArgList
-	=	IDENTIFIER EQUAL IDENTIFIER LPAREN ArgumentList RPAREN
-	;
-
-*/
-
