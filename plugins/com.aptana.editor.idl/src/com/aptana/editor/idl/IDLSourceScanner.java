@@ -120,7 +120,7 @@ public class IDLSourceScanner extends RuleBasedScanner
 		rules.add(cmRule);
 		
 		// NOTE: this combines integer and float
-		rules.add(new IDLNumberRule(createToken(IDLTokenType.NUM_FLOAT)));
+		rules.add(new IDLNumberRule(createToken(IDLTokenType.NUMBER)));
 
 		this.setRules(rules.toArray(new IRule[rules.size()]));
 		//this.setDefaultReturnToken(this.createToken("text"));
