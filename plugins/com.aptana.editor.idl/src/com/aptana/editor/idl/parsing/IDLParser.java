@@ -69,7 +69,12 @@ public class IDLParser extends Parser implements IParser {
 		this._scanner.setSource(source);
 
 		// parse
-		return (IParseNode) parse(this._scanner);
+		IParseNode result = (IParseNode) parse(this._scanner);
+		
+		// save reference to result
+		parseState.setParseResult(result);
+		
+		return result;
 	}
 
 	public IDLParser() {
