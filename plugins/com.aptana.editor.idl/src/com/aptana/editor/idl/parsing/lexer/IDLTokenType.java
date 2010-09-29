@@ -8,59 +8,60 @@ public enum IDLTokenType
 	EOF("source.idl"), // 0
 	
 	IDENTIFIER("source.idl"), // 1
-	SEMICOLON("punctuation.terminator.statement.idl"), // 2
-	DOUBLE_COLON("keyword.operator.idl"), // 3
-	LONG("keyword.operator.idl"), // 4
-	LBRACKET("meta.brace.square.idl"), // 5
-	SHORT("keyword.operator.idl"), // 6
-	SEQUENCE("keyword.operator.idl"), // 7
-	OBJECT("keyword.operator.idl"), // 8
-	ANY("keyword.operator.idl"), // 9
-	BOOLEAN("keyword.operator.idl"), // 10
-	DOUBLE("keyword.operator.idl"), // 11
-	FLOAT("keyword.operator.idl"), // 12
-	OCTET("keyword.operator.idl"), // 13
-	DOMSTRING("keyword.operator.idl"), // 14
-	UNSIGNED("keyword.operator.idl"), // 15
-	QUESTION("keyword.operator.idl"), // 16
-	LPAREN("meta.brace.round.idl"), // 17
-	LCURLY("meta.brace.curly.idl"), // 18
-	ATTRIBUTE("keyword.operator.idl"), // 19
-	GETTER("keyword.operator.idl"), // 20
-	SETTER("keyword.operator.idl"), // 21
-	CREATOR("keyword.operator.idl"), // 22
-	DELETER("keyword.operator.idl"), // 23
-	CALLER("keyword.operator.idl"), // 24
-	CONST("keyword.operator.idl"), // 25
-	VOID("constant.language.void.idl"), // 26
-	MODULE("keyword.operator.idl"), // 27
-	INTERFACE("keyword.operator.idl"), // 28
-	EXCEPTION("keyword.operator.idl"), // 29
-	EQUAL("keyword.operator.idl"), // 30
-	TYPEDEF("keyword.operator.idl"), // 31
-	LESS_THAN("keyword.operator.idl"), // 32
-	GREATER_THAN("keyword.operator.idl"), // 33
-	IMPLEMENTS("keyword.operator.idl"), // 34
-	COLON("keyword.operator.idl"), // 35
-	NUM_INTEGER("constant.numeric.js"), // 36
-	NUM_FLOAT("constant.numeric.js"), // 37
-	TRUE("constant.language.boolean.true.idl"), // 38
-	FALSE("constant.language.boolean.false.idl"), // 39
-	STRINGIFIER("keyword.operator.idl"), // 40
-	GETRAISES("keyword.operator.idl"), // 41
-	SETRAISES("keyword.operator.idl"), // 42
-	OMITTABLE("keyword.operator.idl"), // 43
-	RAISES("keyword.operator.idl"), // 44
-	IN("keyword.operator.idl"), // 45
-	OPTIONAL("keyword.operator.idl"), // 46
-	ELLIPSIS("keyword.operator.idl"), // 47
-	COMMA("meta.delimiter.object.comma.idl"), // 48
-	STRING("source.idl"), // 49
-	OTHER("source.idl"), // 50
-	RCURLY("meta.brace.curly.idl"), // 51
-	RPAREN("meta.brace.round.idl"), // 52
-	RBRACKET("meta.brace.square.idl"), // 53
-	READONLY("keyword.operator.idl"), // 54
+	DOUBLE_COLON("keyword.operator.idl"), // 2
+	SEMICOLON("punctuation.terminator.statement.idl"), // 3
+	LBRACKET("meta.brace.square.idl"), // 4
+	LONG("keyword.operator.idl"), // 5
+	RCURLY("meta.brace.curly.idl"), // 6
+	SHORT("keyword.operator.idl"), // 7
+	LPAREN("meta.brace.round.idl"), // 8
+	SEQUENCE("keyword.operator.idl"), // 9
+	UNSIGNED("keyword.operator.idl"), // 10
+	BOOLEAN("keyword.operator.idl"), // 11
+	OCTET("keyword.operator.idl"), // 12
+	FLOAT("keyword.operator.idl"), // 13
+	DOUBLE("keyword.operator.idl"), // 14
+	DOMSTRING("keyword.operator.idl"), // 15
+	ANY("keyword.operator.idl"), // 16
+	OBJECT("keyword.operator.idl"), // 17
+	QUESTION("keyword.operator.idl"), // 18
+	RPAREN("meta.brace.round.idl"), // 19
+	MODULE("keyword.operator.idl"), // 20
+	INTERFACE("keyword.operator.idl"), // 21
+	EXCEPTION("keyword.operator.idl"), // 22
+	TYPEDEF("keyword.operator.idl"), // 23
+	COMMA("meta.delimiter.object.comma.idl"), // 24
+	LCURLY("meta.brace.curly.idl"), // 25
+	ATTRIBUTE("keyword.operator.idl"), // 26
+	GETTER("keyword.operator.idl"), // 27
+	SETTER("keyword.operator.idl"), // 28
+	CREATOR("keyword.operator.idl"), // 29
+	DELETER("keyword.operator.idl"), // 30
+	CALLER("keyword.operator.idl"), // 31
+	EQUAL("keyword.operator.idl"), // 32
+	CONST("keyword.operator.idl"), // 33
+	RBRACKET("meta.brace.square.idl"), // 34
+	READONLY("keyword.operator.idl"), // 35
+	VOID("constant.language.void.idl"), // 36
+	LESS_THAN("keyword.operator.idl"), // 37
+	GREATER_THAN("keyword.operator.idl"), // 38
+	IMPLEMENTS("keyword.operator.idl"), // 39
+	IN("keyword.operator.idl"), // 40
+	OPTIONAL("keyword.operator.idl"), // 41
+	ELLIPSIS("keyword.operator.idl"), // 42
+	COLON("keyword.operator.idl"), // 43
+	NUMBER("constant.numeric.js"), // 44
+	TRUE("constant.language.boolean.true.idl"), // 45
+	FALSE("constant.language.boolean.false.idl"), // 46
+	STRINGIFIER("keyword.operator.idl"), // 47
+	GETRAISES("keyword.operator.idl"), // 48
+	SETRAISES("keyword.operator.idl"), // 49
+	OMITTABLE("keyword.operator.idl"), // 50
+	RAISES("keyword.operator.idl"), // 51
+	
+	OTHER("source.idl"),
+	STRING("source.idl"),
+	
 	COMMENT(""),
 	DOC_COMMENT(""),
 	MULTILINE_COMMENT("");
