@@ -98,7 +98,19 @@ MarkupDecl
 // 3
 
 ElementDecl
-	=	ELEMENT NAME.n ContentSpec GREATER_THAN
+	=	ELEMENT NAME.n EMPTY GREATER_THAN
+	{:
+		return new DTDElementDeclarationNode(n);
+	:}
+	|	ELEMENT NAME.n ANY GREATER_THAN
+	{:
+		return new DTDElementDeclarationNode(n);
+	:}
+	|	ELEMENT NAME.n Mixed GREATER_THAN
+	{:
+		return new DTDElementDeclarationNode(n);
+	:}
+	|	ELEMENT NAME.n Children GREATER_THAN
 	{:
 		return new DTDElementDeclarationNode(n);
 	:}
@@ -137,13 +149,6 @@ NotationDecl
 	;
 
 // 4
-
-ContentSpec
-	=	EMPTY
-	|	ANY
-	|	Mixed
-	|	Children
-	;
 
 AttDef
 	=	NAME AttType DefaultDecl

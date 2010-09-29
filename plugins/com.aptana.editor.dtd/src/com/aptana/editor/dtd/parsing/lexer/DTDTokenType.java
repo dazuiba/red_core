@@ -19,33 +19,35 @@ public enum DTDTokenType
 	SYSTEM_LITERAL("source.dtd"),	// 11
 	NMTOKEN("source.dtd"),	// 12
 	SYSTEM("keyword.operator.dtd"),	 // 13
-	ENTITY("keyword.operator.dtd"),	// 14
-	ELEMENT("keyword.operator.dtd"),	// 15
+	ELEMENT("keyword.operator.dtd"),	// 14
+	ENTITY("keyword.operator.dtd"),	// 15
 	ATTLIST("keyword.operator.dtd"),	// 16
 	NOTATION("keyword.operator.dtd"),	// 17
 	RPAREN_STAR("source.dtd"),	// 18
 	PE_REF("source.dtd"),	// 19
 	PI("source.dtd"),	// 20
-	COMMENT(""),	// 21
-	COMMA("source.dtd"),	// 22
-	PERCENT("keyword.operator.dtd"),	// 23
-	NOTATION_TYPE("keyword.operator.dtd"),	// 24
-	PCDATA("keyword.operator.dtd"),	// 25
-	FIXED("keyword.operator.dtd"),	// 26
-	NDATA("keyword.operator.dtd"),	// 27
-	EMPTY("keyword.operator.dtd"),	// 28
-	ANY("keyword.operator.dtd"),	// 29
-	REQUIRED("keyword.operator.dtd"),	// 30
-	IMPLIED("keyword.operator.dtd"),	// 31
-	CDATA_TYPE("keyword.operator.dtd"),	// 32
-	ID_TYPE("keyword.operator.dtd"),	// 33
-	IDREF_TYPE("keyword.operator.dtd"),	// 34
-	IDREFS_TYPE("keyword.operator.dtd"),	// 35
-	ENTITY_TYPE("keyword.operator.dtd"),	// 36
-	ENTITIES_TYPE("keyword.operator.dtd"),	// 37
-	NMTOKEN_TYPE("keyword.operator.dtd"),	// 38
-	NMTOKENS_TYPE("keyword.operator.dtd"),	// 39
-	NDATA_TYPE("keyword.operator.dtd");
+	COMMA("source.dtd"),	// 21
+	EMPTY("keyword.operator.dtd"),	// 22
+	ANY("keyword.operator.dtd"),	// 23
+	PERCENT("keyword.operator.dtd"),	// 24
+	NOTATION_TYPE("keyword.operator.dtd"),	// 25
+	PCDATA("keyword.operator.dtd"),	// 26
+	FIXED("keyword.operator.dtd"),	// 27
+	NDATA("keyword.operator.dtd"),	// 28
+	REQUIRED("keyword.operator.dtd"),	// 29
+	IMPLIED("keyword.operator.dtd"),	// 30
+	CDATA_TYPE("keyword.operator.dtd"),	// 31
+	ID_TYPE("keyword.operator.dtd"),	// 32
+	IDREF_TYPE("keyword.operator.dtd"),	// 33
+	IDREFS_TYPE("keyword.operator.dtd"),	// 34
+	ENTITY_TYPE("keyword.operator.dtd"),	// 35
+	ENTITIES_TYPE("keyword.operator.dtd"),	// 36
+	NMTOKEN_TYPE("keyword.operator.dtd"),	// 37
+	NMTOKENS_TYPE("keyword.operator.dtd"),	// 38
+	
+	NDATA_TYPE("keyword.operator.dtd"),
+	
+	COMMENT("");
 	
 	//ENTITY_REF("source.dtd"),
 	
