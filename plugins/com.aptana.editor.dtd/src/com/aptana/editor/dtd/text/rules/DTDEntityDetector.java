@@ -7,6 +7,7 @@ public class DTDEntityDetector implements IWordDetector
 	private DTDNameDetector _detector = new DTDNameDetector();
 	private int _index;
 	private char _startingChararacter;
+	private boolean _done;
 	
 	/**
 	 * DTDEntityDetector
@@ -16,6 +17,7 @@ public class DTDEntityDetector implements IWordDetector
 	public DTDEntityDetector(char startingCharacter)
 	{
 		this._startingChararacter = startingCharacter;
+		this._done = false;
 	}
 	
 	/*
@@ -25,16 +27,29 @@ public class DTDEntityDetector implements IWordDetector
 	@Override
 	public boolean isWordPart(char c)
 	{
+		boolean result = false;
+		
 		this._index++;
 		
-		if (this._index == 1)
+		if (this._done == false)
 		{
-			return this._detector.isWordStart(c);
+			if (this._index == 1)
+			{
+				result = this._detector.isWordStart(c);
+			}
+			else if (c == ';')
+			{
+				this._done = true;
+
+				result = true;
+			}
+			else
+			{
+				result = this._detector.isWordPart(c);
+			}
 		}
-		else
-		{
-			return this._detector.isWordPart(c) || c == ';';
-		}
+		
+		return result;
 	}
 
 	/*

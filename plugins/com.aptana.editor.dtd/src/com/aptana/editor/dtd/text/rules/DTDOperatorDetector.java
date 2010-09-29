@@ -15,8 +15,6 @@ public class DTDOperatorDetector implements IWordDetector
 		{
 			switch (c)
 			{
-				case '?':
-				case '>':
 				case '*':
 					return true;
 					
@@ -35,8 +33,6 @@ public class DTDOperatorDetector implements IWordDetector
 
 		switch (c)
 		{
-			case '<':
-			case '?':
 			case ')':
 				return true;
 

@@ -15,7 +15,7 @@ import org.eclipse.jface.text.rules.WordRule;
 import com.aptana.editor.common.text.rules.CharacterMapRule;
 import com.aptana.editor.common.text.rules.WhitespaceDetector;
 import com.aptana.editor.dtd.parsing.lexer.DTDTokenType;
-import com.aptana.editor.dtd.text.rules.DTDEntityDetector;
+import com.aptana.editor.dtd.text.rules.DTDEntityRule;
 import com.aptana.editor.dtd.text.rules.DTDNameDetector;
 import com.aptana.editor.dtd.text.rules.DTDOperatorDetector;
 
@@ -52,14 +52,18 @@ public class DTDSourceScanner extends RuleBasedScanner
 		
 		rules.add(new WhitespaceRule(new WhitespaceDetector()));
 		
-		// TODO: comment, string, pubid?
-		// TODO: att value, entity value
+		// Already handled by partitioning, but we need this for the parser
+		rules.add(new MultiLineRule("<!--", "-->", createToken(DTDTokenType.COMMENT), '\0', true));
 		
-		rules.add(new MultiLineRule("<!--", "-->", new Token(DTDTokenType.COMMENT), '\0', true));
+		// TODO: This should require Name directly after the opening <? and it
+		// should reject <?xml
+		rules.add(new MultiLineRule("<?", "?>", createToken(DTDTokenType.PI), '\0', true));
+		
+		// NOTE: There is no String, but we're using this to generalize 
+		// pubid, att value, entity value
+		rules.add(new MultiLineRule("\"", "\"", createToken(DTDTokenType.STRING), '\0', true));
 		
 		WordRule operatorRule = new WordRule(new DTDOperatorDetector(), Token.UNDEFINED);
-		operatorRule.addWord("<?", createToken(DTDTokenType.PI_START));
-		operatorRule.addWord("?>", createToken(DTDTokenType.PI_END));
 		operatorRule.addWord(")*", createToken(DTDTokenType.RPAREN_STAR));
 		rules.add(operatorRule);
 		
@@ -75,12 +79,12 @@ public class DTDSourceScanner extends RuleBasedScanner
 		wordRule.addWord("ANY", createToken(DTDTokenType.ANY));
 		wordRule.addWord("CDATA", createToken(DTDTokenType.CDATA_TYPE));
 		wordRule.addWord("EMPTY", createToken(DTDTokenType.EMPTY));
-		wordRule.addWord("ENTITY", createToken(DTDTokenType.ENTITY));
+		wordRule.addWord("ENTITY", createToken(DTDTokenType.ENTITY_TYPE));
 		wordRule.addWord("ENTITIES", createToken(DTDTokenType.ENTITIES_TYPE));
 		wordRule.addWord("ID", createToken(DTDTokenType.ID_TYPE));
 		wordRule.addWord("IDREF", createToken(DTDTokenType.IDREF_TYPE));
 		wordRule.addWord("IDREFS", createToken(DTDTokenType.IDREFS_TYPE));
-		wordRule.addWord("NDATA", createToken(DTDTokenType.NMTOKEN_TYPE));
+		wordRule.addWord("NDATA", createToken(DTDTokenType.NDATA_TYPE));
 		wordRule.addWord("NMTOKEN", createToken(DTDTokenType.NMTOKEN_TYPE));
 		wordRule.addWord("NMTOKENS", createToken(DTDTokenType.NMTOKENS_TYPE));
 		wordRule.addWord("NOTATION", createToken(DTDTokenType.NOTATION_TYPE));
@@ -89,7 +93,7 @@ public class DTDSourceScanner extends RuleBasedScanner
 		rules.add(wordRule);
 		
 		// PERef
-		rules.add(new WordRule(new DTDEntityDetector('%'), createToken(DTDTokenType.PE_REF)));
+		rules.add(new DTDEntityRule('%', createToken(DTDTokenType.PE_REF)));
 		
 		CharacterMapRule cmRule = new CharacterMapRule();
 		cmRule.add('>', createToken(DTDTokenType.GREATER_THAN));
@@ -107,7 +111,7 @@ public class DTDSourceScanner extends RuleBasedScanner
 		rules.add(new WordRule(new DTDNameDetector(), createToken(DTDTokenType.NAME)));
 		
 		// EntityRef
-		//rules.add(new WordRule(new DTDEntityDetector('&'), createToken(DTDTokenType.ENTITY_REF)));
+		//rules.add(new DTDEntityRule('&', createToken(DTDTokenType.PE_REF)));
 
 		this.setRules(rules.toArray(new IRule[rules.size()]));
 		//this.setDefaultReturnToken(this.createToken("text"));

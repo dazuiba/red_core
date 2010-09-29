@@ -2,23 +2,40 @@ package com.aptana.editor.dtd.text.rules;
 
 import org.eclipse.jface.text.rules.ICharacterScanner;
 import org.eclipse.jface.text.rules.IToken;
-import org.eclipse.jface.text.rules.IWordDetector;
 
 import com.aptana.editor.common.text.rules.ExtendedWordRule;
 
 public class DTDEntityRule extends ExtendedWordRule
 {
-
-	public DTDEntityRule(IWordDetector detector, IToken defaultToken, boolean ignoreCase)
+	private char _startingChararacter;
+	
+	/**
+	 * DTDEntityRule
+	 * 
+	 * @param firstChar
+	 * @param defaultToken
+	 */
+	public DTDEntityRule(char firstChar, IToken defaultToken)
 	{
-		super(new DTDEntityDetector('&'), defaultToken, false);
+		super(new DTDEntityDetector(firstChar), defaultToken, true);
+		
+		this._startingChararacter = firstChar;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.aptana.editor.common.text.rules.ExtendedWordRule#wordOK(java.lang.String, org.eclipse.jface.text.rules.ICharacterScanner)
+	 */
 	@Override
 	protected boolean wordOK(String word, ICharacterScanner scanner)
 	{
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		
+		if (word != null && word.length() >= 2)
+		{
+			result = (word.charAt(0) == this._startingChararacter) && word.charAt(word.length() - 1) == ';';
+		}
+		
+		return result;
 	}
-
 }

@@ -15,27 +15,26 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9obbNTmLKKKnhzx4z0GZ0fAA0OBQjGqGmmXWJGICAI05L43Ye8As30AeW8HGH11PtJyJyT" +
-		"24UbD0K41Em9YBs3lOXUxoETtzvutFXv927eplzEsdTspUGjWAwRZ8iIZ9Gx0WKX0Aup0IC" +
-		"J1tolM1Lb8HHewuo3KuaXaavpf8iVW39o9it0s1k0S3CIv68CRqHgbk1o7uoWSZHP8Z8fL8" +
-		"1#5BZO9rKZ6DJWC7T0Vf#5qd8VpKODEE08JK8agRaSIsgCDsg80FT2JRs4ushbSYb2C4Xo2" +
-		"Gt4oSb6EOt4SZiS9E14d8HqPoBHi0tcA6v7dx6vETjVQNN6mrWvQ8fJXLFGMqt0bBb0EGvJ" +
-		"NKEJW4dw4Ujp4JRWCr#9ItAvnexc3N#5gVial#24$G1zqvFleYnHkupiOnxVv9cxb6tmT5s" +
-		"8gUc4Y1c4mXg4Vhi1Lk1YZK8VhSHt6OZmtusRSm1S1tCB7C1gJCGMtSIDVqDxYb6UETf2hp" +
-		"FEKTxvYFVQA#UeNxjfNtYKwPsYbC1AUJAgTJPhgbwIT1oUNeYgtK8tQHSKAtQWWbg2w5AXc" +
-		"SUfJePsf7gfNPpScMLNl0a$xQgkpxsrtnKEs$22Nq0zg7$JkQNwq37EBv1odAaT74ZJEqzg" +
-		"#kuiXdcH0iYeLp1hItlNCScs96fSekxNkhAU$CYSzbrVGNkIafre5ifEJ1Qgth$iSh56Z7O" +
-		"VpU9h1rxthuFeKeoCyqhMrKjItMO4PzN1VgaW9x7sXBraKYt7ctolk4$UB1qGRqKSyA8h4G" +
-		"sAczPqjvfWzIAIRFT3qu9YrXiJuGsFyKQR7cXvlkjxqHDFzn5pnY9Wl1eW5Of5OB9QAoTPt" +
-		"IcH#$KBibafhu0ncnSQQYxvbOeMOQluqqql4TBFlQ6ById6dM6t#6jFBJIyKTvczLZmivfb" +
-		"$jyWLwytV8EuHpuXdnVDYbLWdDeewiSdwRXPR8ddeR5uMs$PZtqcDjMcU7L8jzpM7#csFid" +
-		"SsT#sOF4fZ$7BJbQPhzcEkLDDrKNdjaXh#Nt9hndfZ6eYDQEROsl#nxh0OVr8JVKSs4fyHA" +
-		"kxcBlx5F$a7V#Tl$9M$MFndDF3nFIVVTLAtay$nKQxWSYxZKYxXOYxYGYxWVCvJcsundnPF" +
-		"2TrcRcXmnftY9$xexCzrYxVo9LbR#1fVvIjSptLyaazmBTVmSQxcAgwqSVhju5ndwJ#ASpY" +
-		"Ri$W3l#Ttrlwj#4PyuhoFBVgrwSyQpELJ9$#MgDLlbAUNqHUUtiYGhesGWtYzdt4YNg#JBp" +
-		"pzNuTqKomWJ$HoRzo$P6jCTyNpzVO4RqwM$3BfSkbonGDTuF3rAdh2Zs9Flr1#XA8zyDqB5" +
-		"UBhVV8SwPg$H7ENA9OXdI6$LBfKVeNQ#pP1fL6ilfdIcKv7QDglqZfLsc#rrggMNUDUIW$z" +
-		"$m6vHgmT");
+		"U9oTbGTmL5KKXl$tTXCLI4J4650W5eG4Ge0GI0CXf0c8OaS4qIWM41LfAaWLmT4P7Hr7Pnn" +
+		"dL8g5Ahqe22fYxmgAbMB1tb7v$T$TixfPbsNntVdkAVUySykxkmV05ip4nGWZ7OVWK1o6Ap" +
+		"4S8VXndYlu0LgX4ox0I1AbA4CvAZaRP#1Cd8MpSGxEnNaOY75eX5uOWMkGXWPe#8zTQtO9k" +
+		"kC45A0V9l0zd8RJCG3dOn1wu6JqH5CtrWRjq1AP$1HDS2HEHKTSZoBqGLySWx4ureqVxoAF" +
+		"GcCSuRHkoCA9Q8sJq1Qvo4DxvAE3PGhwBgxlwlfYt8WPo44p78V9QfqnIYt88lWIij4RDQW" +
+		"I5#8MpNS9BaAXeeTXF39mE2xdL$mIet4Ply0eVewZSHC$uSVy2DFH72tuFhTXAhVoNRx3jr" +
+		"6D2fo2eHYC$XY2It4LhiQrk05Z#3BgC17NyKLCmIIknCtQtJI#m2rQVKYhBz3EEsbrXLfzU" +
+		"wszlYSVdliAsTeHx4jrqqmvsbLmEf7JQ8DChJWufHuwowOwiQXTR7PmNhxcIrCUJpklrCwh" +
+		"jVT8nf0RYvnfTuq7NwcvxaOltOwMkX5XVTDq6myYc#cyMZWjIrylaYEsZqJ#jqzJ2svSkcv" +
+		"90saPQhxDxYcJ9yrpjxATOi9gMKxwpjz8U7ela1cYI3V5Swt28Znz9SzQlZmbYWdsxEjc#k" +
+		"PFSvbAjIFFZGI#XYQ1MPFXdXoH7UW7Gi$TeaBSO$QzuZvnltX0L8e1ua4nLZmaPblimsAEw" +
+		"Vt4EDExcXmSDzVGEBikpXveSeB98IQdc9nciecO9nuHZuaoyRYOBnQ8XMAcnTuQpKzodqHH" +
+		"WZDO5EzB5JsBnLByU$QtcrmYRZFzZYJlBnTtYfLchpAvpEGAqTVqkyHeiThijMA6M2ysY8r" +
+		"YdLWZdX5Zn2QBVKviZZcBjyJsWzXdPfAn737yG3aqtzQOTpgcEdVSN5LnTgt9w1drJpMNrh" +
+		"FJtfaQuzihCVx$h2s5jKzCu1kPubht7CGyZUFiwKbYw$RZdnKHtCS$#GVtydV#nb$v2tys$" +
+		"qz8yF13rszt$VDYCrTmEPTnAP$W4Yxc8Yxa0iwdVgryLkYMSfFGxUJ6X1b$53$mUwVlvkjy" +
+		"ZQzAUqNtzqs#mQUvWUlv59$aEgxb6gxcAdjF$mjyr6dwb#0ypkKSViTl#OsDVotsY1tE#io" +
+		"yknAkOQVh$r8tIDNBKvtpXQUA5w73VYX0MDKm9CAgUxxmL1iZT9Ol8AXOiUGhlb3#BgxQ#I" +
+		"AakkYhgeL4sCaYXwywvma$XlfsiUme9VNmLHqzmzV$l#Teg$nbobqcNwvahknooNBPlJLUc" +
+		"OGgerInUP9vJaP9RbThdchjjqPprKYlTJNFGv#$0R#SdMO=");
 
 	private DTDScanner _scanner;
 	
@@ -84,11 +83,11 @@ public class DTDParser extends Parser implements IParser {
 			{
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 			}
-			case 90: // NmTokens = NmTokens NMTOKEN
+			case 89: // NmTokens = NmTokens NMTOKEN
 			{
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
 			}
-			case 91: // NmTokens = NMTOKEN
+			case 90: // NmTokens = NMTOKEN
 			{
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 			}
@@ -103,74 +102,74 @@ public class DTDParser extends Parser implements IParser {
 			case 10: // MarkupDecl = COMMENT
 			case 16: // EntityDecl = GEDecl
 			case 17: // EntityDecl = PEDecl
-			case 21: // ContentSpec = EMPTY
-			case 22: // ContentSpec = ANY
-			case 23: // ContentSpec = Mixed
-			case 24: // ContentSpec = Children
-			case 36: // Children = Choice
-			case 40: // Children = Seq
-			case 44: // AttType = StringType
-			case 45: // AttType = TokenizedType
-			case 46: // AttType = EnumeratedType
-			case 47: // DefaultDecl = REQUIRED
-			case 48: // DefaultDecl = IMPLIED
-			case 49: // DefaultDecl = ATT_VALUE
-			case 51: // EntityDef = ENTITY_VALUE
-			case 52: // EntityDef = ExternalID
-			case 54: // PEDef = ENTITY_VALUE
-			case 55: // PEDef = ExternalID
-			case 63: // StringType = CDATA_TYPE
-			case 64: // TokenizedType = ID_TYPE
-			case 65: // TokenizedType = IDREF_TYPE
-			case 66: // TokenizedType = IDREFS_TYPE
-			case 67: // TokenizedType = ENTITY_TYPE
-			case 68: // TokenizedType = ENTITIES_TYPE
-			case 69: // TokenizedType = NMTOKEN_TYPE
-			case 70: // TokenizedType = NMTOKENS_TYPE
-			case 71: // EnumeratedType = NotationType
-			case 72: // EnumeratedType = Enumeration
-			case 74: // Cp = NAME
-			case 78: // Cp = Choice
-			case 82: // Cp = Seq
+			case 20: // ContentSpec = EMPTY
+			case 21: // ContentSpec = ANY
+			case 22: // ContentSpec = Mixed
+			case 23: // ContentSpec = Children
+			case 35: // Children = Choice
+			case 39: // Children = Seq
+			case 43: // AttType = StringType
+			case 44: // AttType = TokenizedType
+			case 45: // AttType = EnumeratedType
+			case 46: // DefaultDecl = REQUIRED
+			case 47: // DefaultDecl = IMPLIED
+			case 48: // DefaultDecl = STRING
+			case 50: // EntityDef = STRING
+			case 51: // EntityDef = ExternalID
+			case 53: // PEDef = STRING
+			case 54: // PEDef = ExternalID
+			case 62: // StringType = CDATA_TYPE
+			case 63: // TokenizedType = ID_TYPE
+			case 64: // TokenizedType = IDREF_TYPE
+			case 65: // TokenizedType = IDREFS_TYPE
+			case 66: // TokenizedType = ENTITY_TYPE
+			case 67: // TokenizedType = ENTITIES_TYPE
+			case 68: // TokenizedType = NMTOKEN_TYPE
+			case 69: // TokenizedType = NMTOKENS_TYPE
+			case 70: // EnumeratedType = NotationType
+			case 71: // EnumeratedType = Enumeration
+			case 73: // Cp = NAME
+			case 77: // Cp = Choice
+			case 81: // Cp = Seq
 			{
 				return _symbols[offset + 1];
 			}
-			case 28: // ExternalID = SYSTEM SYSTEM_LITERAL
-			case 30: // PublicID = PUBLIC PUBID_LITERAL
-			case 35: // Names = PIPE NAME
-			case 37: // Children = Choice QUESTION
-			case 38: // Children = Choice STAR
-			case 39: // Children = Choice PLUS
-			case 41: // Children = Seq QUESTION
-			case 42: // Children = Seq STAR
-			case 43: // Children = Seq PLUS
-			case 50: // DefaultDecl = FIXED ATT_VALUE
-			case 53: // EntityDef = ExternalID NDataDecl
-			case 58: // ChoiceCps = PIPE Cp
-			case 62: // SeqCps = COMMA Cp
-			case 73: // NDataDecl = NDATA NAME
-			case 75: // Cp = NAME QUESTION
-			case 76: // Cp = NAME STAR
-			case 77: // Cp = NAME PLUS
-			case 79: // Cp = Choice QUESTION
-			case 80: // Cp = Choice STAR
-			case 81: // Cp = Choice PLUS
-			case 83: // Cp = Seq QUESTION
-			case 84: // Cp = Seq STAR
-			case 85: // Cp = Seq PLUS
+			case 27: // ExternalID = SYSTEM SYSTEM_LITERAL
+			case 29: // PublicID = PUBLIC STRING
+			case 34: // Names = PIPE NAME
+			case 36: // Children = Choice QUESTION
+			case 37: // Children = Choice STAR
+			case 38: // Children = Choice PLUS
+			case 40: // Children = Seq QUESTION
+			case 41: // Children = Seq STAR
+			case 42: // Children = Seq PLUS
+			case 49: // DefaultDecl = FIXED STRING
+			case 52: // EntityDef = ExternalID NDataDecl
+			case 57: // ChoiceCps = PIPE Cp
+			case 61: // SeqCps = COMMA Cp
+			case 72: // NDataDecl = NDATA NAME
+			case 74: // Cp = NAME QUESTION
+			case 75: // Cp = NAME STAR
+			case 76: // Cp = NAME PLUS
+			case 78: // Cp = Choice QUESTION
+			case 79: // Cp = Choice STAR
+			case 80: // Cp = Choice PLUS
+			case 82: // Cp = Seq QUESTION
+			case 83: // Cp = Seq STAR
+			case 84: // Cp = Seq PLUS
 			{
 				return _symbols[offset + 2];
 			}
 			case 12: // AttlistDecl = ATTLIST NAME GREATER_THAN
-			case 25: // AttDef = NAME AttType DefaultDecl
-			case 29: // ExternalID = PUBLIC PUBID_LITERAL SYSTEM_LITERAL
-			case 31: // Mixed = LPAREN PCDATA RPAREN_STAR
-			case 33: // Mixed = LPAREN PCDATA RPAREN
-			case 34: // Names = Names PIPE NAME
-			case 57: // ChoiceCps = ChoiceCps PIPE Cp
-			case 59: // Seq = LPAREN Cp RPAREN
-			case 61: // SeqCps = SeqCps COMMA Cp
-			case 88: // Enumeration = LPAREN NMTOKEN RPAREN
+			case 24: // AttDef = NAME AttType DefaultDecl
+			case 28: // ExternalID = PUBLIC STRING SYSTEM_LITERAL
+			case 30: // Mixed = LPAREN PCDATA RPAREN_STAR
+			case 32: // Mixed = LPAREN PCDATA RPAREN
+			case 33: // Names = Names PIPE NAME
+			case 56: // ChoiceCps = ChoiceCps PIPE Cp
+			case 58: // Seq = LPAREN Cp RPAREN
+			case 60: // SeqCps = SeqCps COMMA Cp
+			case 87: // Enumeration = LPAREN NMTOKEN RPAREN
 			{
 				return _symbols[offset + 3];
 			}
@@ -178,18 +177,17 @@ public class DTDParser extends Parser implements IParser {
 			case 13: // AttlistDecl = ATTLIST NAME AttDefs GREATER_THAN
 			case 18: // NotationDecl = NOTATION NAME ExternalID GREATER_THAN
 			case 19: // NotationDecl = NOTATION NAME PublicID GREATER_THAN
-			case 20: // PI = PI_START NAME NOT_PI_END PI_END
-			case 26: // GEDecl = ENTITY NAME EntityDef GREATER_THAN
-			case 32: // Mixed = LPAREN PCDATA Names RPAREN_STAR
-			case 56: // Choice = LPAREN Cp ChoiceCps RPAREN
-			case 60: // Seq = LPAREN Cp SeqCps RPAREN
-			case 86: // NotationType = NOTATION_TYPE LPAREN NAME RPAREN
-			case 89: // Enumeration = LPAREN NMTOKEN NmTokens RPAREN
+			case 25: // GEDecl = ENTITY NAME EntityDef GREATER_THAN
+			case 31: // Mixed = LPAREN PCDATA Names RPAREN_STAR
+			case 55: // Choice = LPAREN Cp ChoiceCps RPAREN
+			case 59: // Seq = LPAREN Cp SeqCps RPAREN
+			case 85: // NotationType = NOTATION_TYPE LPAREN NAME RPAREN
+			case 88: // Enumeration = LPAREN NMTOKEN NmTokens RPAREN
 			{
 				return _symbols[offset + 4];
 			}
-			case 27: // PEDecl = ENTITY PERCENT NAME PEDef GREATER_THAN
-			case 87: // NotationType = NOTATION_TYPE LPAREN NAME Names RPAREN
+			case 26: // PEDecl = ENTITY PERCENT NAME PEDef GREATER_THAN
+			case 86: // NotationType = NOTATION_TYPE LPAREN NAME Names RPAREN
 			{
 				return _symbols[offset + 5];
 			}

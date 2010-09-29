@@ -4,6 +4,10 @@ import org.eclipse.jface.text.rules.IWordDetector;
 
 public class DTDNameDetector implements IWordDetector
 {
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordPart(char)
+	 */
 	@Override
 	public boolean isWordPart(char c)
 	{
@@ -17,6 +21,10 @@ public class DTDNameDetector implements IWordDetector
 		||	(0x203F <= c && c <= 0x2040);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordStart(char)
+	 */
 	@Override
 	public boolean isWordStart(char c)
 	{
@@ -24,6 +32,7 @@ public class DTDNameDetector implements IWordDetector
 			c == ':'
 		||	('A' <= c && c <= 'Z')
 		||	c == '_'
+		||	('a' <= c && c <= 'z')
 		||	(0xC0 <= c && c <= 0xD6)
 		||	(0xD8 <= c && c <= 0xF6)
 		||	(0xF8 <= c && c <= 0x2FF)
