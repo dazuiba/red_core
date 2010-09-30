@@ -64,6 +64,8 @@ public class DTDSourceScanner extends RuleBasedScanner
 		rules.add(new MultiLineRule("\"", "\"", createToken(DTDTokenType.STRING), '\0', true));
 		
 		WordRule operatorRule = new WordRule(new DTDOperatorDetector(), Token.UNDEFINED);
+		operatorRule.addWord("<![", createToken(DTDTokenType.SECTION_START));
+		operatorRule.addWord("]]>", createToken(DTDTokenType.SECTION_END));
 		operatorRule.addWord(")*", createToken(DTDTokenType.RPAREN_STAR));
 		rules.add(operatorRule);
 		
@@ -84,6 +86,8 @@ public class DTDSourceScanner extends RuleBasedScanner
 		wordRule.addWord("ID", createToken(DTDTokenType.ID_TYPE));
 		wordRule.addWord("IDREF", createToken(DTDTokenType.IDREF_TYPE));
 		wordRule.addWord("IDREFS", createToken(DTDTokenType.IDREFS_TYPE));
+		wordRule.addWord("IGNORE", createToken(DTDTokenType.IGNORE));
+		wordRule.addWord("INCLUDE", createToken(DTDTokenType.INCLUDE));
 		wordRule.addWord("NDATA", createToken(DTDTokenType.NDATA_TYPE));
 		wordRule.addWord("NMTOKEN", createToken(DTDTokenType.NMTOKEN_TYPE));
 		wordRule.addWord("NMTOKENS", createToken(DTDTokenType.NMTOKENS_TYPE));
@@ -105,6 +109,7 @@ public class DTDSourceScanner extends RuleBasedScanner
 		cmRule.add('+', createToken(DTDTokenType.PLUS));
 		cmRule.add(',', createToken(DTDTokenType.COMMA));
 		cmRule.add('%', createToken(DTDTokenType.PERCENT));
+		cmRule.add('[', createToken(DTDTokenType.LBRACKET));
 		rules.add(cmRule);
 		
 		// Name
