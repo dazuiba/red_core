@@ -17,7 +17,6 @@ public class DTDEntityDetector implements IWordDetector
 	public DTDEntityDetector(char startingCharacter)
 	{
 		this._startingChararacter = startingCharacter;
-		this._done = false;
 	}
 	
 	/*
@@ -60,6 +59,7 @@ public class DTDEntityDetector implements IWordDetector
 	public boolean isWordStart(char c)
 	{
 		this._index = 0;
+		this._done = false;
 		
 		return c == this._startingChararacter;
 	}
