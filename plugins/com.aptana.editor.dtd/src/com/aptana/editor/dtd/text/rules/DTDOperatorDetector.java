@@ -11,16 +11,30 @@ public class DTDOperatorDetector implements IWordDetector
 	{
 		this._position++;
 
-		if (this._position == 1)
+		switch (this._position)
 		{
-			switch (c)
-			{
-				case '*':
-					return true;
-					
-				default:
-					return false;
-			}
+			case 1:
+				switch (c)
+				{
+					case '*':
+					case ']':
+					case '!':
+						return true;
+						
+					default:
+						return false;
+				}
+				
+			case 2:
+				switch (c)
+				{
+					case '[':
+					case '>':
+						return true;
+						
+					default:
+						return false;
+				}
 		}
 		
 		return false;
@@ -33,6 +47,8 @@ public class DTDOperatorDetector implements IWordDetector
 
 		switch (c)
 		{
+			case '<':
+			case ']':
 			case ')':
 				return true;
 
