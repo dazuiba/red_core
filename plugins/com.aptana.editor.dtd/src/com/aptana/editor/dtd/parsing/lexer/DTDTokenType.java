@@ -24,7 +24,7 @@ public enum DTDTokenType
 	ATTLIST("keyword.operator.dtd"),	// 16
 	NOTATION("keyword.operator.dtd"),	// 17
 	RPAREN_STAR("source.dtd"),	// 18
-	PE_REF("source.dtd"),	// 19
+	PE_REF("entity.reference.parameter.dtd"),	// 19
 	PI("source.dtd"),	// 20
 	COMMA("source.dtd"),	// 21
 	EMPTY("keyword.operator.dtd"),	// 22
