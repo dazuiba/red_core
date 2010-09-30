@@ -97,6 +97,20 @@ public class DTDSourceScannerTests extends TestCase
 		this.typeTests(source, DTDTokenType.PI);
 	}
 	
+	public void testSectionStart()
+	{
+		String source = "<![";
+		
+		this.typeTests(source, DTDTokenType.SECTION_START);
+	}
+	
+	public void testSectionEnd()
+	{
+		String source = "]]>";
+		
+		this.typeTests(source, DTDTokenType.SECTION_END);
+	}
+	
 	public void testCloseWithKleene()
 	{
 		String source = ")*";
@@ -207,6 +221,20 @@ public class DTDSourceScannerTests extends TestCase
 		String source = "IDREFS";
 		
 		this.typeTests(source, DTDTokenType.IDREFS_TYPE);
+	}
+	
+	public void testIgnore()
+	{
+		String source = "IGNORE";
+		
+		this.typeTests(source, DTDTokenType.IGNORE);
+	}
+	
+	public void testInclude()
+	{
+		String source = "INCLUDE";
+		
+		this.typeTests(source, DTDTokenType.INCLUDE);
 	}
 	
 	public void testNDataType()
@@ -321,10 +349,31 @@ public class DTDSourceScannerTests extends TestCase
 		this.typeTests(source, DTDTokenType.PERCENT);
 	}
 	
+	public void testLeftBracket()
+	{
+		String source = "[";
+		
+		this.typeTests(source, DTDTokenType.LBRACKET);
+	}
+	
 	public void testName()
 	{
 		String source = "Name";
 		
 		this.typeTests(source, DTDTokenType.NAME);
+	}
+	
+	public void testSequence()
+	{
+		String source = "<![%svg-prefw-redecl.module;[%svg-prefw-redecl.mod;]]>";
+		
+		this.typeTests(
+			source,
+			DTDTokenType.SECTION_START,
+			DTDTokenType.PE_REF,
+			DTDTokenType.LBRACKET,
+			DTDTokenType.PE_REF,
+			DTDTokenType.SECTION_END
+		);
 	}
 }
