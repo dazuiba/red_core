@@ -46,6 +46,11 @@ public enum DTDTokenType
 	NMTOKENS_TYPE("keyword.operator.dtd"),	// 38
 	
 	NDATA_TYPE("keyword.operator.dtd"),
+	SECTION_START("keyword.operator.dtd"),
+	SECTION_END("keyword.operator.dtd"),
+	IGNORE("keyword.operator.dtd"),
+	INCLUDE("keyword.operator.dtd"),
+	LBRACKET("keyword.operator.dtd"),
 	
 	COMMENT("");
 	
