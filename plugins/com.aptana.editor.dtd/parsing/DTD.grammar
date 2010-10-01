@@ -47,10 +47,10 @@
 %terminals ENTITY, SYSTEM, PUBLIC, PCDATA, LPAREN, PIPE, RPAREN, RPAREN_STAR, QUESTION;
 %terminals STAR, PLUS, FIXED, IMPLIED, REQUIRED, COMMA, CDATA_TYPE, ID_TYPE, IDREF_TYPE;
 %terminals IDREFS_TYPE, ENTITY_TYPE, ENTITIES_TYPE, NMTOKEN_TYPE, NMTOKENS_TYPE, NDATA;
-%terminals NOTATION_TYPE, PE_REF, NAME, PERCENT, STRING;
-%terminals SYSTEM_LITERAL, NMTOKEN;
+%terminals NOTATION_TYPE, PE_REF, NAME, PERCENT, STRING, LBRACKET;
+%terminals COMMENT, SYSTEM_LITERAL, NMTOKEN, SECTION_START, SECTION_END, IGNORE, INCLUDE;
 
-%typeof NAME, PI = "String";
+%typeof NAME, PI, STRING = "String";
 
 %goal DTD;
 
@@ -77,6 +77,7 @@ Declarations
 Declaration
 	=	MarkupDecl
 	|	PE_REF
+	|	ConditionalSect
 	;
 
 // 2
@@ -92,7 +93,7 @@ MarkupDecl
 		
 		return new DTDProcessingInstructionNode(content);
 	:}
-//	|	COMMENT
+	|	COMMENT
 	;
 
 // 3
@@ -155,14 +156,29 @@ AttDef
 	;
 	
 GEDecl
-	=	ENTITY NAME.n EntityDef GREATER_THAN
+	=	ENTITY NAME.n STRING GREATER_THAN
+	{:
+		return new DTDGEntityDeclarationNode(n);
+	:}
+	|	ENTITY NAME.n ExternalID GREATER_THAN
+	{:
+		return new DTDGEntityDeclarationNode(n);
+	:}
+	|	ENTITY NAME.n ExternalID NDataDecl GREATER_THAN
 	{:
 		return new DTDGEntityDeclarationNode(n);
 	:}
 	;
 
 PEDecl
-	=	ENTITY PERCENT NAME.n PEDef GREATER_THAN
+	=	ENTITY PERCENT NAME.n STRING.s GREATER_THAN
+	{:
+		String value = s.substring(1, s.length() - 1);
+		this._scanner.register(n, value);
+		
+		return new DTDPEntityDeclarationNode(n);
+	:}
+	|	ENTITY PERCENT NAME.n ExternalID GREATER_THAN
 	{:
 		return new DTDPEntityDeclarationNode(n);
 	:}
@@ -212,17 +228,6 @@ DefaultDecl
 	|	IMPLIED
 	|	STRING
 	|	FIXED STRING
-	;
-
-EntityDef
-	=	STRING
-	|	ExternalID
-	|	ExternalID NDataDecl
-	;
-
-PEDef
-	=	STRING
-	|	ExternalID
 	;
 
 // 6
@@ -300,3 +305,50 @@ NmTokens
 	=	NmTokens NMTOKEN
 	|	NMTOKEN
 	;
+
+// misc
+
+//ExtSubset
+//	=	ExtSubsetDeclList
+//	|	// nothing
+//	|	TextDecl ExtSubsetDecl
+//	;
+	
+//TextDecl
+//	=	'<?xml' VersionInfo? EncodingDecl S? '?>'
+//	;
+
+//ExtSubsetDeclList
+//	=	ExtSubsetDeclList ExtSubsetDecl
+//	|	ExtSubsetDecl
+//	;
+	
+//ExtSubsetDecl
+//	=	MarkupDecl
+//	|	ConditionalSect
+//	|	PE_REF
+//	;
+
+ConditionalSect
+	=	IncludeSect
+	|	IgnoreSect
+	;
+
+IncludeSect
+// 	=	SECTION_START INCLUDE LBRACKET ExtSubsetDecl SECTION_END
+ 	=	SECTION_START INCLUDE LBRACKET Declaration SECTION_END
+	;
+
+IgnoreSect
+//	=	SECTION_START IGNORE LBRACKET IgnoreSectContents* SECTION_END
+	=	SECTION_START IGNORE LBRACKET Declaration SECTION_END
+	;
+
+//IgnoreSectContents
+//	=	Ignore (SECTION_START ignoreSectContents SECTION_END Ignore)*
+//	;
+
+//Ignore
+//	=	Char* - (Char* ('<![' | ']]>') Char*)
+//	;
+
