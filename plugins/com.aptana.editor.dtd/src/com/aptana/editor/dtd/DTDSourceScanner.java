@@ -66,7 +66,6 @@ public class DTDSourceScanner extends RuleBasedScanner
 		WordRule operatorRule = new WordRule(new DTDOperatorDetector(), Token.UNDEFINED);
 		operatorRule.addWord("<![", createToken(DTDTokenType.SECTION_START));
 		operatorRule.addWord("]]>", createToken(DTDTokenType.SECTION_END));
-		operatorRule.addWord(")*", createToken(DTDTokenType.RPAREN_STAR));
 		rules.add(operatorRule);
 		
 		WordRule wordRule = new WordRule(new WordDetector(), Token.UNDEFINED);

@@ -111,13 +111,6 @@ public class DTDSourceScannerTests extends TestCase
 		this.typeTests(source, DTDTokenType.SECTION_END);
 	}
 	
-	public void testCloseWithKleene()
-	{
-		String source = ")*";
-		
-		this.typeTests(source, DTDTokenType.RPAREN_STAR);
-	}
-	
 	public void testAttList()
 	{
 		String source = "<!ATTLIST";
