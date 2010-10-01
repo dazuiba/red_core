@@ -3,6 +3,7 @@ package com.aptana.editor.dtd.parsing;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
@@ -18,29 +19,48 @@ import com.aptana.editor.dtd.parsing.lexer.DTDTokenType;
 
 public class DTDScanner extends Scanner
 {
-	private DTDSourceScanner _sourceScanner;
+	private static class DTDParserScanner extends DTDSourceScanner
+	{
+		protected IToken createToken(DTDTokenType type)
+		{
+			return new Token(type);
+		}
+		
+		protected IDocument getDocument()
+		{
+			return this.fDocument;
+		}
+	}
+	
+	private DTDParserScanner _sourceScanner;
 	private IDocument _document;
-	private Map<String,String> _entities;
+	private Map<String, String> _entities;
+	private Stack<DTDParserScanner> _nestedScanners;
 
 	/**
 	 * DTDScanner
 	 */
 	public DTDScanner()
 	{
-		this._sourceScanner = new DTDSourceScanner()
-		{
-			/* (non-Javadoc)
-			 * @see com.aptana.editor.dtd.DTDSourceScanner#createToken(com.aptana.editor.dtd.parsing.lexer.DTDTokenType)
-			 */
-			@Override
-			protected IToken createToken(DTDTokenType type)
-			{
-				// TODO Auto-generated method stub
-				return new Token(type);
-			}
-		};
+		this._sourceScanner = new DTDParserScanner();
+		this._nestedScanners = new Stack<DTDParserScanner>();
 	}
-	
+
+	/**
+	 * createNestedScanner
+	 * 
+	 * @param text
+	 */
+	protected void createNestedScanner(String text)
+	{
+		DTDParserScanner nestedScanner = new DTDParserScanner();
+		IDocument document = new Document(text);
+
+		nestedScanner.setRange(document, 0, document.getLength());
+
+		this._nestedScanners.push(nestedScanner);
+	}
+
 	/**
 	 * createSymbol
 	 * 
@@ -50,13 +70,27 @@ public class DTDScanner extends Scanner
 	 */
 	protected Symbol createSymbol(Object data) throws Exception
 	{
-		int offset = this._sourceScanner.getTokenOffset();
-		int length = this._sourceScanner.getTokenLength();
+		DTDParserScanner scanner;
+		IDocument document;
+		
+		if (this._nestedScanners.size() > 0)
+		{
+			scanner = this._nestedScanners.peek();
+			document = scanner.getDocument();
+		}
+		else
+		{
+			scanner = this._sourceScanner;
+			document = this._document;
+		}
+		
+		int offset = scanner.getTokenOffset();
+		int length = scanner.getTokenLength();
 		DTDTokenType type = (data == null) ? DTDTokenType.EOF : (DTDTokenType) data;
 
 		try
 		{
-			int totalLength = this._document.getLength();
+			int totalLength = document.getLength();
 
 			if (offset > totalLength)
 			{
@@ -67,12 +101,46 @@ public class DTDScanner extends Scanner
 				length = 0;
 			}
 
-			return new Symbol(type.getIndex(), offset, offset + length - 1, this._document.get(offset, length));
+			return new Symbol(type.getIndex(), offset, offset + length - 1, document.get(offset, length));
 		}
 		catch (BadLocationException e)
 		{
 			throw new Scanner.Exception(e.getLocalizedMessage());
 		}
+	}
+
+	/**
+	 * getToken
+	 * 
+	 * @return
+	 */
+	protected IToken getToken()
+	{
+		IToken token = null;
+
+		while (this._nestedScanners.size() > 0)
+		{
+			DTDSourceScanner nestedScanner = this._nestedScanners.peek();
+
+			token = nestedScanner.nextToken();
+			
+			if (token.isWhitespace() == false && token.getData() == null)
+			{
+				this._nestedScanners.pop();
+				token = null;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		if (token == null)
+		{
+			token = this._sourceScanner.nextToken();
+		}
+
+		return token;
 	}
 
 	/**
@@ -84,15 +152,15 @@ public class DTDScanner extends Scanner
 	public String getValue(String key)
 	{
 		String result = null;
-		
+
 		if (this._entities != null)
 		{
 			result = this._entities.get(key);
 		}
-		
+
 		return result;
 	}
-	
+
 	/**
 	 * isComment
 	 * 
@@ -111,31 +179,34 @@ public class DTDScanner extends Scanner
 	@Override
 	public Symbol nextToken() throws IOException, Exception
 	{
-		IToken token = this._sourceScanner.nextToken();
+		IToken token = this.getToken();
 		Object data = token.getData();
 
 		while (token.isWhitespace() || isComment(data))
 		{
-			token = this._sourceScanner.nextToken();
+			token = this.getToken();
 			data = token.getData();
 		}
-		
+
 		Symbol result = this.createSymbol(data);
-		
+
 		if (data == DTDTokenType.PE_REF)
 		{
-			// grab key
+			// grab key minus the leading '%' and trailing ';'
 			String key = (String) result.value;
-			
-			// grab content
 			key = key.substring(1, key.length() - 1);
-			
-			// grab value
-			String value = this.getValue(key);
-			
-			System.out.println("PERef: " + key + " = " + value);
+
+			// grab entity's value
+			String text = this.getValue(key);
+
+			// create new scanner
+			this.createNestedScanner(text);
+
+			result = this.nextToken();
 		}
 
+		System.out.println(result.value);
+		
 		return result;
 	}
 
@@ -149,12 +220,12 @@ public class DTDScanner extends Scanner
 	{
 		if (this._entities == null)
 		{
-			this._entities = new HashMap<String,String>();
+			this._entities = new HashMap<String, String>();
 		}
-		
+
 		this._entities.put(key, value);
 	}
-	
+
 	/**
 	 * setSource
 	 * 
@@ -164,6 +235,7 @@ public class DTDScanner extends Scanner
 	{
 		this._document = document;
 		this._sourceScanner.setRange(document, 0, document.getLength());
+		this._nestedScanners.clear();
 	}
 
 	/**
