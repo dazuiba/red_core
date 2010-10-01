@@ -1,6 +1,8 @@
 package com.aptana.editor.dtd.parsing;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
@@ -18,6 +20,7 @@ public class DTDScanner extends Scanner
 {
 	private DTDSourceScanner _sourceScanner;
 	private IDocument _document;
+	private Map<String,String> _entities;
 
 	/**
 	 * DTDScanner
@@ -73,6 +76,24 @@ public class DTDScanner extends Scanner
 	}
 
 	/**
+	 * getValue
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public String getValue(String key)
+	{
+		String result = null;
+		
+		if (this._entities != null)
+		{
+			result = this._entities.get(key);
+		}
+		
+		return result;
+	}
+	
+	/**
 	 * isComment
 	 * 
 	 * @param data
@@ -98,10 +119,42 @@ public class DTDScanner extends Scanner
 			token = this._sourceScanner.nextToken();
 			data = token.getData();
 		}
+		
+		Symbol result = this.createSymbol(data);
+		
+		if (data == DTDTokenType.PE_REF)
+		{
+			// grab key
+			String key = (String) result.value;
+			
+			// grab content
+			key = key.substring(1, key.length() - 1);
+			
+			// grab value
+			String value = this.getValue(key);
+			
+			System.out.println("PERef: " + key + " = " + value);
+		}
 
-		return this.createSymbol(data);
+		return result;
 	}
 
+	/**
+	 * register
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void register(String key, String value)
+	{
+		if (this._entities == null)
+		{
+			this._entities = new HashMap<String,String>();
+		}
+		
+		this._entities.put(key, value);
+	}
+	
 	/**
 	 * setSource
 	 * 
