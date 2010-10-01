@@ -16,28 +16,29 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9oTbdcSJMKOnt$ttBbKAbb6CoCJeccHTOpbcasZCMQ65jhJQYdHXfOXKob48IrK$rWYXK8" +
-		"YYZQjoBupjXQXgMYRokFtlkVXS#RCdN77EP$l#tkVvtctyvxdtFS2AC4hY44LLCLfE1rdu3" +
-		"xSZxDmDfgWEIw0Ws34w5NeWukGB9CnB6ByfOZUst4rpa4tN8a4EOhpS1sknmsu4JVXPjo2d" +
-		"dW2rJ44L#01X50DPuhuFJY$ZCTlvoCD7H5lrvyacz4TFN0jRiLjI4S6CcKzwgCr6g0zQk9o" +
-		"PA4JOd4kQg0MBiObk1INeIcQeH5IK1UrqG4jq1AjT3TCsSwMOLkcuYcCHMCauaAp6vOwQ6D" +
-		"rDEzdy31lOyMXdjNEoCC0T66PWroqnLtepRKaucxqmqDuL7RA3lOOYWbuKhRBDen2GmoIJU" +
-		"YFUsMZR91riXO5iWPTaOrhS0VkH2$SWmVH5yzX80RZCJoEfr68uHY1aR88Z#1P5E1vZCSOZ" +
-		"CCBU17cUfbhTvyhcNkHmXMtvNErrsTFAoSQOYwOVEXQJZoojnwVp#7UDUA#WplMc7kLnBrm" +
-		"Txi9iyEyDPCTrPaRDTZ6xt7AUFnsXbrvKDSVu2xdS8zpkSjk1WQOZIOVgx3cUZenO#eo0rt" +
-		"BBKqsnB55lDhkQ6NB46ztD4Ttn8nlj2Rl0FCfLhrngWxpo9JfrFWJQp4QjZrCdqJcjcFh3Q" +
-		"dPrDgy0thN8fdqk#yWbLdkC9fWOo7cN9Wv763UksqTIvWHOzSHNem34mljwsS4o3Vroi2hD" +
-		"Ub32jGUepfTTQvg0Xb8lY2laMz9Tusj82krFeYyhlN9gaDzSnRwx94#UwhgDDKPgdDKvwds" +
-		"9wl9EhAU32ORo4QocMmX2xJj8i$uSIJMEwVwD$bzqS9hAzbE5gkzH7KLMQhrPHNqBoBpoLw" +
-		"rzwbkKzrDbclzRRA6P96rwlkQJ2BxrPwbUa3r43b8VY4xI35vbHpM#17LNQG7sUDT7vDjDI" +
-		"cAPYyYF5luP6quzawJqL6CbUsffvtYUdhvxBwg$LG7L6Ai8Qg57byIcNGgQujYlYaHV1EYx" +
-		"3kgCdFnTHJx#i$sr6T6CT$2SiOjyRMRw8hyB$zAYVmZVyjVygVy8KVaiBmXqpJwE$cD$4gA" +
-		"uRbagosts9BVWNmb2#LzMI3loNoP9tFbNNb7viXicSKOVxzaEVcSV4a#GuHB#9N88Jbewp$" +
-		"8IbaX$BsJR$WLV2Uhv5FvH3wMPR9KFf8FPOaibW#q7xzCUSlMPf8tPOPCbmFoi#pN#4$aHx" +
-		"BBMaKdvfkg#ZtPH$RwrhE7xDRw5FcFqfDdTe3mA#2vaCPwSmyjog4LOagHpBCdcPfkJx80J" +
-		"mEN5FeC7HXlGtK9yVnt2TkpACWppU6v6oGnLbCj3a$Y074ybBOpQ1ydinGEJ#GOdjj1ujX$" +
-		"04rfPr6pQ7TccvmAwA9qP5lphw6PrUDKRETodbm#MnxdocFTdCVvRDDIQSUO#SVKxHY1azZ" +
-		"q");
+		"U9ojbdTy54KKnt#xUtSqCQII44qWI1D3I3EGGeX48OceA7O5xDWG6zW1Um6ne2Z$M50IhDW" +
+		"Y8b4GArX12LtKKAo01R30yxTpx#IoTuc97$S#t$dDl3VpPdPczcO0AmCpa0OV0cY3jcY7zh" +
+		"W4uz4H#yEcfsjKpsGSWlxeXEwO8Oz4hV4G7CH5zJWuhmdxYAZs59nXUij0Bzo6L9o8at0oJ" +
+		"i6fE0sdOvJinR6u6KVZ6CGY7ZSY1jVX25mAFpfWFn7JTYf7EX5tUhqHvODmA2P5M8VXI4o9" +
+		"i0x2OPWPOHqkg$0mUYC1UHYCV8p4yJW1ep46YUYCKfJ9vsP4XHY8SYJXO1IZ7vBH1Jcu1qD" +
+		"mEFgWBpAH9MkHZLnJzm0KwLkKy2rwC7flHizZMc3IO6aSUg82bHnh1ix5vJWRv#D2N8q1c2" +
+		"WRS22knKsu4brbFQfmFHx0nRW8wR8EHw6RrCjA#K9Mo7Bv3ETWACx2tJWEOt4cBi1bk08JS" +
+		"0DknLMu1hVWTjo1QRXBvZFYTDo7Ut4$7kI8$SZY6BFv7haSJJvdie1z3wGdhWbFNxwLpRVF" +
+		"v9YRQcj5zMHofqItEr7jFivXg3UB8#tEbUx1#Uh5kUl3DG3IsR8RPow5An7QWUvwkZiGfcq" +
+		"ysoRoU$1wlUKoxelO2Al5lYEjRjn8wo3MZcLzotmFVkwkeTo3xjeEuPw9uNTdcPPn7560#G" +
+		"1tbgkfJ1tZ3s6PrAqRODrzR#5dT9lHVKpz9WsMYXYpn8pLjHSIznVF#8cq5ZEwpHqQntmHT" +
+		"rGQTtc2wRdKZ7RVhzX4I6Rz14QjKcyI8phyMVmoB1Chc1Qg5vWr6UOPJSQv#TR0fmkfSjTB" +
+		"otDL5wekKgqc8yXIibD4$gBk8dl8th1uDMIvvbUgplVqkS1JhlEKwrLNgQvHNQ#wGNKEE0c" +
+		"4YMKpKqjrY8$uIO2swLftKrZyF58MEHTMMw#jfR1jEzA6cStQHuFgRh95yrkRQT#HoLfgZ9" +
+		"OxgSQgnZ7Phd7M4NV#9sXvYkhFP1Jh9cfvfBRjh9fCkDuMzusLGb9fN4nDKtzws7WwC9cgS" +
+		"MQ6x5pt5UIVzMxT767ylzLXx6sKsXR4AW$Bz$oFuodtbAUfpbQjRaMi6jMwCDjOwFVpVyDd" +
+		"MHJRaXQsdTUQlhWc6xLT#x0OgyFozIteiw6P#3kqJfBghA387lbJ$f3VPRViaftoc$mglyY" +
+		"JyeHwkTjb1zbEji7po1fPRVG3yhwyAhNoYhmiBycByeBCa#VbENbMdg7lNV8EUPkyHvPu8v" +
+		"aeFv4VvGUJtomVoOUoZBcbygby8X$BMx9O5icRyeRKoK9vNHR8QzhkQVAKoSqbDL8jS#Hx#" +
+		"Kw#LVzMieLiDAKlrJgRFAxvJQI1VECPqTVaA$Cl37cCFChC6DuAB0BU0snYcTj0YAmco8Ql" +
+		"4JayONAe9OpXdcovIXvjBaNqvrE3#7bV259epYM7fvtDKzT7$CGnPs0nsvSRx30QbzqpF4H" +
+		"f8soUmpxU4XnYyqHsY8zt1eVOFEijdlPDCqmPh7UPVaP3D5#kO3yLV8zAzbM9uBbSnJhzbG" +
+		"BQ2kXtxqi3gCF$1e9gsH4=");
 
 	private DTDScanner _scanner;
 	
@@ -209,6 +210,14 @@ public class DTDParser extends Parser implements IParser {
 					
 		return new DTDPEntityDeclarationNode(n);
 			}
+			case 37: // Names = Names PIPE NAME
+			{
+					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3].value); return _symbols[offset + 1];
+			}
+			case 38: // Names = NAME
+			{
+					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
+			}
 			case 88: // NmTokens = NmTokens NMTOKEN
 			{
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
@@ -253,9 +262,8 @@ public class DTDParser extends Parser implements IParser {
 			{
 				return _symbols[offset + 1];
 			}
-			case 31: // ExternalID = SYSTEM SYSTEM_LITERAL
+			case 31: // ExternalID = SYSTEM STRING
 			case 33: // PublicID = PUBLIC STRING
-			case 38: // Names = PIPE NAME
 			case 40: // Children = Choice QUESTION
 			case 41: // Children = Choice STAR
 			case 42: // Children = Choice PLUS
@@ -279,10 +287,8 @@ public class DTDParser extends Parser implements IParser {
 				return _symbols[offset + 2];
 			}
 			case 25: // AttDef = NAME AttType DefaultDecl
-			case 32: // ExternalID = PUBLIC STRING SYSTEM_LITERAL
-			case 34: // Mixed = LPAREN PCDATA RPAREN_STAR
+			case 32: // ExternalID = PUBLIC STRING STRING
 			case 36: // Mixed = LPAREN PCDATA RPAREN
-			case 37: // Names = Names PIPE NAME
 			case 55: // ChoiceCps = ChoiceCps PIPE Cp
 			case 57: // Seq = LPAREN Cp RPAREN
 			case 59: // SeqCps = SeqCps COMMA Cp
@@ -290,17 +296,20 @@ public class DTDParser extends Parser implements IParser {
 			{
 				return _symbols[offset + 3];
 			}
-			case 35: // Mixed = LPAREN PCDATA Names RPAREN_STAR
+			case 34: // Mixed = LPAREN PCDATA RPAREN STAR
 			case 54: // Choice = LPAREN Cp ChoiceCps RPAREN
 			case 58: // Seq = LPAREN Cp SeqCps RPAREN
 			case 84: // NotationType = NOTATION_TYPE LPAREN NAME RPAREN
 			case 87: // Enumeration = LPAREN NMTOKEN NmTokens RPAREN
+			case 92: // IncludeSect = SECTION_START INCLUDE LBRACKET SECTION_END
+			case 94: // IgnoreSect = SECTION_START IGNORE LBRACKET SECTION_END
 			{
 				return _symbols[offset + 4];
 			}
+			case 35: // Mixed = LPAREN PCDATA Names RPAREN STAR
 			case 85: // NotationType = NOTATION_TYPE LPAREN NAME Names RPAREN
-			case 92: // IncludeSect = SECTION_START INCLUDE LBRACKET Declaration SECTION_END
-			case 93: // IgnoreSect = SECTION_START IGNORE LBRACKET Declaration SECTION_END
+			case 93: // IncludeSect = SECTION_START INCLUDE LBRACKET Declarations SECTION_END
+			case 95: // IgnoreSect = SECTION_START IGNORE LBRACKET Declarations SECTION_END
 			{
 				return _symbols[offset + 5];
 			}

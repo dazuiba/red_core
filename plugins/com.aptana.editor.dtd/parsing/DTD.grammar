@@ -44,11 +44,11 @@
 :};
 
 %terminals ELEMENT, GREATER_THAN, ATTLIST, NOTATION, PI, EMPTY, ANY;
-%terminals ENTITY, SYSTEM, PUBLIC, PCDATA, LPAREN, PIPE, RPAREN, RPAREN_STAR, QUESTION;
+%terminals ENTITY, SYSTEM, PUBLIC, PCDATA, LPAREN, PIPE, RPAREN, QUESTION;
 %terminals STAR, PLUS, FIXED, IMPLIED, REQUIRED, COMMA, CDATA_TYPE, ID_TYPE, IDREF_TYPE;
 %terminals IDREFS_TYPE, ENTITY_TYPE, ENTITIES_TYPE, NMTOKEN_TYPE, NMTOKENS_TYPE, NDATA;
 %terminals NOTATION_TYPE, PE_REF, NAME, PERCENT, STRING, LBRACKET;
-%terminals COMMENT, SYSTEM_LITERAL, NMTOKEN, SECTION_START, SECTION_END, IGNORE, INCLUDE;
+%terminals COMMENT, NMTOKEN, SECTION_START, SECTION_END, IGNORE, INCLUDE;
 
 %typeof NAME, PI, STRING = "String";
 
@@ -185,8 +185,8 @@ PEDecl
 	;
 
 ExternalID
-	=	SYSTEM SYSTEM_LITERAL
-	|	PUBLIC STRING SYSTEM_LITERAL
+	=	SYSTEM STRING
+	|	PUBLIC STRING STRING
 	;
 
 PublicID
@@ -196,14 +196,14 @@ PublicID
 // 5
 
 Mixed
-	=	LPAREN PCDATA RPAREN_STAR
-	|	LPAREN PCDATA Names RPAREN_STAR
+	=	LPAREN PCDATA RPAREN STAR
+	|	LPAREN PCDATA Names RPAREN STAR
 	|	LPAREN PCDATA RPAREN
 	;
 	
 Names
 	=	Names PIPE NAME
-	|	PIPE NAME
+	|	NAME
 	;
 
 Children
@@ -308,47 +308,17 @@ NmTokens
 
 // misc
 
-//ExtSubset
-//	=	ExtSubsetDeclList
-//	|	// nothing
-//	|	TextDecl ExtSubsetDecl
-//	;
-	
-//TextDecl
-//	=	'<?xml' VersionInfo? EncodingDecl S? '?>'
-//	;
-
-//ExtSubsetDeclList
-//	=	ExtSubsetDeclList ExtSubsetDecl
-//	|	ExtSubsetDecl
-//	;
-	
-//ExtSubsetDecl
-//	=	MarkupDecl
-//	|	ConditionalSect
-//	|	PE_REF
-//	;
-
 ConditionalSect
 	=	IncludeSect
 	|	IgnoreSect
 	;
 
 IncludeSect
-// 	=	SECTION_START INCLUDE LBRACKET ExtSubsetDecl SECTION_END
- 	=	SECTION_START INCLUDE LBRACKET Declaration SECTION_END
+ 	=	SECTION_START INCLUDE LBRACKET SECTION_END
+ 	|	SECTION_START INCLUDE LBRACKET Declarations SECTION_END
 	;
 
 IgnoreSect
-//	=	SECTION_START IGNORE LBRACKET IgnoreSectContents* SECTION_END
-	=	SECTION_START IGNORE LBRACKET Declaration SECTION_END
+	=	SECTION_START IGNORE LBRACKET SECTION_END
+	|	SECTION_START IGNORE LBRACKET Declarations SECTION_END
 	;
-
-//IgnoreSectContents
-//	=	Ignore (SECTION_START ignoreSectContents SECTION_END Ignore)*
-//	;
-
-//Ignore
-//	=	Char* - (Char* ('<![' | ']]>') Char*)
-//	;
-
