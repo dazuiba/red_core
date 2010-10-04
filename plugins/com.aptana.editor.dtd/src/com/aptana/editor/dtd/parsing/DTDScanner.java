@@ -205,8 +205,6 @@ public class DTDScanner extends Scanner
 			result = this.nextToken();
 		}
 
-		System.out.println(result.value);
-		
 		return result;
 	}
 
