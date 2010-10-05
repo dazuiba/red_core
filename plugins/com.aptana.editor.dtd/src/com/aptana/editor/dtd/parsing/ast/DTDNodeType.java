@@ -5,6 +5,12 @@ import java.util.EnumSet;
 public enum DTDNodeType
 {
 	EMPTY,
+	ANY,
+	PCDATA,
+	ZERO_OR_MORE,
+	ONE_OR_MORE,
+	OPTIONAL,
+	ELEMENT,
 	ELEMENT_DECLARATION,
 	ATTRIBUTE_LIST_DECLARATION,
 	P_ENTITY_DECLARATION,
@@ -13,20 +19,20 @@ public enum DTDNodeType
 	PROCESSING_INSTRUCTION;
 	
 	private short _index;
-	
+
 	/**
 	 * static initializer
 	 */
 	static
 	{
 		short index = 0;
-		
+
 		for (DTDNodeType type : EnumSet.allOf(DTDNodeType.class))
 		{
 			type._index = index++;
 		}
 	}
-	
+
 	/**
 	 * getIndex
 	 * 

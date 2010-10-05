@@ -16,29 +16,29 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9ojbdTy54KKnt#xUtSqCQII44qWI1D3I3EGGeX48OceA7O5xDWG6zW1Um6ne2Z$M50IhDW" +
-		"Y8b4GArX12LtKKAo01R30yxTpx#IoTuc97$S#t$dDl3VpPdPczcO0AmCpa0OV0cY3jcY7zh" +
-		"W4uz4H#yEcfsjKpsGSWlxeXEwO8Oz4hV4G7CH5zJWuhmdxYAZs59nXUij0Bzo6L9o8at0oJ" +
-		"i6fE0sdOvJinR6u6KVZ6CGY7ZSY1jVX25mAFpfWFn7JTYf7EX5tUhqHvODmA2P5M8VXI4o9" +
-		"i0x2OPWPOHqkg$0mUYC1UHYCV8p4yJW1ep46YUYCKfJ9vsP4XHY8SYJXO1IZ7vBH1Jcu1qD" +
-		"mEFgWBpAH9MkHZLnJzm0KwLkKy2rwC7flHizZMc3IO6aSUg82bHnh1ix5vJWRv#D2N8q1c2" +
-		"WRS22knKsu4brbFQfmFHx0nRW8wR8EHw6RrCjA#K9Mo7Bv3ETWACx2tJWEOt4cBi1bk08JS" +
-		"0DknLMu1hVWTjo1QRXBvZFYTDo7Ut4$7kI8$SZY6BFv7haSJJvdie1z3wGdhWbFNxwLpRVF" +
-		"v9YRQcj5zMHofqItEr7jFivXg3UB8#tEbUx1#Uh5kUl3DG3IsR8RPow5An7QWUvwkZiGfcq" +
-		"ysoRoU$1wlUKoxelO2Al5lYEjRjn8wo3MZcLzotmFVkwkeTo3xjeEuPw9uNTdcPPn7560#G" +
-		"1tbgkfJ1tZ3s6PrAqRODrzR#5dT9lHVKpz9WsMYXYpn8pLjHSIznVF#8cq5ZEwpHqQntmHT" +
-		"rGQTtc2wRdKZ7RVhzX4I6Rz14QjKcyI8phyMVmoB1Chc1Qg5vWr6UOPJSQv#TR0fmkfSjTB" +
-		"otDL5wekKgqc8yXIibD4$gBk8dl8th1uDMIvvbUgplVqkS1JhlEKwrLNgQvHNQ#wGNKEE0c" +
-		"4YMKpKqjrY8$uIO2swLftKrZyF58MEHTMMw#jfR1jEzA6cStQHuFgRh95yrkRQT#HoLfgZ9" +
-		"OxgSQgnZ7Phd7M4NV#9sXvYkhFP1Jh9cfvfBRjh9fCkDuMzusLGb9fN4nDKtzws7WwC9cgS" +
-		"MQ6x5pt5UIVzMxT767ylzLXx6sKsXR4AW$Bz$oFuodtbAUfpbQjRaMi6jMwCDjOwFVpVyDd" +
-		"MHJRaXQsdTUQlhWc6xLT#x0OgyFozIteiw6P#3kqJfBghA387lbJ$f3VPRViaftoc$mglyY" +
-		"JyeHwkTjb1zbEji7po1fPRVG3yhwyAhNoYhmiBycByeBCa#VbENbMdg7lNV8EUPkyHvPu8v" +
-		"aeFv4VvGUJtomVoOUoZBcbygby8X$BMx9O5icRyeRKoK9vNHR8QzhkQVAKoSqbDL8jS#Hx#" +
-		"Kw#LVzMieLiDAKlrJgRFAxvJQI1VECPqTVaA$Cl37cCFChC6DuAB0BU0snYcTj0YAmco8Ql" +
-		"4JayONAe9OpXdcovIXvjBaNqvrE3#7bV259epYM7fvtDKzT7$CGnPs0nsvSRx30QbzqpF4H" +
-		"f8soUmpxU4XnYyqHsY8zt1eVOFEijdlPDCqmPh7UPVaP3D5#kO3yLV8zAzbM9uBbSnJhzbG" +
-		"BQ2kXtxqi3gCF$1e9gsH4=");
+		"U9oTLcTu55KKFREJ3GWYAIGXH4E7O188SI4nrOI0AQAYs1MmOGMnOHTGmKAp82X$h15ZGLG" +
+		"K5H5550LKB4X0GL2gXQAWW93hcRTtTJExYPlCVEUTMzwzxxwoEm#mkc06KX65QBH0Ino1Lh" +
+		"W6Oz06Hy53JwUmdl78G1PYq1Kpv8cmFHw3ZRYm7XkNDM0V4jQUZ0lDQ5tG4$SY1MVXR9o3S" +
+		"t4UpiS562PrE0ttu1ISYbZ4uowqnUqOX6lXHMiSAM9Yfx3Ic$20snkYTqD$Z0knbkCaJ0Yn" +
+		"5g4KiqAiWt4z7aSQ#i67eJW3Ps8uHiWEt8W49CaMd80yKr4PZaS1ZaKx5AC4lT410p0GsUY" +
+		"5T3o8xiX47oJAh#YBuqp$ev5lk0SAEPiqpiR7DiUqQMmT7issahLMSAsEmKXSWYjm5N9njx" +
+		"o7Mt0ROzhZ3ZoAJh9JVaD7ZCBLw2pRPPjibStoa$o8Aap3YJWPf#DYN8HBSIKkntMu0MCn2" +
+		"NVYPjoAYRWFzsCg9ijBp3WT3#CXF8APhDVBYhDORpOhzd7#$LbTBcUPoNCGtfFE6NauzqpM" +
+		"t52i5TQJoPCItcw7jKTn$GAZMQoqAtUwEzUo9rUj5tS1N0qRdRbkoTo9m0bqzjCvWJ2nyOn" +
+		"DuE$1xNNhXJmPiI5MYsE7MfsyeLRdZCIolvTr3#9#b7D7AvbX8Cz86JcQA#f4HhEY9BOMps" +
+		"0CEKNPQMr6EsofDz3VuJXoFFCdCBz$50$VACFvR9rQYua2#lnl4ZMBCJPZB9wjLEQmJ2Nj#" +
+		"7gC77ZpUSeyFDEsoLd0CnNeaOT4McrAfOHjh4wRPxo9NEVPus6UuSHeHsuA#7GWgfpzKdsH" +
+		"yWhblSfpY274IcA$Y1mYxoCE48U2ybKJIrLUexp0DUP2bxxOfQzJhbLUhxn1UPFoFAAE470" +
+		"n#CmdKx0yX4ruQPkkVRS4vVSH9Q5hOKMxRP62iIs8bXIswHXRbGyIsrNUqKXy6pO$aDkg7g" +
+		"CSgnp7PhVcMKiS9iQgFa5v9p6CVHDK7wgnIShj2UwtnNDZ9HCfD7v4JbL$nw1wMhEPedbc1" +
+		"UpSzw#9kkQj4SRyNn$ctaMQ6q6kyY2vHpFhANFfKvMhbMkQaAj6UNcGRIInh3crHJ3UgZ2s" +
+		"9H76ZchAMDoJZHhNAYX7RP2yEe8nDpUIVu$sILIUxISvB7$BGJaW##Kl#LFsoLxvGwhbMVN" +
+		"#JkmXTXExu7ha5$dPy2PYewoJjL8hQ#HRMItVy0n$9L$AAlc2lWt4Uk9xWhy$#SwToMJvdF" +
+		"XCLXhvOtb7tfQtA2sGHVAkB9GtvGsPBw$BQ$Agp9DNPAwyh74l4YyOgOPuNkR8Sx92bikdw" +
+		"l#4M4QyRxJ5Qds6U5fb$ZvbAV6Xgw8bn0VcNnZo5F4aXH6y5LW4U0$m49Qv3GJGfm7qHLGz" +
+		"333m4ZQ$HGuiymqjOyx$K5zFPqmX#nPIpY1dK2yY5#dzeRVX01hNincNpVXYyqsrU2lnmqU" +
+		"RWtpw#v7zyFA#uaUU#IxQ$EPxU1#m$aL9FNXuFx1uGsWOvOfIzgtW61NCNScybPIhQAkYBq" +
+		"kHGriE$SvzAPSy#1yuiDiq");
 
 	private DTDScanner _scanner;
 	
@@ -65,6 +65,20 @@ public class DTDParser extends Parser implements IParser {
 		parseState.setParseResult(result);
 		
 		return result;
+	}
+	
+	protected void addChildren(IParseNode node, ArrayList children)
+	{
+		if (node != null && children != null)
+		{
+			for (Object child : children)
+			{
+				if (node instanceof IParseNode)
+				{
+					node.addChild((IParseNode) child);
+				}
+			}
+		}
 	}
 
 	public DTDParser() {
@@ -111,112 +125,286 @@ public class DTDParser extends Parser implements IParser {
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDElementDeclarationNode(n);
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			decl.addChild(new DTDEmptyNode());
+			
+			return decl;
 			}
 			case 14: // ElementDecl = ELEMENT NAME.n ANY GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDElementDeclarationNode(n);
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			decl.addChild(new DTDAnyNode());
+			
+			return decl;
 			}
-			case 15: // ElementDecl = ELEMENT NAME.n Mixed GREATER_THAN
+			case 15: // ElementDecl = ELEMENT NAME.n Mixed.m GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					final Symbol _symbol_m = _symbols[offset + 3];
+					final DTDNode m = (DTDNode) _symbol_m.value;
+					
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			decl.addChild(m);
+			
+			return decl;
+			}
+			case 16: // ElementDecl = ELEMENT NAME.n Children.c GREATER_THAN
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					final Symbol _symbol_c = _symbols[offset + 3];
+					final ArrayList c = (ArrayList) _symbol_c.value;
+					
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			this.addChildren(decl, c);
+			
+			return decl;
+			}
+			case 17: // Mixed = LPAREN PCDATA RPAREN STAR
+			{
+					
+			DTDPCDataNode data = new DTDPCDataNode();
+			DTDZeroOrMoreNode zom = new DTDZeroOrMoreNode();
+			
+			zom.addChild(data);
+			
+			return zom;
+			}
+			case 18: // Mixed = LPAREN PCDATA Names.n RPAREN STAR
+			{
+					final Symbol _symbol_n = _symbols[offset + 3];
+					final ArrayList n = (ArrayList) _symbol_n.value;
+					
+			DTDPCDataNode data = new DTDPCDataNode();
+			DTDZeroOrMoreNode zom = new DTDZeroOrMoreNode();
+			
+			zom.addChild(data);
+			this.addChildren(zom, n);
+			
+			return zom;
+			}
+			case 19: // Mixed = LPAREN PCDATA RPAREN
+			{
+					
+			return new DTDPCDataNode();
+			}
+			case 20: // Names = Names PIPE NAME
+			{
+					
+			String name = (String) _symbols[offset + 3].value;
+			DTDElementNode element = new DTDElementNode(name);
+			((ArrayList) _symbols[offset + 1].value).add(element);
+			
+			return _symbols[offset + 1];
+			}
+			case 21: // Names = NAME
+			{
+					
+			ArrayList lst = new ArrayList();
+			String name = (String) _symbols[offset + 1].value;
+			DTDElementNode element = new DTDElementNode(name);
+			
+			lst.add(element);
+			
+			return new Symbol(lst);
+			}
+			case 27: // Children = Seq QUESTION
+			{
+					
+			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
+			DTDOptionalNode result = new DTDOptionalNode();
+			
+			this.addChildren(result, seq);
+			
+			ArrayList lst = new ArrayList();
+			lst.add(result);
+			return new Symbol(lst);
+			}
+			case 28: // Children = Seq.s STAR
+			{
+					final Symbol s = _symbols[offset + 1];
+					
+			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
+			DTDZeroOrMoreNode result = new DTDZeroOrMoreNode();
+			
+			this.addChildren(result, seq);
+			
+			ArrayList lst = new ArrayList();
+			lst.add(result);
+			return new Symbol(lst);
+			}
+			case 29: // Children = Seq.s PLUS
+			{
+					final Symbol s = _symbols[offset + 1];
+					
+			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
+			DTDOneOrMoreNode result = new DTDOneOrMoreNode();
+			
+			this.addChildren(result, seq);
+			
+			ArrayList lst = new ArrayList();
+			lst.add(result);
+			return new Symbol(lst);
+			}
+			case 33: // Seq = LPAREN Cp.c RPAREN
+			{
+					final Symbol _symbol_c = _symbols[offset + 2];
+					final DTDNode c = (DTDNode) _symbol_c.value;
+					
+			ArrayList lst = new ArrayList();
+			
+			lst.add(_symbols[offset + 2]);
+			
+			return new Symbol(lst);
+			}
+			case 34: // Seq = LPAREN Cp.c SeqCps.l RPAREN
+			{
+					final Symbol _symbol_c = _symbols[offset + 2];
+					final DTDNode c = (DTDNode) _symbol_c.value;
+					final Symbol l = _symbols[offset + 3];
+					
+			((ArrayList) _symbols[offset + 3].value).add(0, c);
+			
+			return _symbols[offset + 3];
+			}
+			case 35: // SeqCps = SeqCps.l COMMA Cp.c
+			{
+					final Symbol l = _symbols[offset + 1];
+					final Symbol _symbol_c = _symbols[offset + 3];
+					final DTDNode c = (DTDNode) _symbol_c.value;
+					
+			((ArrayList) _symbols[offset + 1].value).add(c);
+			
+			return _symbols[offset + 1];
+			}
+			case 36: // SeqCps = COMMA Cp.c
+			{
+					final Symbol _symbol_c = _symbols[offset + 2];
+					final DTDNode c = (DTDNode) _symbol_c.value;
+					
+			ArrayList lst = new ArrayList();
+			
+			lst.add(_symbols[offset + 2]);
+			
+			return new Symbol(lst);
+			}
+			case 37: // Cp = NAME.n
+			{
+					final Symbol _symbol_n = _symbols[offset + 1];
+					final String n = (String) _symbol_n.value;
+					
+			return new DTDElementNode(n);
+			}
+			case 38: // Cp = NAME.n QUESTION
+			{
+					final Symbol _symbol_n = _symbols[offset + 1];
+					final String n = (String) _symbol_n.value;
+					
+			DTDOptionalNode node = new DTDOptionalNode();
+			
+			node.addChild(new DTDElementNode(n));
+			}
+			case 39: // Cp = NAME.n STAR
+			{
+					final Symbol _symbol_n = _symbols[offset + 1];
+					final String n = (String) _symbol_n.value;
+					
+			DTDZeroOrMoreNode node = new DTDZeroOrMoreNode();
+			
+			node.addChild(new DTDElementNode(n));
+			}
+			case 40: // Cp = NAME.n PLUS
+			{
+					final Symbol _symbol_n = _symbols[offset + 1];
+					final String n = (String) _symbol_n.value;
+					
+			DTDOneOrMoreNode node = new DTDOneOrMoreNode();
+			
+			node.addChild(new DTDElementNode(n));
+			}
+			case 49: // AttlistDecl = ATTLIST NAME.n GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDElementDeclarationNode(n);
+			return new DTDAttListDeclNode(n);
 			}
-			case 16: // ElementDecl = ELEMENT NAME.n Children GREATER_THAN
+			case 50: // AttlistDecl = ATTLIST NAME.n AttDefs GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDElementDeclarationNode(n);
+			return new DTDAttListDeclNode(n);
 			}
-			case 17: // AttlistDecl = ATTLIST NAME.n GREATER_THAN
-			{
-					final Symbol _symbol_n = _symbols[offset + 2];
-					final String n = (String) _symbol_n.value;
-					
-		return new DTDAttributeListDeclarationNode(n);
-			}
-			case 18: // AttlistDecl = ATTLIST NAME.n AttDefs GREATER_THAN
-			{
-					final Symbol _symbol_n = _symbols[offset + 2];
-					final String n = (String) _symbol_n.value;
-					
-		return new DTDAttributeListDeclarationNode(n);
-			}
-			case 19: // AttDefs = AttDefs AttDef
+			case 51: // AttDefs = AttDefs AttDef
 			{
 					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2]); return _symbols[offset + 1];
 			}
-			case 20: // AttDefs = AttDef
+			case 52: // AttDefs = AttDef
 			{
 					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1]); return new Symbol(lst);
 			}
-			case 23: // NotationDecl = NOTATION NAME.n ExternalID GREATER_THAN
+			case 55: // NotationDecl = NOTATION NAME.n ExternalID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDNotationDeclarationNode(n);
+			return new DTDNotationDeclNode(n);
 			}
-			case 24: // NotationDecl = NOTATION NAME.n PublicID GREATER_THAN
+			case 56: // NotationDecl = NOTATION NAME.n PublicID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDNotationDeclarationNode(n);
+			return new DTDNotationDeclNode(n);
 			}
-			case 26: // GEDecl = ENTITY NAME.n STRING GREATER_THAN
+			case 58: // GEDecl = ENTITY NAME.n STRING GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDGEntityDeclarationNode(n);
+			return new DTDGeneralEntityDeclNode(n);
 			}
-			case 27: // GEDecl = ENTITY NAME.n ExternalID GREATER_THAN
+			case 59: // GEDecl = ENTITY NAME.n ExternalID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDGEntityDeclarationNode(n);
+			return new DTDGeneralEntityDeclNode(n);
 			}
-			case 28: // GEDecl = ENTITY NAME.n ExternalID NDataDecl GREATER_THAN
+			case 60: // GEDecl = ENTITY NAME.n ExternalID NDataDecl GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDGEntityDeclarationNode(n);
+			return new DTDGeneralEntityDeclNode(n);
 			}
-			case 29: // PEDecl = ENTITY PERCENT NAME.n STRING.s GREATER_THAN
+			case 61: // PEDecl = ENTITY PERCENT NAME.n STRING.s GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 3];
 					final String n = (String) _symbol_n.value;
 					final Symbol _symbol_s = _symbols[offset + 4];
 					final String s = (String) _symbol_s.value;
 					
-		String value = s.substring(1, s.length() - 1);
-		this._scanner.register(n, value);
-		
-		return new DTDPEntityDeclarationNode(n);
+			String value = s.substring(1, s.length() - 1);
+			this._scanner.register(n, value);
+			
+			return new DTDParsedEntityDeclNode(n);
 			}
-			case 30: // PEDecl = ENTITY PERCENT NAME.n ExternalID GREATER_THAN
+			case 62: // PEDecl = ENTITY PERCENT NAME.n ExternalID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 3];
 					final String n = (String) _symbol_n.value;
 					
-		return new DTDPEntityDeclarationNode(n);
-			}
-			case 37: // Names = Names PIPE NAME
-			{
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3].value); return _symbols[offset + 1];
-			}
-			case 38: // Names = NAME
-			{
-					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
+			return new DTDParsedEntityDeclNode(n);
 			}
 			case 88: // NmTokens = NmTokens NMTOKEN
 			{
@@ -234,71 +422,58 @@ public class DTDParser extends Parser implements IParser {
 			case 9: // MarkupDecl = EntityDecl
 			case 10: // MarkupDecl = NotationDecl
 			case 12: // MarkupDecl = COMMENT
-			case 21: // EntityDecl = GEDecl
-			case 22: // EntityDecl = PEDecl
-			case 39: // Children = Choice
-			case 43: // Children = Seq
-			case 47: // AttType = StringType
-			case 48: // AttType = TokenizedType
-			case 49: // AttType = EnumeratedType
-			case 50: // DefaultDecl = REQUIRED
-			case 51: // DefaultDecl = IMPLIED
-			case 52: // DefaultDecl = STRING
-			case 61: // StringType = CDATA_TYPE
-			case 62: // TokenizedType = ID_TYPE
-			case 63: // TokenizedType = IDREF_TYPE
-			case 64: // TokenizedType = IDREFS_TYPE
-			case 65: // TokenizedType = ENTITY_TYPE
-			case 66: // TokenizedType = ENTITIES_TYPE
-			case 67: // TokenizedType = NMTOKEN_TYPE
-			case 68: // TokenizedType = NMTOKENS_TYPE
-			case 69: // EnumeratedType = NotationType
-			case 70: // EnumeratedType = Enumeration
-			case 72: // Cp = NAME
-			case 76: // Cp = Choice
-			case 80: // Cp = Seq
+			case 22: // Children = Choice
+			case 26: // Children = Seq
+			case 41: // Cp = Choice
+			case 45: // Cp = Seq
+			case 53: // EntityDecl = GEDecl
+			case 54: // EntityDecl = PEDecl
+			case 66: // AttType = StringType
+			case 67: // AttType = TokenizedType
+			case 68: // AttType = EnumeratedType
+			case 69: // DefaultDecl = REQUIRED
+			case 70: // DefaultDecl = IMPLIED
+			case 71: // DefaultDecl = STRING
+			case 73: // StringType = CDATA_TYPE
+			case 74: // TokenizedType = ID_TYPE
+			case 75: // TokenizedType = IDREF_TYPE
+			case 76: // TokenizedType = IDREFS_TYPE
+			case 77: // TokenizedType = ENTITY_TYPE
+			case 78: // TokenizedType = ENTITIES_TYPE
+			case 79: // TokenizedType = NMTOKEN_TYPE
+			case 80: // TokenizedType = NMTOKENS_TYPE
+			case 81: // EnumeratedType = NotationType
+			case 82: // EnumeratedType = Enumeration
 			case 90: // ConditionalSect = IncludeSect
 			case 91: // ConditionalSect = IgnoreSect
 			{
 				return _symbols[offset + 1];
 			}
-			case 31: // ExternalID = SYSTEM STRING
-			case 33: // PublicID = PUBLIC STRING
-			case 40: // Children = Choice QUESTION
-			case 41: // Children = Choice STAR
-			case 42: // Children = Choice PLUS
-			case 44: // Children = Seq QUESTION
-			case 45: // Children = Seq STAR
-			case 46: // Children = Seq PLUS
-			case 53: // DefaultDecl = FIXED STRING
-			case 56: // ChoiceCps = PIPE Cp
-			case 60: // SeqCps = COMMA Cp
-			case 71: // NDataDecl = NDATA NAME
-			case 73: // Cp = NAME QUESTION
-			case 74: // Cp = NAME STAR
-			case 75: // Cp = NAME PLUS
-			case 77: // Cp = Choice QUESTION
-			case 78: // Cp = Choice STAR
-			case 79: // Cp = Choice PLUS
-			case 81: // Cp = Seq QUESTION
-			case 82: // Cp = Seq STAR
-			case 83: // Cp = Seq PLUS
+			case 23: // Children = Choice QUESTION
+			case 24: // Children = Choice STAR
+			case 25: // Children = Choice PLUS
+			case 32: // ChoiceCps = PIPE Cp
+			case 42: // Cp = Choice QUESTION
+			case 43: // Cp = Choice STAR
+			case 44: // Cp = Choice PLUS
+			case 46: // Cp = Seq QUESTION
+			case 47: // Cp = Seq STAR
+			case 48: // Cp = Seq PLUS
+			case 63: // ExternalID = SYSTEM STRING
+			case 65: // PublicID = PUBLIC STRING
+			case 72: // DefaultDecl = FIXED STRING
+			case 83: // NDataDecl = NDATA NAME
 			{
 				return _symbols[offset + 2];
 			}
-			case 25: // AttDef = NAME AttType DefaultDecl
-			case 32: // ExternalID = PUBLIC STRING STRING
-			case 36: // Mixed = LPAREN PCDATA RPAREN
-			case 55: // ChoiceCps = ChoiceCps PIPE Cp
-			case 57: // Seq = LPAREN Cp RPAREN
-			case 59: // SeqCps = SeqCps COMMA Cp
+			case 31: // ChoiceCps = ChoiceCps PIPE Cp
+			case 57: // AttDef = NAME AttType DefaultDecl
+			case 64: // ExternalID = PUBLIC STRING STRING
 			case 86: // Enumeration = LPAREN NMTOKEN RPAREN
 			{
 				return _symbols[offset + 3];
 			}
-			case 34: // Mixed = LPAREN PCDATA RPAREN STAR
-			case 54: // Choice = LPAREN Cp ChoiceCps RPAREN
-			case 58: // Seq = LPAREN Cp SeqCps RPAREN
+			case 30: // Choice = LPAREN Cp ChoiceCps RPAREN
 			case 84: // NotationType = NOTATION_TYPE LPAREN NAME RPAREN
 			case 87: // Enumeration = LPAREN NMTOKEN NmTokens RPAREN
 			case 92: // IncludeSect = SECTION_START INCLUDE LBRACKET SECTION_END
@@ -306,7 +481,6 @@ public class DTDParser extends Parser implements IParser {
 			{
 				return _symbols[offset + 4];
 			}
-			case 35: // Mixed = LPAREN PCDATA Names RPAREN STAR
 			case 85: // NotationType = NOTATION_TYPE LPAREN NAME Names RPAREN
 			case 93: // IncludeSect = SECTION_START INCLUDE LBRACKET Declarations SECTION_END
 			case 95: // IgnoreSect = SECTION_START IGNORE LBRACKET Declarations SECTION_END

@@ -37,6 +37,20 @@
 		
 		return result;
 	}
+	
+	protected void addChildren(IParseNode node, ArrayList children)
+	{
+		if (node != null && children != null)
+		{
+			for (Object child : children)
+			{
+				if (node instanceof IParseNode)
+				{
+					node.addChild((IParseNode) child);
+				}
+			}
+		}
+	}
 :};
 
 %init {:
@@ -51,6 +65,8 @@
 %terminals COMMENT, NMTOKEN, SECTION_START, SECTION_END, IGNORE, INCLUDE;
 
 %typeof NAME, PI, STRING = "String";
+%typeof Mixed, Cp = "DTDNode";
+%typeof Names, Children = "ArrayList";
 
 %goal DTD;
 
@@ -96,36 +112,218 @@ MarkupDecl
 	|	COMMENT
 	;
 
-// 3
+// Element declaration
 
 ElementDecl
 	=	ELEMENT NAME.n EMPTY GREATER_THAN
-	{:
-		return new DTDElementDeclarationNode(n);
-	:}
+		{:
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			decl.addChild(new DTDEmptyNode());
+			
+			return decl;
+		:}
 	|	ELEMENT NAME.n ANY GREATER_THAN
-	{:
-		return new DTDElementDeclarationNode(n);
-	:}
-	|	ELEMENT NAME.n Mixed GREATER_THAN
-	{:
-		return new DTDElementDeclarationNode(n);
-	:}
-	|	ELEMENT NAME.n Children GREATER_THAN
-	{:
-		return new DTDElementDeclarationNode(n);
-	:}
+		{:
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			decl.addChild(new DTDAnyNode());
+			
+			return decl;
+		:}
+	|	ELEMENT NAME.n Mixed.m GREATER_THAN
+		{:
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			decl.addChild(m);
+			
+			return decl;
+		:}
+	|	ELEMENT NAME.n Children.c GREATER_THAN
+		{:
+			DTDNode decl = new DTDElementDeclNode(n);
+			
+			this.addChildren(decl, c);
+			
+			return decl;
+		:}
 	;
+
+Mixed
+	=	LPAREN PCDATA RPAREN STAR
+		{:
+			DTDPCDataNode data = new DTDPCDataNode();
+			DTDZeroOrMoreNode zom = new DTDZeroOrMoreNode();
+			
+			zom.addChild(data);
+			
+			return zom;
+		:}
+	|	LPAREN PCDATA Names.n RPAREN STAR
+		{:
+			DTDPCDataNode data = new DTDPCDataNode();
+			DTDZeroOrMoreNode zom = new DTDZeroOrMoreNode();
+			
+			zom.addChild(data);
+			this.addChildren(zom, n);
+			
+			return zom;
+		:}
+	|	LPAREN PCDATA RPAREN
+		{:
+			return new DTDPCDataNode();
+		:}
+	;
+	
+Names
+	=	Names PIPE NAME
+		{:
+			String name = (String) _symbols[offset + 3].value;
+			DTDElementNode element = new DTDElementNode(name);
+			((ArrayList) _symbols[offset + 1].value).add(element);
+			
+			return _symbols[offset + 1];
+		:}
+	|	NAME
+		{:
+			ArrayList lst = new ArrayList();
+			String name = (String) _symbols[offset + 1].value;
+			DTDElementNode element = new DTDElementNode(name);
+			
+			lst.add(element);
+			
+			return new Symbol(lst);
+		:}
+	;
+
+Children
+	=	Choice
+	|	Choice QUESTION
+	|	Choice STAR
+	|	Choice PLUS
+	|	Seq
+	|	Seq QUESTION
+		{:
+			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
+			DTDOptionalNode result = new DTDOptionalNode();
+			
+			this.addChildren(result, seq);
+			
+			ArrayList lst = new ArrayList();
+			lst.add(result);
+			return new Symbol(lst);
+		:}
+	|	Seq.s STAR
+		{:
+			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
+			DTDZeroOrMoreNode result = new DTDZeroOrMoreNode();
+			
+			this.addChildren(result, seq);
+			
+			ArrayList lst = new ArrayList();
+			lst.add(result);
+			return new Symbol(lst);
+		:}
+	|	Seq.s PLUS
+		{:
+			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
+			DTDOneOrMoreNode result = new DTDOneOrMoreNode();
+			
+			this.addChildren(result, seq);
+			
+			ArrayList lst = new ArrayList();
+			lst.add(result);
+			return new Symbol(lst);
+		:}
+	;
+
+Choice
+	=	LPAREN Cp ChoiceCps RPAREN
+	;
+
+ChoiceCps
+	=	ChoiceCps PIPE Cp
+	|	PIPE Cp
+	;
+
+Seq
+	=	LPAREN Cp.c RPAREN
+		{:
+			ArrayList lst = new ArrayList();
+			
+			lst.add(_symbols[offset + 2]);
+			
+			return new Symbol(lst);
+		:}
+	|	LPAREN Cp.c SeqCps.l RPAREN
+		{:
+			((ArrayList) _symbols[offset + 3].value).add(0, c);
+			
+			return _symbols[offset + 3];
+		:}
+	;
+	
+SeqCps
+	=	SeqCps.l COMMA Cp.c
+		{:
+			((ArrayList) _symbols[offset + 1].value).add(c);
+			
+			return _symbols[offset + 1];
+		:}
+	|	COMMA Cp.c
+		{:
+			ArrayList lst = new ArrayList();
+			
+			lst.add(_symbols[offset + 2]);
+			
+			return new Symbol(lst);
+		:}
+	;
+
+Cp
+	=	NAME.n
+		{:
+			return new DTDElementNode(n);
+		:}
+	|	NAME.n QUESTION
+		{:
+			DTDOptionalNode node = new DTDOptionalNode();
+			
+			node.addChild(new DTDElementNode(n));
+		:}
+	|	NAME.n STAR
+		{:
+			DTDZeroOrMoreNode node = new DTDZeroOrMoreNode();
+			
+			node.addChild(new DTDElementNode(n));
+		:}
+	|	NAME.n PLUS
+		{:
+			DTDOneOrMoreNode node = new DTDOneOrMoreNode();
+			
+			node.addChild(new DTDElementNode(n));
+		:}
+	|	Choice
+	|	Choice QUESTION
+	|	Choice STAR
+	|	Choice PLUS
+	|	Seq
+	|	Seq QUESTION
+	|	Seq STAR
+	|	Seq PLUS
+	;
+
+// Attribute declaration
 
 AttlistDecl
 	=	ATTLIST NAME.n GREATER_THAN
-	{:
-		return new DTDAttributeListDeclarationNode(n);
-	:}
+		{:
+			return new DTDAttributeListDeclarationNode(n);
+		:}
 	|	ATTLIST NAME.n AttDefs GREATER_THAN
-	{:
-		return new DTDAttributeListDeclarationNode(n);
-	:}
+		{:
+			return new DTDAttributeListDeclarationNode(n);
+		:}
 	;
 	
 AttDefs
@@ -140,13 +338,13 @@ EntityDecl
 
 NotationDecl
 	=	NOTATION NAME.n ExternalID GREATER_THAN
-	{:
-		return new DTDNotationDeclarationNode(n);
-	:}
+		{:
+			return new DTDNotationDeclarationNode(n);
+		:}
 	|	NOTATION NAME.n PublicID GREATER_THAN
-	{:
-		return new DTDNotationDeclarationNode(n);
-	:}
+		{:
+			return new DTDNotationDeclarationNode(n);
+		:}
 	;
 
 // 4
@@ -157,31 +355,31 @@ AttDef
 	
 GEDecl
 	=	ENTITY NAME.n STRING GREATER_THAN
-	{:
-		return new DTDGEntityDeclarationNode(n);
-	:}
+		{:
+			return new DTDGEntityDeclarationNode(n);
+		:}
 	|	ENTITY NAME.n ExternalID GREATER_THAN
-	{:
-		return new DTDGEntityDeclarationNode(n);
-	:}
+		{:
+			return new DTDGEntityDeclarationNode(n);
+		:}
 	|	ENTITY NAME.n ExternalID NDataDecl GREATER_THAN
-	{:
-		return new DTDGEntityDeclarationNode(n);
-	:}
+		{:
+			return new DTDGEntityDeclarationNode(n);
+		:}
 	;
 
 PEDecl
 	=	ENTITY PERCENT NAME.n STRING.s GREATER_THAN
-	{:
-		String value = s.substring(1, s.length() - 1);
-		this._scanner.register(n, value);
-		
-		return new DTDPEntityDeclarationNode(n);
-	:}
+		{:
+			String value = s.substring(1, s.length() - 1);
+			this._scanner.register(n, value);
+			
+			return new DTDPEntityDeclarationNode(n);
+		:}
 	|	ENTITY PERCENT NAME.n ExternalID GREATER_THAN
-	{:
-		return new DTDPEntityDeclarationNode(n);
-	:}
+		{:
+			return new DTDPEntityDeclarationNode(n);
+		:}
 	;
 
 ExternalID
@@ -194,28 +392,6 @@ PublicID
 	;
 
 // 5
-
-Mixed
-	=	LPAREN PCDATA RPAREN STAR
-	|	LPAREN PCDATA Names RPAREN STAR
-	|	LPAREN PCDATA RPAREN
-	;
-	
-Names
-	=	Names PIPE NAME
-	|	NAME
-	;
-
-Children
-	=	Choice
-	|	Choice QUESTION
-	|	Choice STAR
-	|	Choice PLUS
-	|	Seq
-	|	Seq QUESTION
-	|	Seq STAR
-	|	Seq PLUS
-	;
 
 AttType
 	=	StringType
@@ -231,25 +407,6 @@ DefaultDecl
 	;
 
 // 6
-
-Choice
-	=	LPAREN Cp ChoiceCps RPAREN
-	;
-
-ChoiceCps
-	=	ChoiceCps PIPE Cp
-	|	PIPE Cp
-	;
-
-Seq
-	=	LPAREN Cp RPAREN
-	|	LPAREN Cp SeqCps RPAREN
-	;
-	
-SeqCps
-	=	SeqCps COMMA Cp
-	|	COMMA Cp
-	;
 
 StringType
 	=	CDATA_TYPE
@@ -275,21 +432,6 @@ NDataDecl
 	;
 
 // 7
-
-Cp
-	=	NAME
-	|	NAME QUESTION
-	|	NAME STAR
-	|	NAME PLUS
-	|	Choice
-	|	Choice QUESTION
-	|	Choice STAR
-	|	Choice PLUS
-	|	Seq
-	|	Seq QUESTION
-	|	Seq STAR
-	|	Seq PLUS
-	;
 
 NotationType
 	=	NOTATION_TYPE LPAREN NAME RPAREN
