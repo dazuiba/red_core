@@ -1,15 +1,17 @@
 package com.aptana.editor.dtd.parsing.ast;
 
-public class DTDAttributeListDeclarationNode extends DTDNode
+public class DTDParsedEntityDeclNode extends DTDNode
 {
 	private String _name;
 	
 	/**
-	 * DTDAttributeListDeclarationNode
+	 * DTDPEntityDeclarationNode
+	 * 
+	 * @param name
 	 */
-	public DTDAttributeListDeclarationNode(String name)
+	public DTDParsedEntityDeclNode(String name)
 	{
-		super(DTDNodeType.ATTRIBUTE_LIST_DECLARATION);
+		super(DTDNodeType.P_ENTITY_DECLARATION);
 		
 		this._name = name;
 	}

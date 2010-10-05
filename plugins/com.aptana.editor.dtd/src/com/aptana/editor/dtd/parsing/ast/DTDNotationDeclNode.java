@@ -1,13 +1,13 @@
 package com.aptana.editor.dtd.parsing.ast;
 
-public class DTDNotationDeclarationNode extends DTDNode
+public class DTDNotationDeclNode extends DTDNode
 {
 	private String _name;
 
 	/**
 	 * DTDNotationDeclarationNode
 	 */
-	public DTDNotationDeclarationNode(String name)
+	public DTDNotationDeclNode(String name)
 	{
 		super(DTDNodeType.NOTATION_DECLARATION);
 

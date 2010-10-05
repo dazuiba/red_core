@@ -1,6 +1,6 @@
 package com.aptana.editor.dtd.parsing.ast;
 
-public class DTDGEntityDeclarationNode extends DTDNode
+public class DTDGeneralEntityDeclNode extends DTDNode
 {
 	private String _name;
 
@@ -9,7 +9,7 @@ public class DTDGEntityDeclarationNode extends DTDNode
 	 * 
 	 * @param name
 	 */
-	public DTDGEntityDeclarationNode(String name)
+	public DTDGeneralEntityDeclNode(String name)
 	{
 		super(DTDNodeType.G_ENTITY_DECLARATION);
 
