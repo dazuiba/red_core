@@ -36,6 +36,7 @@ public class DTDScanner extends Scanner
 	private IDocument _document;
 	private Map<String, String> _entities;
 	private Stack<DTDParserScanner> _nestedScanners;
+	private int _ignoreStack;
 
 	/**
 	 * DTDScanner
@@ -110,6 +111,14 @@ public class DTDScanner extends Scanner
 	}
 
 	/**
+	 * enterIgnoreSection
+	 */
+	public void enterIgnoreSection()
+	{
+		this._ignoreStack = 1;
+	}
+	
+	/**
 	 * getToken
 	 * 
 	 * @return
@@ -182,10 +191,28 @@ public class DTDScanner extends Scanner
 		IToken token = this.getToken();
 		Object data = token.getData();
 
-		while (token.isWhitespace() || isComment(data))
+		while (token.isWhitespace() || isComment(data) || this._ignoreStack > 0)
 		{
 			token = this.getToken();
 			data = token.getData();
+			
+			if (this._ignoreStack > 0)
+			{
+				if (data == DTDTokenType.SECTION_START)
+				{
+					this._ignoreStack++;
+				}
+				else if (data == DTDTokenType.SECTION_END)
+				{
+					this._ignoreStack--;
+				}
+				
+				if (this._ignoreStack == 0)
+				{
+					token = this.getToken();
+					data = token.getData();
+				}
+			}
 		}
 
 		Symbol result = this.createSymbol(data);
