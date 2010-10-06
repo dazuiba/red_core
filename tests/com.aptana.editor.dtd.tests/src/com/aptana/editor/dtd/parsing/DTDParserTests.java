@@ -5,9 +5,14 @@ import java.io.IOException;
 import junit.framework.TestCase;
 import beaver.Parser.Exception;
 
+import com.aptana.editor.dtd.parsing.ast.DTDAndExpressionNode;
 import com.aptana.editor.dtd.parsing.ast.DTDElementDeclNode;
 import com.aptana.editor.dtd.parsing.ast.DTDElementNode;
 import com.aptana.editor.dtd.parsing.ast.DTDNodeType;
+import com.aptana.editor.dtd.parsing.ast.DTDOneOrMoreNode;
+import com.aptana.editor.dtd.parsing.ast.DTDOptionalNode;
+import com.aptana.editor.dtd.parsing.ast.DTDOrExpressionNode;
+import com.aptana.editor.dtd.parsing.ast.DTDZeroOrMoreNode;
 import com.aptana.parsing.ast.IParseNode;
 
 public class DTDParserTests extends TestCase
@@ -215,6 +220,358 @@ public class DTDParserTests extends TestCase
 		assertTrue(element instanceof DTDElementNode);
 		
 		assertEquals("circle", ((DTDElementNode) element).getName());
+	}
+	
+	/**
+	 * testOrExpression
+	 */
+	public void testOrExpression()
+	{
+		String source = "<!ELEMENT svg (circle | ellipse)>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode orExpr = elementDecl.getFirstChild();
+		assertTrue(orExpr instanceof DTDOrExpressionNode);
+		assertEquals(2, orExpr.getChildCount());
+		
+		IParseNode circle = orExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = orExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testZeroOrMoreOrExpression
+	 */
+	public void testZeroOrMoreOrExpression()
+	{
+		String source = "<!ELEMENT svg (circle | ellipse)*>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.ZERO_OR_MORE,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode zom = elementDecl.getFirstChild();
+		assertTrue(zom instanceof DTDZeroOrMoreNode);
+		
+		IParseNode orExpr = zom.getFirstChild();
+		assertTrue(orExpr instanceof DTDOrExpressionNode);
+		assertEquals(2, orExpr.getChildCount());
+		
+		IParseNode circle = orExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = orExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testOneOrMoreOrExpression
+	 */
+	public void testOneOrMoreOrExpression()
+	{
+		String source = "<!ELEMENT svg (circle | ellipse)+>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.ONE_OR_MORE,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode oom = elementDecl.getFirstChild();
+		assertTrue(oom instanceof DTDOneOrMoreNode);
+		
+		IParseNode orExpr = oom.getFirstChild();
+		assertTrue(orExpr instanceof DTDOrExpressionNode);
+		assertEquals(2, orExpr.getChildCount());
+		
+		IParseNode circle = orExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = orExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testOptionalOrExpression
+	 */
+	public void testOptionalOrExpression()
+	{
+		String source = "<!ELEMENT svg (circle | ellipse)?>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.OPTIONAL,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode opt = elementDecl.getFirstChild();
+		assertTrue(opt instanceof DTDOptionalNode);
+		
+		IParseNode orExpr = opt.getFirstChild();
+		assertTrue(orExpr instanceof DTDOrExpressionNode);
+		assertEquals(2, orExpr.getChildCount());
+		
+		IParseNode circle = orExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = orExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testAndExpression
+	 */
+	public void testAndExpression()
+	{
+		String source = "<!ELEMENT svg (circle, ellipse)>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode andExpr = elementDecl.getFirstChild();
+		assertTrue(andExpr instanceof DTDAndExpressionNode);
+		assertEquals(2, andExpr.getChildCount());
+		
+		IParseNode circle = andExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = andExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testZeroOrMoreAndExpression
+	 */
+	public void testZeroOrMoreAndExpression()
+	{
+		String source = "<!ELEMENT svg (circle, ellipse)*>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.ZERO_OR_MORE,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode zom = elementDecl.getFirstChild();
+		assertTrue(zom instanceof DTDZeroOrMoreNode);
+		
+		IParseNode andExpr = zom.getFirstChild();
+		assertTrue(andExpr instanceof DTDAndExpressionNode);
+		assertEquals(2, andExpr.getChildCount());
+		
+		IParseNode circle = andExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = andExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testOneOrMoreAndExpression
+	 */
+	public void testOneOrMoreAndExpression()
+	{
+		String source = "<!ELEMENT svg (circle, ellipse)+>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.ONE_OR_MORE,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode oom = elementDecl.getFirstChild();
+		assertTrue(oom instanceof DTDOneOrMoreNode);
+		
+		IParseNode andExpr = oom.getFirstChild();
+		assertTrue(andExpr instanceof DTDAndExpressionNode);
+		assertEquals(2, andExpr.getChildCount());
+		
+		IParseNode circle = andExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = andExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testOptionalAndExpression
+	 */
+	public void testOptionalAndExpression()
+	{
+		String source = "<!ELEMENT svg (circle, ellipse)?>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.OPTIONAL,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+		
+		DTDElementDeclNode elementDecl = (DTDElementDeclNode) root.getFirstChild();
+		assertEquals("svg", elementDecl.getName());
+		
+		IParseNode opt = elementDecl.getFirstChild();
+		assertTrue(opt instanceof DTDOptionalNode);
+		
+		IParseNode andExpr = opt.getFirstChild();
+		assertTrue(andExpr instanceof DTDAndExpressionNode);
+		assertEquals(2, andExpr.getChildCount());
+		
+		IParseNode circle = andExpr.getFirstChild();
+		assertTrue(circle instanceof DTDElementNode);
+		assertEquals("circle", ((DTDElementNode) circle).getName());
+		
+		IParseNode ellipse = andExpr.getLastChild();
+		assertTrue(ellipse instanceof DTDElementNode);
+		assertEquals("ellipse", ((DTDElementNode) ellipse).getName());
+	}
+	
+	/**
+	 * testNestedAndExpression
+	 */
+	public void testNestedAndExpression()
+	{
+		String source = "<!ELEMENT svg ((circle, ellipse), (rectangle, path))>";
+		
+		this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+	}
+	
+	/**
+	 * testNestedOrExpression
+	 */
+	public void testNestedOrExpression()
+	{
+		String source = "<!ELEMENT svg ((circle | ellipse) | (rectangle | path))>";
+		
+		this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+	}
+	
+	/**
+	 * testMixedExpression
+	 */
+	public void testMixedExpression()
+	{
+		String source = "<!ELEMENT svg ((circle | ellipse), (rectangle | path))>";
+		
+		this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
+	}
+	
+	/**
+	 * testMixedExpression2
+	 */
+	public void testMixedExpression2()
+	{
+		String source = "<!ELEMENT svg ((circle, ellipse) | (rectangle, path))>";
+		
+		this.parse(
+			source,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.OR_EXPRESSION,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.AND_EXPRESSION,
+			DTDNodeType.ELEMENT,
+			DTDNodeType.ELEMENT
+		);
 	}
 	
 	/**
