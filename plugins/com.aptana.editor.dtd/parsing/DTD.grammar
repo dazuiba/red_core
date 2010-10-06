@@ -44,7 +44,7 @@
 		{
 			for (Object child : children)
 			{
-				if (node instanceof IParseNode)
+				if (child instanceof IParseNode)
 				{
 					node.addChild((IParseNode) child);
 				}
@@ -62,10 +62,10 @@
 %terminals STAR, PLUS, FIXED, IMPLIED, REQUIRED, COMMA, CDATA_TYPE, ID_TYPE, IDREF_TYPE;
 %terminals IDREFS_TYPE, ENTITY_TYPE, ENTITIES_TYPE, NMTOKEN_TYPE, NMTOKENS_TYPE, NDATA;
 %terminals NOTATION_TYPE, PE_REF, NAME, PERCENT, STRING, LBRACKET;
-%terminals COMMENT, NMTOKEN, SECTION_START, SECTION_END, IGNORE, INCLUDE;
+%terminals COMMENT, SECTION_START, SECTION_END, IGNORE, INCLUDE;
 
-%typeof NAME, PI, STRING = "String";
-%typeof Mixed, Cp, Children, Choice, Seq = "DTDNode";
+%typeof NAME, PI, STRING, IMPLIED, FIXED, REQUIRED = "String";
+%typeof Mixed, Cp, Children, Choice, Seq, AttType = "DTDNode";
 %typeof Names = "ArrayList";
 
 %goal DTD;
@@ -287,7 +287,7 @@ Seq
 		{:
 			return c;
 		:}
-	|	LPAREN Cp.c SeqCps.l RPAREN
+	|	LPAREN Cp.c SeqCps RPAREN
 		{:
 			ArrayList cps = (ArrayList) _symbols[offset + 3].value;
 			DTDAndExpressionNode result = new DTDAndExpressionNode();
@@ -303,13 +303,13 @@ Seq
 	;
 	
 SeqCps
-	=	SeqCps.l COMMA Cp.c
+	=	SeqCps COMMA Cp.c
 		{:
 			((ArrayList) _symbols[offset + 1].value).add(c);
 			
 			return _symbols[offset + 1];
 		:}
-	|	COMMA Cp.c
+	|	COMMA Cp
 		{:
 			ArrayList lst = new ArrayList();
 			
@@ -354,7 +354,13 @@ AttlistDecl
 		:}
 	|	ATTLIST NAME.n AttDefs GREATER_THAN
 		{:
-			return new DTDAttListDeclNode(n);
+			Symbol _symbol_a = _symbols[offset + 3];
+			ArrayList defs = (ArrayList) _symbol_a.value;
+			DTDAttListDeclNode result = new DTDAttListDeclNode(n);
+			
+			this.addChildren(result, defs);
+			
+			return result;
 		:}
 	;
 	
@@ -363,28 +369,85 @@ AttDefs
 	|	AttDef
 	;
 
+AttDef
+	=	NAME.n AttType.t REQUIRED.m
+		{:
+			return new DTDAttributeNode(n, t, m);
+		:}
+	|	NAME.n AttType.t IMPLIED.m
+		{:
+			return new DTDAttributeNode(n, t, m);
+		:}
+	|	NAME.n AttType.t STRING.m
+		{:
+			return new DTDAttributeNode(n, t, m.substring(1, m.length() - 1));
+		:}
+	|	NAME.n AttType.t FIXED.m1 STRING.m2
+		{:
+			return new DTDAttributeNode(n, t, m1 + " " + m2.substring(1, m2.length() - 1));
+		:}
+	;
+
+AttType
+	=	CDATA_TYPE.t						// StringType
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+	|	ID_TYPE.t							// TokenizedType
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+	|	IDREF_TYPE.t
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+	|	IDREFS_TYPE.t
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+	|	ENTITY_TYPE.t
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+	|	ENTITIES_TYPE.t
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+	|	NMTOKEN_TYPE.t
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+	|	NMTOKENS_TYPE.t
+		{:
+			return new DTDTypeNode((String) t.value);
+		:}
+											// EnumeratedType
+	|	NOTATION_TYPE LPAREN Names RPAREN	// NotationType
+		{:
+			// TODO: add Names
+			return new DTDNotationTypeNode();
+		:}
+	|	LPAREN NmTokens RPAREN				// Enumeration
+		{:
+			// TODO: add NmTokens
+			return new DTDEnumerationTypeNode();
+		:}
+	;
+
+// NOTE: NAME is not the same as NMTOKEN, but we're using it here
+
+NmTokens
+	=	NmTokens NAME
+	|	NAME
+	;
+
+// Entities
+
 EntityDecl
 	=	GEDecl
 	|	PEDecl
 	;
 
-NotationDecl
-	=	NOTATION NAME.n ExternalID GREATER_THAN
-		{:
-			return new DTDNotationDeclNode(n);
-		:}
-	|	NOTATION NAME.n PublicID GREATER_THAN
-		{:
-			return new DTDNotationDeclNode(n);
-		:}
-	;
-
-// 4
-
-AttDef
-	=	NAME AttType DefaultDecl
-	;
-	
 GEDecl
 	=	ENTITY NAME.n STRING GREATER_THAN
 		{:
@@ -419,68 +482,28 @@ ExternalID
 	|	PUBLIC STRING STRING
 	;
 
-PublicID
-	=	PUBLIC STRING
-	;
-
-// 5
-
-AttType
-	=	StringType
-	|	TokenizedType
-	|	EnumeratedType
-	;
-
-DefaultDecl
-	=	REQUIRED
-	|	IMPLIED
-	|	STRING
-	|	FIXED STRING
-	;
-
-// 6
-
-StringType
-	=	CDATA_TYPE
-	;
-
-TokenizedType
-	=	ID_TYPE
-	|	IDREF_TYPE
-	|	IDREFS_TYPE
-	|	ENTITY_TYPE
-	|	ENTITIES_TYPE
-	|	NMTOKEN_TYPE
-	|	NMTOKENS_TYPE
-	;
-	
-EnumeratedType
-	=	NotationType
-	|	Enumeration
-	;
-	
 NDataDecl
 	=	NDATA NAME
 	;
 
-// 7
+// Notations
 
-NotationType
-	=	NOTATION_TYPE LPAREN NAME RPAREN
-	|	NOTATION_TYPE LPAREN NAME Names RPAREN
+NotationDecl
+	=	NOTATION NAME.n ExternalID GREATER_THAN
+		{:
+			return new DTDNotationDeclNode(n);
+		:}
+	|	NOTATION NAME.n PublicID GREATER_THAN
+		{:
+			return new DTDNotationDeclNode(n);
+		:}
 	;
 
-Enumeration
-	=	LPAREN NMTOKEN RPAREN
-	|	LPAREN NMTOKEN NmTokens RPAREN
+PublicID
+	=	PUBLIC STRING
 	;
 
-NmTokens
-	=	NmTokens NMTOKEN
-	|	NMTOKEN
-	;
-
-// misc
+// Sections
 
 ConditionalSect
 	=	IncludeSect
@@ -489,10 +512,30 @@ ConditionalSect
 
 IncludeSect
  	=	SECTION_START INCLUDE LBRACKET SECTION_END
- 	|	SECTION_START INCLUDE LBRACKET Declarations SECTION_END
+ 		{:
+ 			return new DTDIncludeSectionNode();
+ 		:}
+ 	|	SECTION_START INCLUDE LBRACKET Declarations.d SECTION_END
+ 		{:
+ 			DTDIncludeSectionNode result = new DTDIncludeSectionNode();
+ 			
+ 			for (Symbol s : d)
+ 			{
+ 				Object v = s.value;
+ 				
+ 				if (v instanceof IParseNode)
+ 				{
+ 					result.addChild((IParseNode) v);
+ 				}
+ 			}
+ 			
+ 			return result;
+ 		:}
 	;
 
 IgnoreSect
-	=	SECTION_START IGNORE LBRACKET SECTION_END
-	|	SECTION_START IGNORE LBRACKET Declarations SECTION_END
+	=	SECTION_START IGNORE
+		{:
+			this._scanner.enterIgnoreSection();
+		:}
 	;

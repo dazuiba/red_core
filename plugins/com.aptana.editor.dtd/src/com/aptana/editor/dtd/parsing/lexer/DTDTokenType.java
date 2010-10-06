@@ -11,43 +11,42 @@ public enum DTDTokenType
 	STRING("keyword.operator.dtd"),	// 3
 	LPAREN("source.dtd"),	 // 4
 	RPAREN("source.dtd"),	// 5
-	ENTITY("keyword.operator.dtd"),	// 6
-	ELEMENT("keyword.operator.dtd"),	// 7
-	SECTION_START("keyword.operator.dtd"),	// 8
-	ATTLIST("keyword.operator.dtd"),	// 9
-	NOTATION("keyword.operator.dtd"),	// 10
-	PE_REF("entity.reference.parameter.dtd"),	// 11
-	PI("source.dtd"),	// 12
-	COMMENT("comment.dtd"),	// 13
-	STAR("source.dtd"),	// 14	
-	SECTION_END("keyword.operator.dtd"),	// 15
-	PIPE("source.dtd"),	// 16
-	PUBLIC("keyword.operator.dtd"),	 // 17
-	NMTOKEN("source.dtd"),	// 18
-	QUESTION("source.dtd"),	// 19
-	PLUS("source.dtd"),	// 20
-	SYSTEM("keyword.operator.dtd"),	 // 21
-	LBRACKET("keyword.operator.dtd"),	// 22
-	COMMA("source.dtd"),	// 23
-	PERCENT("keyword.operator.dtd"),	// 24
-	EMPTY("keyword.operator.dtd"),	// 25
-	ANY("keyword.operator.dtd"),	// 26
-	PCDATA("keyword.operator.dtd"),	// 27
-	NOTATION_TYPE("keyword.operator.dtd"),	// 28
-	INCLUDE("keyword.operator.dtd"),	// 29
-	IGNORE("keyword.operator.dtd"),	// 30
-	FIXED("keyword.operator.dtd"),	// 31
+	STAR("source.dtd"),	// 16
+	ENTITY("keyword.operator.dtd"),	// 7
+	ELEMENT("keyword.operator.dtd"),	// 8
+	SECTION_START("keyword.operator.dtd"),	// 9
+	ATTLIST("keyword.operator.dtd"),	// 10
+	NOTATION("keyword.operator.dtd"),	// 11
+	PIPE("source.dtd"),	// 12
+	PE_REF("entity.reference.parameter.dtd"),	// 13
+	PI("source.dtd"),	// 14
+	COMMENT("comment.dtd"),	// 15
+	PUBLIC("keyword.operator.dtd"),	 // 16
+	QUESTION("source.dtd"),	// 17
+	PLUS("source.dtd"),	// 18
+	SYSTEM("keyword.operator.dtd"),	 // 19
+	SECTION_END("keyword.operator.dtd"),	// 20
+	COMMA("source.dtd"),	// 21
+	PERCENT("keyword.operator.dtd"),	// 22
+	EMPTY("keyword.operator.dtd"),	// 23
+	ANY("keyword.operator.dtd"),	// 24
+	PCDATA("keyword.operator.dtd"),	// 25
+	INCLUDE("keyword.operator.dtd"),	// 26
+	LBRACKET("keyword.operator.dtd"),	// 27
+	FIXED("keyword.operator.dtd"),	// 28
+	NOTATION_TYPE("keyword.operator.dtd"),	// 29
+	REQUIRED("keyword.operator.dtd"),	// 30
+	IMPLIED("keyword.operator.dtd"),	// 31
 	NDATA("keyword.operator.dtd"),	// 32
-	REQUIRED("keyword.operator.dtd"),	// 33
-	IMPLIED("keyword.operator.dtd"),	// 34
-	CDATA_TYPE("keyword.operator.dtd"),	// 35
-	ID_TYPE("keyword.operator.dtd"),	// 36
-	IDREF_TYPE("keyword.operator.dtd"),	// 37
-	IDREFS_TYPE("keyword.operator.dtd"),	// 38
-	ENTITY_TYPE("keyword.operator.dtd"),	// 39
-	ENTITIES_TYPE("keyword.operator.dtd"),	// 40
-	NMTOKEN_TYPE("keyword.operator.dtd"),	// 41
-	NMTOKENS_TYPE("keyword.operator.dtd"),	// 42	
+	IGNORE("keyword.operator.dtd"),	// 33
+	CDATA_TYPE("keyword.operator.dtd"),	// 34
+	ID_TYPE("keyword.operator.dtd"),	// 35
+	IDREF_TYPE("keyword.operator.dtd"),	// 36
+	IDREFS_TYPE("keyword.operator.dtd"),	// 37
+	ENTITY_TYPE("keyword.operator.dtd"),	// 38
+	ENTITIES_TYPE("keyword.operator.dtd"),	// 39
+	NMTOKEN_TYPE("keyword.operator.dtd"),	// 40
+	NMTOKENS_TYPE("keyword.operator.dtd"),	// 41	
 	
 	NDATA_TYPE("keyword.operator.dtd");
 	
