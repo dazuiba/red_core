@@ -6,12 +6,17 @@ import junit.framework.TestCase;
 import beaver.Parser.Exception;
 
 import com.aptana.editor.dtd.parsing.ast.DTDAndExpressionNode;
+import com.aptana.editor.dtd.parsing.ast.DTDAttListDeclNode;
+import com.aptana.editor.dtd.parsing.ast.DTDAttributeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDElementDeclNode;
 import com.aptana.editor.dtd.parsing.ast.DTDElementNode;
+import com.aptana.editor.dtd.parsing.ast.DTDEnumerationTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDNodeType;
+import com.aptana.editor.dtd.parsing.ast.DTDNotationTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOneOrMoreNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOptionalNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOrExpressionNode;
+import com.aptana.editor.dtd.parsing.ast.DTDTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDZeroOrMoreNode;
 import com.aptana.parsing.ast.IParseNode;
 
@@ -572,6 +577,371 @@ public class DTDParserTests extends TestCase
 			DTDNodeType.ELEMENT,
 			DTDNodeType.ELEMENT
 		);
+	}
+	
+	/**
+	 * testEmptyAttList
+	 */
+	public void testEmptyAttList()
+	{
+		String source = "<!ATTLIST svg>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+	}
+	
+	/**
+	 * testRequiredStringAttribute
+	 */
+	public void testRequiredStringAttribute()
+	{
+		String source = "<!ATTLIST svg name CDATA #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("CDATA", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredIDAttribute
+	 */
+	public void testRequiredIDAttribute()
+	{
+		String source = "<!ATTLIST svg name ID #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("ID", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredIDRefAttribute
+	 */
+	public void testRequiredIDRefAttribute()
+	{
+		String source = "<!ATTLIST svg name IDREF #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("IDREF", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredIDRefsAttribute
+	 */
+	public void testRequiredIDRefsAttribute()
+	{
+		String source = "<!ATTLIST svg name IDREFS #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("IDREFS", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredEntityAttribute
+	 */
+	public void testRequiredEntityAttribute()
+	{
+		String source = "<!ATTLIST svg name ENTITY #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("ENTITY", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredEntitiesAttribute
+	 */
+	public void testRequiredEntitiesAttribute()
+	{
+		String source = "<!ATTLIST svg name ENTITIES #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("ENTITIES", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredNMTokenAttribute
+	 */
+	public void testRequiredNMTokenAttribute()
+	{
+		String source = "<!ATTLIST svg name NMTOKEN #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("NMTOKEN", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredNMTokensAttribute
+	 */
+	public void testRequiredNMTokensAttribute()
+	{
+		String source = "<!ATTLIST svg name NMTOKENS #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("NMTOKENS", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testRequiredNotationAttribute
+	 */
+	public void testRequiredNotationAttribute()
+	{
+		String source = "<!ATTLIST svg name NOTATION(abc) #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.NOTATION
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDNotationTypeNode);
+	}
+	
+	/**
+	 * testRequiredEnumerationAttribute
+	 */
+	public void testRequiredEnumerationAttribute()
+	{
+		String source = "<!ATTLIST svg name (abc) #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.ENUMERATION
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDEnumerationTypeNode);
+	}
+	
+	/**
+	 * testImpliedStringAttribute
+	 */
+	public void testImpliedStringAttribute()
+	{
+		String source = "<!ATTLIST svg name CDATA #IMPLIED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#IMPLIED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("CDATA", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testStringAttribute
+	 */
+	public void testStringAttribute()
+	{
+		String source = "<!ATTLIST svg name CDATA \"default\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("default", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("CDATA", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testFixedStringAttribute
+	 */
+	public void testFixedStringAttribute()
+	{
+		String source = "<!ATTLIST svg name CDATA #FIXED \"default\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.TYPE
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("name", ((DTDAttributeNode) att).getName());
+		assertEquals("#FIXED default", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDTypeNode);
+		assertEquals("CDATA", ((DTDTypeNode) type).getType());
 	}
 	
 	/**
