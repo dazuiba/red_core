@@ -65,8 +65,8 @@
 %terminals COMMENT, NMTOKEN, SECTION_START, SECTION_END, IGNORE, INCLUDE;
 
 %typeof NAME, PI, STRING = "String";
-%typeof Mixed, Cp = "DTDNode";
-%typeof Names, Children = "ArrayList";
+%typeof Mixed, Cp, Children, Choice, Seq = "DTDNode";
+%typeof Names = "ArrayList";
 
 %goal DTD;
 
@@ -143,7 +143,7 @@ ElementDecl
 		{:
 			DTDNode decl = new DTDElementDeclNode(n);
 			
-			this.addChildren(decl, c);
+			decl.addChild(c);
 			
 			return decl;
 		:}
@@ -198,56 +198,81 @@ Names
 
 Children
 	=	Choice
-	|	Choice QUESTION
-	|	Choice STAR
-	|	Choice PLUS
-	|	Seq
-	|	Seq QUESTION
+	|	Choice.c QUESTION
 		{:
-			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
 			DTDOptionalNode result = new DTDOptionalNode();
 			
-			this.addChildren(result, seq);
+			result.addChild(c);
 			
-			ArrayList lst = new ArrayList();
-			lst.add(result);
-			return new Symbol(lst);
+			return result;
+		:}
+	|	Choice.c STAR
+		{:
+			DTDZeroOrMoreNode result = new DTDZeroOrMoreNode();
+			
+			result.addChild(c);
+			
+			return result;
+		:}
+	|	Choice.c PLUS
+		{:
+			DTDOneOrMoreNode result = new DTDOneOrMoreNode();
+			
+			result.addChild(c);
+			
+			return result;
+		:}
+	|	Seq
+	|	Seq.s QUESTION
+		{:
+			DTDOptionalNode result = new DTDOptionalNode();
+			
+			result.addChild(s);
+			
+			return result;
 		:}
 	|	Seq.s STAR
 		{:
-			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
 			DTDZeroOrMoreNode result = new DTDZeroOrMoreNode();
 			
-			this.addChildren(result, seq);
+			result.addChild(s);
 			
-			ArrayList lst = new ArrayList();
-			lst.add(result);
-			return new Symbol(lst);
+			return result;
 		:}
 	|	Seq.s PLUS
 		{:
-			ArrayList seq = (ArrayList) _symbols[offset + 1].value;
 			DTDOneOrMoreNode result = new DTDOneOrMoreNode();
 			
-			this.addChildren(result, seq);
+			result.addChild(s);
 			
-			ArrayList lst = new ArrayList();
-			lst.add(result);
-			return new Symbol(lst);
+			return result;
 		:}
 	;
 
 Choice
-	=	LPAREN Cp ChoiceCps RPAREN
+	=	LPAREN Cp.c ChoiceCps RPAREN
+		{:
+			ArrayList cps = (ArrayList) _symbols[offset + 3].value;
+			DTDOrExpressionNode result = new DTDOrExpressionNode();
+
+			// pre-pend leading cp			
+			cps.add(0, c);
+			
+			// add all children to or-expr
+			this.addChildren(result, cps);
+			
+			return result;
+		:}
 	;
 
 ChoiceCps
-	=	ChoiceCps PIPE Cp
+	=	ChoiceCps PIPE Cp.c
+		{:
+			((ArrayList) _symbols[offset + 1].value).add(c);
+			
+			return _symbols[offset + 1];
+		:}
 	|	PIPE Cp
-	;
-
-Seq
-	=	LPAREN Cp.c RPAREN
 		{:
 			ArrayList lst = new ArrayList();
 			
@@ -255,11 +280,25 @@ Seq
 			
 			return new Symbol(lst);
 		:}
+	;
+
+Seq
+	=	LPAREN Cp.c RPAREN
+		{:
+			return c;
+		:}
 	|	LPAREN Cp.c SeqCps.l RPAREN
 		{:
-			((ArrayList) _symbols[offset + 3].value).add(0, c);
+			ArrayList cps = (ArrayList) _symbols[offset + 3].value;
+			DTDAndExpressionNode result = new DTDAndExpressionNode();
+
+			// pre-pend leading cp			
+			cps.add(0, c);
 			
-			return _symbols[offset + 3];
+			// add all children to or-expr
+			this.addChildren(result, cps);
+			
+			return result;
 		:}
 	;
 	
@@ -303,14 +342,7 @@ Cp
 			
 			node.addChild(new DTDElementNode(n));
 		:}
-	|	Choice
-	|	Choice QUESTION
-	|	Choice STAR
-	|	Choice PLUS
-	|	Seq
-	|	Seq QUESTION
-	|	Seq STAR
-	|	Seq PLUS
+	|	Children
 	;
 
 // Attribute declaration
@@ -318,11 +350,11 @@ Cp
 AttlistDecl
 	=	ATTLIST NAME.n GREATER_THAN
 		{:
-			return new DTDAttributeListDeclarationNode(n);
+			return new DTDAttListDeclNode(n);
 		:}
 	|	ATTLIST NAME.n AttDefs GREATER_THAN
 		{:
-			return new DTDAttributeListDeclarationNode(n);
+			return new DTDAttListDeclNode(n);
 		:}
 	;
 	
@@ -339,11 +371,11 @@ EntityDecl
 NotationDecl
 	=	NOTATION NAME.n ExternalID GREATER_THAN
 		{:
-			return new DTDNotationDeclarationNode(n);
+			return new DTDNotationDeclNode(n);
 		:}
 	|	NOTATION NAME.n PublicID GREATER_THAN
 		{:
-			return new DTDNotationDeclarationNode(n);
+			return new DTDNotationDeclNode(n);
 		:}
 	;
 
@@ -356,15 +388,15 @@ AttDef
 GEDecl
 	=	ENTITY NAME.n STRING GREATER_THAN
 		{:
-			return new DTDGEntityDeclarationNode(n);
+			return new DTDGeneralEntityDeclNode(n);
 		:}
 	|	ENTITY NAME.n ExternalID GREATER_THAN
 		{:
-			return new DTDGEntityDeclarationNode(n);
+			return new DTDGeneralEntityDeclNode(n);
 		:}
 	|	ENTITY NAME.n ExternalID NDataDecl GREATER_THAN
 		{:
-			return new DTDGEntityDeclarationNode(n);
+			return new DTDGeneralEntityDeclNode(n);
 		:}
 	;
 
@@ -374,11 +406,11 @@ PEDecl
 			String value = s.substring(1, s.length() - 1);
 			this._scanner.register(n, value);
 			
-			return new DTDPEntityDeclarationNode(n);
+			return new DTDParsedEntityDeclNode(n);
 		:}
 	|	ENTITY PERCENT NAME.n ExternalID GREATER_THAN
 		{:
-			return new DTDPEntityDeclarationNode(n);
+			return new DTDParsedEntityDeclNode(n);
 		:}
 	;
 

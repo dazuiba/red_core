@@ -6,26 +6,26 @@ public enum DTDTokenType
 {
 	UNDEFINED(""),	// -1
 	EOF(""),	// 0
-	GREATER_THAN("source.dtd"), // 1
-	NAME("source.dtd"),	// 2
+	NAME("source.dtd"),	// 1
+	GREATER_THAN("source.dtd"), // 2
 	STRING("keyword.operator.dtd"),	// 3
 	LPAREN("source.dtd"),	 // 4
 	RPAREN("source.dtd"),	// 5
-	STAR("source.dtd"),	// 6
-	ENTITY("keyword.operator.dtd"),	// 7
-	ELEMENT("keyword.operator.dtd"),	// 8
-	SECTION_START("keyword.operator.dtd"),	// 9
-	ATTLIST("keyword.operator.dtd"),	// 10
-	NOTATION("keyword.operator.dtd"),	// 11
-	PE_REF("entity.reference.parameter.dtd"),	// 12
-	PI("source.dtd"),	// 13
-	COMMENT("comment.dtd"),	// 14
-	QUESTION("source.dtd"),	// 15
-	PLUS("source.dtd"),	// 16
-	SECTION_END("keyword.operator.dtd"),	// 17
-	PIPE("source.dtd"),	// 18
-	PUBLIC("keyword.operator.dtd"),	 // 19
-	NMTOKEN("source.dtd"),	// 20
+	ENTITY("keyword.operator.dtd"),	// 6
+	ELEMENT("keyword.operator.dtd"),	// 7
+	SECTION_START("keyword.operator.dtd"),	// 8
+	ATTLIST("keyword.operator.dtd"),	// 9
+	NOTATION("keyword.operator.dtd"),	// 10
+	PE_REF("entity.reference.parameter.dtd"),	// 11
+	PI("source.dtd"),	// 12
+	COMMENT("comment.dtd"),	// 13
+	STAR("source.dtd"),	// 14	
+	SECTION_END("keyword.operator.dtd"),	// 15
+	PIPE("source.dtd"),	// 16
+	PUBLIC("keyword.operator.dtd"),	 // 17
+	NMTOKEN("source.dtd"),	// 18
+	QUESTION("source.dtd"),	// 19
+	PLUS("source.dtd"),	// 20
 	SYSTEM("keyword.operator.dtd"),	 // 21
 	LBRACKET("keyword.operator.dtd"),	// 22
 	COMMA("source.dtd"),	// 23
