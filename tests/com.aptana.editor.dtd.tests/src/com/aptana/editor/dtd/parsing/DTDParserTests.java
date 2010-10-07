@@ -1146,6 +1146,138 @@ public class DTDParserTests extends TestCase
 	}
 	
 	/**
+	 * testEmptyIncludeSection
+	 */
+	public void testEmptyIncludeSection()
+	{
+		String source = "<![INCLUDE[]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.INCLUDE_SECTION
+		);
+	}
+	
+	/**
+	 * testSimpleIncludeSection
+	 */
+	public void testSimpleIncludeSection()
+	{
+		String source = "<![INCLUDE[\n<!ELEMENT svg EMPTY>\n]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.INCLUDE_SECTION,
+			DTDNodeType.ELEMENT_DECLARATION,
+			DTDNodeType.EMPTY
+		);
+	}
+	
+	/**
+	 * testEmptyIgnoreSection
+	 */
+	public void testEmptyIgnoreSection()
+	{
+		String source = "<![IGNORE[]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
+	 * testSimpleIgnoreSection
+	 */
+	public void testSimpleIgnoreSection()
+	{
+		String source = "<![IGNORE[\n<!ELEMENT svg EMPTY>\n]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
+	 * testNestedIgnoreSectionAfter
+	 */
+	public void testNestedIgnoreSectionAfter()
+	{
+		String source = "<![IGNORE[\n<!ELEMENT svg EMPTY>\n<![IGNORE[]]>]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
+	 * testNestedIgnoreSectionAfter
+	 */
+	public void testNestedIncludeSectionAfter()
+	{
+		String source = "<![IGNORE[\n<!ELEMENT svg EMPTY>\n<![INCLUDE[]]>]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
+	 * testNestedIgnoreSectionBefore
+	 */
+	public void testNestedIgnoreSectionBefore()
+	{
+		String source = "<![IGNORE[<![IGNORE[]]>\n<!ELEMENT svg EMPTY>\n]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
+	 * testNestedIgnoreSectionBefore
+	 */
+	public void testNestedIncludeSectionBefore()
+	{
+		String source = "<![IGNORE[<![INCLUDE[]]>\n<!ELEMENT svg EMPTY>\n]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
+	 * testNestedIgnoreSectionBeforeAndAfter
+	 */
+	public void testNestedIgnoreSectionBeforeAndAfter()
+	{
+		String source = "<![IGNORE[<![IGNORE[]]>\n<!ELEMENT svg EMPTY>\n<![IGNORE[]]>]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
+	 * testNestedIgnoreSectionBefore
+	 */
+	public void testNestedIncludeSectionBeforeAndAfter()
+	{
+		String source = "<![IGNORE[<![INCLUDE[]]>\n<!ELEMENT svg EMPTY>\n<![INCLUDE[]]>]]>";
+		
+		this.parse(
+			source,
+			DTDNodeType.IGNORE_SECTION
+		);
+	}
+	
+	/**
 	 * parse
 	 * 
 	 * @param source
