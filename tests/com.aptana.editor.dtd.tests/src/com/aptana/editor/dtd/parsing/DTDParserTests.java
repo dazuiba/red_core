@@ -19,6 +19,7 @@ import com.aptana.editor.dtd.parsing.ast.DTDOneOrMoreNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOptionalNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOrExpressionNode;
 import com.aptana.editor.dtd.parsing.ast.DTDParsedEntityDeclNode;
+import com.aptana.editor.dtd.parsing.ast.DTDProcessingInstructionNode;
 import com.aptana.editor.dtd.parsing.ast.DTDTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDZeroOrMoreNode;
 import com.aptana.parsing.ast.IParseNode;
@@ -1126,6 +1127,22 @@ public class DTDParserTests extends TestCase
 		assertEquals("test", entity.getName());
 		
 		// TODO: test value
+	}
+	
+	/**
+	 * testProcessingInstruction
+	 */
+	public void testProcessingInstruction()
+	{
+		String source = "<?TEST this is a test?>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.PROCESSING_INSTRUCTION
+		);
+		
+		DTDProcessingInstructionNode pi = (DTDProcessingInstructionNode) root.getFirstChild();
+		assertEquals("TEST this is a test", pi.getText());
 	}
 	
 	/**
