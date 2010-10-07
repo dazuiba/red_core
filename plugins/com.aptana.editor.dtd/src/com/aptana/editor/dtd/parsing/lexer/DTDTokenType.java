@@ -11,7 +11,7 @@ public enum DTDTokenType
 	STRING("keyword.operator.dtd"),	// 3
 	LPAREN("source.dtd"),	 // 4
 	RPAREN("source.dtd"),	// 5
-	STAR("source.dtd"),	// 16
+	STAR("source.dtd"),	// 6
 	ENTITY("keyword.operator.dtd"),	// 7
 	ELEMENT("keyword.operator.dtd"),	// 8
 	SECTION_START("keyword.operator.dtd"),	// 9
@@ -46,9 +46,7 @@ public enum DTDTokenType
 	ENTITY_TYPE("keyword.operator.dtd"),	// 38
 	ENTITIES_TYPE("keyword.operator.dtd"),	// 39
 	NMTOKEN_TYPE("keyword.operator.dtd"),	// 40
-	NMTOKENS_TYPE("keyword.operator.dtd"),	// 41	
-	
-	NDATA_TYPE("keyword.operator.dtd");
+	NMTOKENS_TYPE("keyword.operator.dtd");	// 41	
 	
 	
 	//ENTITY_REF("source.dtd"),

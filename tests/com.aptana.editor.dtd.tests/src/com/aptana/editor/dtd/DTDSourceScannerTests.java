@@ -234,7 +234,7 @@ public class DTDSourceScannerTests extends TestCase
 	{
 		String source = "NDATA";
 		
-		this.typeTests(source, DTDTokenType.NDATA_TYPE);
+		this.typeTests(source, DTDTokenType.NDATA);
 	}
 	
 	public void testNMTokenType()

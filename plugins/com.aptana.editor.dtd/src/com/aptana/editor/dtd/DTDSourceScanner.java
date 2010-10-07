@@ -87,7 +87,7 @@ public class DTDSourceScanner extends RuleBasedScanner
 		wordRule.addWord("IDREFS", createToken(DTDTokenType.IDREFS_TYPE));
 		wordRule.addWord("IGNORE", createToken(DTDTokenType.IGNORE));
 		wordRule.addWord("INCLUDE", createToken(DTDTokenType.INCLUDE));
-		wordRule.addWord("NDATA", createToken(DTDTokenType.NDATA_TYPE));
+		wordRule.addWord("NDATA", createToken(DTDTokenType.NDATA));
 		wordRule.addWord("NMTOKEN", createToken(DTDTokenType.NMTOKEN_TYPE));
 		wordRule.addWord("NMTOKENS", createToken(DTDTokenType.NMTOKENS_TYPE));
 		wordRule.addWord("NOTATION", createToken(DTDTokenType.NOTATION_TYPE));
