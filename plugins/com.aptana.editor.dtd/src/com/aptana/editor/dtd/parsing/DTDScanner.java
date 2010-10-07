@@ -253,7 +253,13 @@ public class DTDScanner extends Scanner
 			this._entities = new HashMap<String, String>();
 		}
 
-		this._entities.put(key, value);
+		// According to the XML 1.1 Specification in Section 4.2:
+		// If the same entity is declared more than once, the first declaration encountered is binding;
+		// at user option, an XML processor may issue a warning if entities are declared multiple times.
+		if (this._entities.containsKey(key) == false)
+		{
+			this._entities.put(key, value);
+		}
 	}
 
 	/**
