@@ -356,6 +356,13 @@ public class DTDSourceScannerTests extends TestCase
 		this.typeTests(source, DTDTokenType.NAME);
 	}
 	
+	public void testNmtoken()
+	{
+		String source = "200";
+		
+		this.typeTests(source, DTDTokenType.NMTOKEN);
+	}
+	
 	public void testSequence()
 	{
 		String source = "<![%svg-prefw-redecl.module;[%svg-prefw-redecl.mod;]]>";

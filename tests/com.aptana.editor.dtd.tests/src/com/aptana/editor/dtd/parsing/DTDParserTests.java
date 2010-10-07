@@ -894,6 +894,32 @@ public class DTDParserTests extends TestCase
 	}
 	
 	/**
+	 * testRequiredEnumerationAttribute3
+	 */
+	public void testRequiredEnumerationAttribute3()
+	{
+		String source = "<!ATTLIST svg font-weight (bold | 100) #REQUIRED>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.ATTRIBUTE_LIST_DECLARATION,
+			DTDNodeType.ATTRIBUTE,
+			DTDNodeType.ENUMERATION
+		);
+		
+		DTDAttListDeclNode attListDecl = (DTDAttListDeclNode) root.getFirstChild();
+		assertEquals("svg", attListDecl.getName());
+		
+		IParseNode att = attListDecl.getFirstChild();
+		assertTrue(att instanceof DTDAttributeNode);
+		assertEquals("font-weight", ((DTDAttributeNode) att).getName());
+		assertEquals("#REQUIRED", ((DTDAttributeNode) att).getMode());
+		
+		IParseNode type = att.getFirstChild();
+		assertTrue(type instanceof DTDEnumerationTypeNode);
+	}
+	
+	/**
 	 * testImpliedStringAttribute
 	 */
 	public void testImpliedStringAttribute()
