@@ -42,7 +42,7 @@ public class ElementElement
 {
 	private String _name;
 	private String _displayName;
-	private List<String> _attributes;
+	private List<AttributeElement> _attributes;
 	private String _description;
 
 	/**
@@ -58,11 +58,11 @@ public class ElementElement
 	 * @param attribute
 	 *            the attribute to add
 	 */
-	public void addAttribute(String attribute)
+	public void addAttribute(AttributeElement attribute)
 	{
 		if (this._attributes == null)
 		{
-			this._attributes = new ArrayList<String>();
+			this._attributes = new ArrayList<AttributeElement>();
 		}
 		
 		this._attributes.add(attribute);
@@ -73,9 +73,9 @@ public class ElementElement
 	 * 
 	 * @return the attributes
 	 */
-	public List<String> getAttributes()
+	public List<AttributeElement> getAttributes()
 	{
-		List<String> result = Collections.emptyList();
+		List<AttributeElement> result = Collections.emptyList();
 		
 		if (this._attributes != null)
 		{
