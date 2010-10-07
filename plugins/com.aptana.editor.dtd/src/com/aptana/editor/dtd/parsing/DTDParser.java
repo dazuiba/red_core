@@ -16,26 +16,30 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9oTbcTq55KKn$ypkq7A8YK1wGa8618XnB0i8KGDIIY224W4H8g20G55KAeDfAddQ3p7Zt3" +
-		"mS0v#GJc0WZG1WT2Bz28j4W6f5a1GqCj$tjva9yi60ZFdDxU#z#xClDcx0CvWAhmeXuTG7X" +
-		"LG4GCm49NnCAh2nkDeZcGygl8nD4P05fQItmUZu8aOYUojZLx5ytV5i#Y6vz0TFT0Jpyl$U" +
-		"CH4ggCQeZ4QLJ02Js6G2A9G2Jva8mCn8Jzgg3$agQcUu0fjyOOhrhb4h1tULEr9nAErN8HV" +
-		"bc8uwY41QKX2BQJW6Ro5ZkY4DaX7CoIY1LhY2RH27No0Tz083P2B9gYBLCvG7t7meodzyJn" +
-		"pgVkDrjzeuz2UrMUYD$hX5Gp3IBp8d3YCGQnSnZIvX25eYAUHXGxemfbpy09UGb#yZA6OYC" +
-		"5u5U$XDRoEiNWRup41a$2kBCVxh7SA9kD3LfR4sf9PNGhhywCr0gpQuXD8ODtEVHR9TDvlT" +
-		"YdvNkP7ZfIMNxzutaPydutvD9folyJpQK4ZDjzfhU9TK8b#PnTKOMqspv0$G$qXZwsUeXLY" +
-		"N37F7R4YpU9RjbcPpPnoF7t49lLeDq0iepMukweNKvl#gcPKD76Y5lU6ZpFuZD#YtylJqTA" +
-		"CPdCtETL7yPhAd3fch8#Mir93agNPxJctnH7jUCqa7hvnvwvhKdDsZSqtRXj$y9fgei3qoJ" +
-		"17PvBZwFS3ZueaGBgetLVbC9MVgfn6ldJM8#l9RBAQv9FDhlcca3cgVwLoHeHrFmgpFmcpl" +
-		"rRvkSflL2vIkLZb5j97zMMkyR5aRDYSMyFhY0IFRMG7MQhsJsJbNVBta0LadzhxLUvMUO3C" +
-		"L7qUMKC6g3rIvJgIHuwelKJbKPN7oGboZ9ma1MGMEQNnml2wH6GlkLwMUuvmJt7tok7SXHG" +
-		"Zof1tsAMVVP1wjAReC3jBPK#LlLsn2IhpNBwF7tHj7V#5I$#i3FbJxsT#FflpEivspJ7NfS" +
-		"ykmvhpxnAR7XJodzoKV#KVkI7NvM#v9bVbYYoHxpJw5$cJ$45#HzWX5#IyaR#G0lbPZiXXE" +
-		"IG7vPpy9cVbZ9oMNwLGJZ7AtIhSjS8TAzonSjICuxSW#sMVqVV8Rk6t9Rjaf#oGxR9DjieM" +
-		"sIoRTAsDvfel6sGzz$8w#L7zoyZtPAMnLgZtMx9OzRM4Nvci3gl#1x9ARiaY6jtPsom2TZA" +
-		"RMEnS8P9A8HdU4cGOeeY7lzqUy$kTOB1TbBGJEIQTkUdc$vE7UDbfFSGsNQcvaKLOxAGUuc" +
-		"Kl2VQJDDeXlEmTrZtmclwIoV5ERqbH$FG7YMAN3kBqbLJcEjsc5MCEMTHRCjyXG3l0l3RqT" +
-		"RWDLEEIwG==");
+		"U9pDbWTqL4KKXl#tkub2eWar526qI0Xf1198I0YA0SJUKS4k5koze83qq5lelGG8FLYnObV" +
+		"i1JiA8YWYAY2AvUT$inDvMJOIyNWExvrl$ZjtxjmtRPC1d0BCGX5MOYQMOmN6OGnwOmJcOJ" +
+		"4MOX56emHBiGIhC0E3CGh568lXM83fc8g9c8zbc8RP68b9c8mfc83nc8EvbSuujD8P8t4CZ" +
+		"iK0170KZaOLLCKbk1InyA5w#3OEmCssnH$IAxotE$$YzoWrRSUXBcv5ZCQTZykGX0X48Hgh" +
+		"4OSKj49DDCGGj41Bd8jgg856E1MduNISWJDn5ix6EIIIJMHJr49jJwOwDjC1JuE3F3TPJp1" +
+		"3SvoCM$xE5jGSgxbMEw3GZ3eHQSX29bgZ6tz05tH5UzoEOKX5EleY0stG11SZ3#rG7nVXVY" +
+		"IW7df9cw6jz7ZrJqIy#cSYszY9niv40Kv0JvMTS06knOcu0htuCAxNl6$0GDo6at0NTw0nE" +
+		"k8gTCOf#ifvE1yzS24knpMu4bVZHbo7Et477i3Tk0VteGyVmuFAq1$zy13kHV0P14VxwUvB" +
+		"XFQeR6$SjN1d5wFThgRThg7rTrSrJgjPLpEehzrge1s9rtWQwzjDDPy4pQQvnj$YVyYOgbL" +
+		"ErwfdQ9tRQ7Moj7hjz9qSVIbyMnUrXMy9xmreBSfoHNfEQPGzkJ7Q#IITlcH5HMW$t3aqD6" +
+		"EFFcYqi94fsZsV9vFFPZhWoJl8KyjwoZBuvIcpAzBWg1sDD48ZZzGw#imwHgjthXcftvIEt" +
+		"jgASTzOKK#x4AkJd2#DDgtkp0EASSmRCA#xc#rDwVRgg7DQm#nljDapHsq#lMvyPvrAl#cN" +
+		"fx90#4rRJMcsD4vdscUzZlNvq9ZcKHImfb$mL0uKYrtxtw2dXnWiUjfwaTLbLakjRXQxnG2" +
+		"nJKo01YGQYIQUV5#9lK7RyLjVOPZlRWofRofVTmBMlylMgrYjQZNAQbCHO#tgddnznVgGdC" +
+		"r2nn4EnIM8vYBMrfDKxFc7#6GHAL9iFTLgIwjfeewrVQA1ZDLsd6kjlw6AxT8CMu#tcccrh" +
+		"MWdiaIso95pfpJNjkTvnfFkdWwRFx4oSpxIqDDCv1zctzwLY76bVoNYrddiEVzXFiKXzHAh" +
+		"AwoMUjesMDtYyPNxVHp6ztTuxAsLYDzug9YGU7jkqStZs#UnA$pz78W9$kOhoD$TQcb5CKS" +
+		"gUjO4XN$oT#xZR$oLU$aBzt0tTt4DIsthp#8dyQFOYP27s$cTKVrzvPVyX1$p8sxWX$oMsx" +
+		"YLtt0Bl#PcRbBh5#9pyPdOA3ur$JuGx$CzOx$3j$cMz4s#mVLydQ$nLRx2b$cI$TQBfdo1p" +
+		"tCTt#LpVDRw7nMFY2TCxN7hNIrMMViPyRHuAcJqJugr$CFOAyKABkSoBk5YBc8n5t81vtCU" +
+		"vt8EPtCMPt86ftCQft8A9tCIYpYH4pYUupYMOpYQepYI8pYSXHp6eHp2mHp4WLpA4gNletk" +
+		"C8s1kEZcoMtd8g83M29IZao52#FMVsM$#EoSPV1xArrkgJmV5Tf2TB4rMFL#QhtgAObECbk" +
+		"7e9kKN0TqFVCAz5VWz17GpS0v1mDmU2jJVlJbaMjhA7oH2jxGWxhqXMx7kRI9BRIwTpUtDC" +
+		"QIfdgQuT6cwkQtvB8uXzmYcwtvXXpeO");
 
 	private DTDScanner _scanner;
 	
@@ -622,10 +626,15 @@ public class DTDParser extends Parser implements IParser {
  			
  			return result;
 			}
-			case 79: // IgnoreSect = SECTION_START IGNORE
+			case 79: // IgnoreSect = SECTION_START IGNORE LBRACKET SECTION_END
 			{
 					
-			this._scanner.enterIgnoreSection();
+			return new DTDIgnoreSectionNode();
+			}
+			case 80: // IgnoreSect = SECTION_START IGNORE LBRACKET IgnoreSectionBody SECTION_END
+			{
+					
+			return new DTDIgnoreSectionNode();
 			}
 			case 4: // Declaration = MarkupDecl
 			case 5: // Declaration = PE_REF
@@ -642,11 +651,54 @@ public class DTDParser extends Parser implements IParser {
 			case 63: // EntityDecl = PEDecl
 			case 75: // ConditionalSect = IncludeSect
 			case 76: // ConditionalSect = IgnoreSect
+			case 83: // IgnoreSectionBody = IgnoreToken
+			case 84: // IgnoreSectionBody = ConditionalSect
+			case 85: // IgnoreToken = ANY
+			case 86: // IgnoreToken = ATTLIST
+			case 87: // IgnoreToken = CDATA_TYPE
+			case 88: // IgnoreToken = COMMA
+			case 89: // IgnoreToken = COMMENT
+			case 90: // IgnoreToken = ELEMENT
+			case 91: // IgnoreToken = EMPTY
+			case 92: // IgnoreToken = ENTITY
+			case 93: // IgnoreToken = ENTITIES_TYPE
+			case 94: // IgnoreToken = ENTITY_TYPE
+			case 95: // IgnoreToken = FIXED
+			case 96: // IgnoreToken = GREATER_THAN
+			case 97: // IgnoreToken = ID_TYPE
+			case 98: // IgnoreToken = IDREF_TYPE
+			case 99: // IgnoreToken = IDREFS_TYPE
+			case 100: // IgnoreToken = IGNORE
+			case 101: // IgnoreToken = IMPLIED
+			case 102: // IgnoreToken = INCLUDE
+			case 103: // IgnoreToken = LBRACKET
+			case 104: // IgnoreToken = LPAREN
+			case 105: // IgnoreToken = NAME
+			case 106: // IgnoreToken = NDATA
+			case 107: // IgnoreToken = NMTOKEN_TYPE
+			case 108: // IgnoreToken = NMTOKENS_TYPE
+			case 109: // IgnoreToken = NOTATION
+			case 110: // IgnoreToken = NOTATION_TYPE
+			case 111: // IgnoreToken = PCDATA
+			case 112: // IgnoreToken = PE_REF
+			case 113: // IgnoreToken = PERCENT
+			case 114: // IgnoreToken = PI
+			case 115: // IgnoreToken = PIPE
+			case 116: // IgnoreToken = PLUS
+			case 117: // IgnoreToken = PUBLIC
+			case 118: // IgnoreToken = QUESTION
+			case 119: // IgnoreToken = REQUIRED
+			case 120: // IgnoreToken = RPAREN
+			case 121: // IgnoreToken = STAR
+			case 122: // IgnoreToken = STRING
+			case 123: // IgnoreToken = SYSTEM
 			{
 				return _symbols[offset + 1];
 			}
 			case 69: // ExternalID = SYSTEM STRING
 			case 74: // PublicID = PUBLIC STRING
+			case 81: // IgnoreSectionBody = IgnoreSectionBody IgnoreToken
+			case 82: // IgnoreSectionBody = IgnoreSectionBody ConditionalSect
 			{
 				return _symbols[offset + 2];
 			}

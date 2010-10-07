@@ -25,24 +25,24 @@ public enum DTDTokenType
 	QUESTION("source.dtd"),	// 17
 	PLUS("source.dtd"),	// 18
 	SYSTEM("keyword.operator.dtd"),	 // 19
-	SECTION_END("keyword.operator.dtd"),	// 20
-	COMMA("source.dtd"),	// 21
-	PERCENT("keyword.operator.dtd"),	// 22
-	EMPTY("keyword.operator.dtd"),	// 23
-	ANY("keyword.operator.dtd"),	// 24
-	PCDATA("keyword.operator.dtd"),	// 25
-	INCLUDE("keyword.operator.dtd"),	// 26
-	LBRACKET("keyword.operator.dtd"),	// 27
-	FIXED("keyword.operator.dtd"),	// 28
-	NOTATION_TYPE("keyword.operator.dtd"),	// 29
-	REQUIRED("keyword.operator.dtd"),	// 30
-	IMPLIED("keyword.operator.dtd"),	// 31
-	NDATA("keyword.operator.dtd"),	// 32
-	IGNORE("keyword.operator.dtd"),	// 33
+	LBRACKET("keyword.operator.dtd"),	// 20
+	SECTION_END("keyword.operator.dtd"),	// 21
+	COMMA("source.dtd"),	// 22
+	PERCENT("keyword.operator.dtd"),	// 23
+	EMPTY("keyword.operator.dtd"),	// 24
+	ANY("keyword.operator.dtd"),	// 25
+	PCDATA("keyword.operator.dtd"),	// 26
+	INCLUDE("keyword.operator.dtd"),	// 27
+	IGNORE("keyword.operator.dtd"),	// 28
+	FIXED("keyword.operator.dtd"),	// 29
+	NOTATION_TYPE("keyword.operator.dtd"),	// 30
+	REQUIRED("keyword.operator.dtd"),	// 31
+	IMPLIED("keyword.operator.dtd"),	// 32
+	NDATA("keyword.operator.dtd"),	// 33
 	CDATA_TYPE("keyword.operator.dtd"),	// 34
 	ID_TYPE("keyword.operator.dtd"),	// 35
 	IDREF_TYPE("keyword.operator.dtd"),	// 36
-	IDREFS_TYPE("keyword.operator.dtd"),	// 37
+	IDREFS_TYPE("keyword.operator.dtd"),	// 37	
 	ENTITY_TYPE("keyword.operator.dtd"),	// 38
 	ENTITIES_TYPE("keyword.operator.dtd"),	// 39
 	NMTOKEN_TYPE("keyword.operator.dtd"),	// 40

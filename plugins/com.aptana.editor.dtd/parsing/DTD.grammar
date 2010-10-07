@@ -541,8 +541,61 @@ IncludeSect
 	;
 
 IgnoreSect
-	=	SECTION_START IGNORE
+	=	SECTION_START IGNORE LBRACKET SECTION_END
 		{:
-			this._scanner.enterIgnoreSection();
+			return new DTDIgnoreSectionNode();
 		:}
+	|	SECTION_START IGNORE LBRACKET IgnoreSectionBody SECTION_END
+		{:
+			return new DTDIgnoreSectionNode();
+		:}
+	;
+
+IgnoreSectionBody
+	=	IgnoreSectionBody IgnoreToken
+	|	IgnoreSectionBody ConditionalSect
+	|	IgnoreToken
+	|	ConditionalSect
+	;
+
+IgnoreToken
+	=	ANY
+	|	ATTLIST
+	|	CDATA_TYPE
+	|	COMMA
+	|	COMMENT
+	|	ELEMENT
+	|	EMPTY
+	|	ENTITY
+	|	ENTITIES_TYPE
+	|	ENTITY_TYPE
+	|	FIXED
+	|	GREATER_THAN
+	|	ID_TYPE
+	|	IDREF_TYPE
+	|	IDREFS_TYPE
+	|	IGNORE
+	|	IMPLIED
+	|	INCLUDE
+	|	LBRACKET
+	|	LPAREN
+	|	NAME
+	|	NDATA
+	|	NMTOKEN_TYPE
+	|	NMTOKENS_TYPE
+	|	NOTATION
+	|	NOTATION_TYPE
+	|	PCDATA
+	|	PE_REF
+	|	PERCENT
+	|	PI
+	|	PIPE
+	|	PLUS
+	|	PUBLIC
+	|	QUESTION
+	|	REQUIRED
+	|	RPAREN
+	|	STAR
+	|	STRING
+	|	SYSTEM
 	;
