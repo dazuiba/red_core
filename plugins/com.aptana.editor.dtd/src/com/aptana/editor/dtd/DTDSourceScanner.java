@@ -62,6 +62,7 @@ public class DTDSourceScanner extends RuleBasedScanner
 		// NOTE: There is no String, but we're using this to generalize 
 		// pubid, att value, entity value
 		rules.add(new MultiLineRule("\"", "\"", createToken(DTDTokenType.STRING), '\0', true));
+		rules.add(new MultiLineRule("'", "'", createToken(DTDTokenType.STRING), '\0', true));
 		
 		WordRule operatorRule = new WordRule(new DTDOperatorDetector(), Token.UNDEFINED);
 		operatorRule.addWord("<![", createToken(DTDTokenType.SECTION_START));
