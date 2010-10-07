@@ -13,6 +13,7 @@ import com.aptana.editor.dtd.parsing.ast.DTDElementNode;
 import com.aptana.editor.dtd.parsing.ast.DTDEnumerationTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDGeneralEntityDeclNode;
 import com.aptana.editor.dtd.parsing.ast.DTDNodeType;
+import com.aptana.editor.dtd.parsing.ast.DTDNotationDeclNode;
 import com.aptana.editor.dtd.parsing.ast.DTDNotationTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOneOrMoreNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOptionalNode;
@@ -965,9 +966,9 @@ public class DTDParserTests extends TestCase
 	}
 	
 	/**
-	 * testGeneralEntityExternalID
+	 * testGeneralEntitySystemString
 	 */
-	public void testGeneralEntityExternalID()
+	public void testGeneralEntitySystemString()
 	{
 		String source = "<!ENTITY test SYSTEM \"hello\">";
 		
@@ -983,9 +984,9 @@ public class DTDParserTests extends TestCase
 	}
 	
 	/**
-	 * testGeneralEntityExternalID2
+	 * testGeneralEntityExternalPublicString
 	 */
-	public void testGeneralEntityExternalID2()
+	public void testGeneralEntityExternalPublicString()
 	{
 		String source = "<!ENTITY test PUBLIC \"hello\" \"world\">";
 		
@@ -1038,9 +1039,9 @@ public class DTDParserTests extends TestCase
 	}
 	
 	/**
-	 * testParsedEntityExternalID
+	 * testParsedEntitySystemString
 	 */
-	public void testParsedEntityExternalID()
+	public void testParsedEntitySystemString()
 	{
 		String source = "<!ENTITY % test SYSTEM \"hello\">";
 		
@@ -1056,9 +1057,9 @@ public class DTDParserTests extends TestCase
 	}
 	
 	/**
-	 * testParsedEntityExternalID2
+	 * testParsedEntityPublicString
 	 */
-	public void testParsedEntityExternalID2()
+	public void testParsedEntityPublicString()
 	{
 		String source = "<!ENTITY % test PUBLIC \"hello\" \"world\">";
 		
@@ -1071,6 +1072,60 @@ public class DTDParserTests extends TestCase
 		assertEquals("test", entity.getName());
 		
 		// TODO: test values
+	}
+	
+	/**
+	 * testNotationDeclarationSystemString
+	 */
+	public void testNotationDeclarationSystemString()
+	{
+		String source = "<!NOTATION test SYSTEM \"hello\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.NOTATION_DECLARATION
+		);
+		
+		DTDNotationDeclNode entity = (DTDNotationDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test value
+	}
+	
+	/**
+	 * testNotationDeclarationPublicString
+	 */
+	public void testNotationDeclarationPublicString()
+	{
+		String source = "<!NOTATION test PUBLIC \"hello\" \"world\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.NOTATION_DECLARATION
+		);
+		
+		DTDNotationDeclNode entity = (DTDNotationDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test value
+	}
+	
+	/**
+	 * testNotationDeclarationPublicID
+	 */
+	public void testNotationDeclarationPublicID()
+	{
+		String source = "<!NOTATION test PUBLIC \"id\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.NOTATION_DECLARATION
+		);
+		
+		DTDNotationDeclNode entity = (DTDNotationDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test value
 	}
 	
 	/**
