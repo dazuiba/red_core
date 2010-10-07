@@ -12,12 +12,12 @@ public enum DTDTokenType
 	LPAREN("source.dtd"),	 // 4
 	RPAREN("source.dtd"),	// 5
 	STAR("source.dtd"),	// 6
-	ENTITY("keyword.operator.dtd"),	// 7
-	ELEMENT("keyword.operator.dtd"),	// 8
-	SECTION_START("keyword.operator.dtd"),	// 9
-	ATTLIST("keyword.operator.dtd"),	// 10
-	NOTATION("keyword.operator.dtd"),	// 11
-	PIPE("source.dtd"),	// 12
+	PIPE("source.dtd"),	// 7
+	ENTITY("keyword.operator.dtd"),	// 8
+	ELEMENT("keyword.operator.dtd"),	// 9
+	SECTION_START("keyword.operator.dtd"),	// 10
+	ATTLIST("keyword.operator.dtd"),	// 11
+	NOTATION("keyword.operator.dtd"),	// 12
 	PE_REF("entity.reference.parameter.dtd"),	// 13
 	PI("source.dtd"),	// 14
 	COMMENT("comment.dtd"),	// 15

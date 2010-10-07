@@ -437,7 +437,7 @@ AttType
 // NOTE: NAME is not the same as NMTOKEN, but we're using it here
 
 NmTokens
-	=	NmTokens NAME
+	=	NmTokens PIPE NAME
 	|	NAME
 	;
 

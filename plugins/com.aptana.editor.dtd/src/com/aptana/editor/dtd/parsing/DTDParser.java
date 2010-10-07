@@ -17,30 +17,30 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9pDbWTqL4KKXl#tkub2eWar526qI0Xf1198I0YA0SJUKS4k5koze83qq5lelGG8FLYnObV" +
-		"i1JiA8YWYAY2AvUT$inDvMJOIyNWExvrl$ZjtxjmtRPC1d0BCGX5MOYQMOmN6OGnwOmJcOJ" +
-		"4MOX56emHBiGIhC0E3CGh568lXM83fc8g9c8zbc8RP68b9c8mfc83nc8EvbSuujD8P8t4CZ" +
-		"iK0170KZaOLLCKbk1InyA5w#3OEmCssnH$IAxotE$$YzoWrRSUXBcv5ZCQTZykGX0X48Hgh" +
-		"4OSKj49DDCGGj41Bd8jgg856E1MduNISWJDn5ix6EIIIJMHJr49jJwOwDjC1JuE3F3TPJp1" +
-		"3SvoCM$xE5jGSgxbMEw3GZ3eHQSX29bgZ6tz05tH5UzoEOKX5EleY0stG11SZ3#rG7nVXVY" +
-		"IW7df9cw6jz7ZrJqIy#cSYszY9niv40Kv0JvMTS06knOcu0htuCAxNl6$0GDo6at0NTw0nE" +
-		"k8gTCOf#ifvE1yzS24knpMu4bVZHbo7Et477i3Tk0VteGyVmuFAq1$zy13kHV0P14VxwUvB" +
-		"XFQeR6$SjN1d5wFThgRThg7rTrSrJgjPLpEehzrge1s9rtWQwzjDDPy4pQQvnj$YVyYOgbL" +
-		"ErwfdQ9tRQ7Moj7hjz9qSVIbyMnUrXMy9xmreBSfoHNfEQPGzkJ7Q#IITlcH5HMW$t3aqD6" +
-		"EFFcYqi94fsZsV9vFFPZhWoJl8KyjwoZBuvIcpAzBWg1sDD48ZZzGw#imwHgjthXcftvIEt" +
-		"jgASTzOKK#x4AkJd2#DDgtkp0EASSmRCA#xc#rDwVRgg7DQm#nljDapHsq#lMvyPvrAl#cN" +
-		"fx90#4rRJMcsD4vdscUzZlNvq9ZcKHImfb$mL0uKYrtxtw2dXnWiUjfwaTLbLakjRXQxnG2" +
-		"nJKo01YGQYIQUV5#9lK7RyLjVOPZlRWofRofVTmBMlylMgrYjQZNAQbCHO#tgddnznVgGdC" +
-		"r2nn4EnIM8vYBMrfDKxFc7#6GHAL9iFTLgIwjfeewrVQA1ZDLsd6kjlw6AxT8CMu#tcccrh" +
-		"MWdiaIso95pfpJNjkTvnfFkdWwRFx4oSpxIqDDCv1zctzwLY76bVoNYrddiEVzXFiKXzHAh" +
-		"AwoMUjesMDtYyPNxVHp6ztTuxAsLYDzug9YGU7jkqStZs#UnA$pz78W9$kOhoD$TQcb5CKS" +
-		"gUjO4XN$oT#xZR$oLU$aBzt0tTt4DIsthp#8dyQFOYP27s$cTKVrzvPVyX1$p8sxWX$oMsx" +
-		"YLtt0Bl#PcRbBh5#9pyPdOA3ur$JuGx$CzOx$3j$cMz4s#mVLydQ$nLRx2b$cI$TQBfdo1p" +
-		"tCTt#LpVDRw7nMFY2TCxN7hNIrMMViPyRHuAcJqJugr$CFOAyKABkSoBk5YBc8n5t81vtCU" +
-		"vt8EPtCMPt86ftCQft8A9tCIYpYH4pYUupYMOpYQepYI8pYSXHp6eHp2mHp4WLpA4gNletk" +
-		"C8s1kEZcoMtd8g83M29IZao52#FMVsM$#EoSPV1xArrkgJmV5Tf2TB4rMFL#QhtgAObECbk" +
-		"7e9kKN0TqFVCAz5VWz17GpS0v1mDmU2jJVlJbaMjhA7oH2jxGWxhqXMx7kRI9BRIwTpUtDC" +
-		"QIfdgQuT6cwkQtvB8uXzmYcwtvXXpeO");
+		"U9pDbWbOLLKGn$$tllTGAnL3HKCYGXHbbNt7C71ftsdVixBDziNI4XNtNL3S5HLH4P7sihB" +
+		"T5ilsLIDDepGjiwAQ$lUyGrqU3tdKr$Tvx$UxCtFcpDmvS#xxtW6CmLYCObHX4Ign7gin4z" +
+		"Dn4oPZELQY7DEm1cjHWGrOY76OYbMOWKbOWGKenHoKOHtcOmcce0HpCG#pCGjBiSpdZEDzp" +
+		"kY7zkY0GZZH1ctH3aVXSbo1us7Y1Ey#6OtRjCVX4ULzj43#bE#mKVbwe3lknEteoBfpS2LS" +
+		"E1h7e1g1Y4O$Z80$YZ0K9#9ST480Wd0gJiFfE0DduYoSZND44ALcXg4BUYAbIIPFspsxDux" +
+		"5hStumZ0OmxMUhcMcbjd8mqcOg2gFG5ya8maPw8nO3C4e3CGWJ40VHA8h4f2A6CGX2#5SHI" +
+		"$SmrKSXtWaCYu2LpCk2MbAZr1w4YvZxW6u5XSWbvs#23VWOjo1eLA3ORWVtN0pnY1OzY94l" +
+		"aSe#kDavECKTkOyd8zBSI4UmYMu2hVW6bo7kt4zRiHTk1VtuG4yA8zZ9BCyWeSn6lPhB0pk" +
+		"gxK$BkvLmnvPlR1Ms97TxyHE1N25NRYcG5RHdQi8ugu5yui8OPsXh22CdG$d6djpBNt#Xum" +
+		"nx6ySkn$FhYQoKydSvrJcJsT#xxw1z7dtU1zriXUczldHSZIfEvEx7Sclm9$hosNz1gkrQd" +
+		"SrgHPwPZHtCvjVbsScJxjXjicEDETpqDUWUqhZxyeDrkvIlpMJMZ2Zh7vcgewRocTfNIdzr" +
+		"Pm0TjuQCNYdCSv9dw5kfxepLEvypk$F#UueWr7M$eRoQUrQbifiggWCVfCE5Pt5Pnvtrnhj" +
+		"JA$9$0xU9dyzrbo7VgPPFh5Td0tKZ79$dOMatD9R0wyIzMK3cxMzHyi3Rca4QNidAINyJHW" +
+		"Xb0MKFKWe2RFbgoK7TQoXntPuUUyk3tjVOzimzVX#RRVHigsMxRJioSTshNUmvHj9jdha33" +
+		"zSBsppUf48qbxRaSHVwp7DnCGIFnAdxNvQnckPGBfftK62gLJfMZVfyK0#YYYJz7Yz7a$HC" +
+		"esaarIIGJ8vM4UPhVqvjdeIhIz4vudmPTr76hoilStvbx73V9XZYLeVvWstwSN$OJrb7dQ5" +
+		"bfLQLjjysxIiiusrM6iBxzzhqtVx6BEbbU$Gtpk6sCRgRVgXbdCOVeV9Nw1bJMlgEXAmQdO" +
+		"B#KFgvJVvLNwHG$Ap79IVv4VPADNQUu3i9p#GVV2uf4w#LN87sIwVoCVoaNme7yWUsItVo2" +
+		"xPALzBhNn5xnVaS$8P#P9ygkBU9#$9DgM$8rlbRSgtv4rvGxR8w$AQl2gloClwNI#fvujai" +
+		"xmWxyhpyfpsF4OU9Kygwmazke5KQNqJUPOyur7$q#Gf#Ltfwqcbh9EribhAPPMib1LI9ijb" +
+		"cIoL9R9O5ib2MI3pfLJcoLmfaMAP8xDbbioK6J9TfibKcIAJPP9Cb0aoNefad8oLCL8eQwI" +
+		"2wKVmP6CGy7nZ4eCdcN#8RuO4E1inGE4Y3lvJEzI$TL#5QQEn7ScORCxDfXv56KKxXpA7jd" +
+		"K6YLQo0ODdAmTnykHW4kjiuB3Xv4d1Q06dEataAGoUrDoaSDoDIvq1BTBq#S8wMoJJPv6lJ" +
+		"aM68fPsBEV5KSPHvjBdnb1a7i4C#WjbFq8C");
 
 	private DTDScanner _scanner;
 	
@@ -526,9 +526,9 @@ public class DTDParser extends Parser implements IParser {
 			// TODO: add NmTokens
 			return new DTDEnumerationTypeNode();
 			}
-			case 60: // NmTokens = NmTokens NAME
+			case 60: // NmTokens = NmTokens PIPE NAME
 			{
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 2].value); return _symbols[offset + 1];
+					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3].value); return _symbols[offset + 1];
 			}
 			case 61: // NmTokens = NAME
 			{
