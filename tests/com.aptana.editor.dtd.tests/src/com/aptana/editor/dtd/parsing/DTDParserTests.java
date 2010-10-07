@@ -11,11 +11,13 @@ import com.aptana.editor.dtd.parsing.ast.DTDAttributeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDElementDeclNode;
 import com.aptana.editor.dtd.parsing.ast.DTDElementNode;
 import com.aptana.editor.dtd.parsing.ast.DTDEnumerationTypeNode;
+import com.aptana.editor.dtd.parsing.ast.DTDGeneralEntityDeclNode;
 import com.aptana.editor.dtd.parsing.ast.DTDNodeType;
 import com.aptana.editor.dtd.parsing.ast.DTDNotationTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOneOrMoreNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOptionalNode;
 import com.aptana.editor.dtd.parsing.ast.DTDOrExpressionNode;
+import com.aptana.editor.dtd.parsing.ast.DTDParsedEntityDeclNode;
 import com.aptana.editor.dtd.parsing.ast.DTDTypeNode;
 import com.aptana.editor.dtd.parsing.ast.DTDZeroOrMoreNode;
 import com.aptana.parsing.ast.IParseNode;
@@ -942,6 +944,133 @@ public class DTDParserTests extends TestCase
 		IParseNode type = att.getFirstChild();
 		assertTrue(type instanceof DTDTypeNode);
 		assertEquals("CDATA", ((DTDTypeNode) type).getType());
+	}
+	
+	/**
+	 * testGeneralEntityString
+	 */
+	public void testGeneralEntityString()
+	{
+		String source = "<!ENTITY test \"hello\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.G_ENTITY_DECLARATION
+		);
+		
+		DTDGeneralEntityDeclNode entity = (DTDGeneralEntityDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test value
+	}
+	
+	/**
+	 * testGeneralEntityExternalID
+	 */
+	public void testGeneralEntityExternalID()
+	{
+		String source = "<!ENTITY test SYSTEM \"hello\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.G_ENTITY_DECLARATION
+		);
+		
+		DTDGeneralEntityDeclNode entity = (DTDGeneralEntityDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test values
+	}
+	
+	/**
+	 * testGeneralEntityExternalID2
+	 */
+	public void testGeneralEntityExternalID2()
+	{
+		String source = "<!ENTITY test PUBLIC \"hello\" \"world\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.G_ENTITY_DECLARATION
+		);
+		
+		DTDGeneralEntityDeclNode entity = (DTDGeneralEntityDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test values
+	}
+	
+	/**
+	 * testGeneralEntityExternalIDWithNDataDeclaration
+	 */
+	public void testGeneralEntityExternalIDWithNDataDeclaration()
+	{
+		String source = "<!ENTITY test SYSTEM \"hello\" NDATA world>";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.G_ENTITY_DECLARATION,
+			DTDNodeType.NDATA_DECLARATION
+		);
+		
+		DTDGeneralEntityDeclNode entity = (DTDGeneralEntityDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test values
+	}
+	
+	/**
+	 * testParsedEntityString
+	 */
+	public void testParsedEntityString()
+	{
+		String source = "<!ENTITY % test \"hello\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.P_ENTITY_DECLARATION
+		);
+		
+		DTDParsedEntityDeclNode entity = (DTDParsedEntityDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test value
+	}
+	
+	/**
+	 * testParsedEntityExternalID
+	 */
+	public void testParsedEntityExternalID()
+	{
+		String source = "<!ENTITY % test SYSTEM \"hello\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.P_ENTITY_DECLARATION
+		);
+		
+		DTDParsedEntityDeclNode entity = (DTDParsedEntityDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test values
+	}
+	
+	/**
+	 * testParsedEntityExternalID2
+	 */
+	public void testParsedEntityExternalID2()
+	{
+		String source = "<!ENTITY % test PUBLIC \"hello\" \"world\">";
+		
+		IParseNode root = this.parse(
+			source,
+			DTDNodeType.P_ENTITY_DECLARATION
+		);
+		
+		DTDParsedEntityDeclNode entity = (DTDParsedEntityDeclNode) root.getFirstChild();
+		assertEquals("test", entity.getName());
+		
+		// TODO: test values
 	}
 	
 	/**
