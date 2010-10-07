@@ -2,6 +2,7 @@ package com.aptana.editor.dtd.parsing;
 
 import java.util.ArrayList;
 import com.aptana.editor.dtd.parsing.ast.*;
+import com.aptana.parsing.ast.IParseRootNode;
 import beaver.*;
 import com.aptana.parsing.IParser;
 import com.aptana.parsing.ast.IParseNode;
@@ -47,8 +48,7 @@ public class DTDParser extends Parser implements IParser {
 	 * (non-Javadoc)
 	 * @see com.aptana.parsing.IParser#parse(com.aptana.parsing.IParseState)
 	 */
-	@Override
-	public synchronized IParseNode parse(IParseState parseState) throws java.lang.Exception
+	public synchronized IParseRootNode parse(IParseState parseState) throws java.lang.Exception
 	{
 		// grab source
 		char[] characters = parseState.getSource();
@@ -60,7 +60,7 @@ public class DTDParser extends Parser implements IParser {
 		this._scanner.setSource(source);
 
 		// parse
-		IParseNode result = (IParseNode) parse(this._scanner);
+		IParseRootNode result = (IParseRootNode) parse(this._scanner);
 		
 		// save reference to result
 		parseState.setParseResult(result);
