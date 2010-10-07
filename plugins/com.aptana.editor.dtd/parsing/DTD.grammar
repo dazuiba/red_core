@@ -65,7 +65,7 @@
 %terminals COMMENT, SECTION_START, SECTION_END, IGNORE, INCLUDE;
 
 %typeof NAME, PI, STRING, IMPLIED, FIXED, REQUIRED = "String";
-%typeof Mixed, Cp, Children, Choice, Seq, AttType = "DTDNode";
+%typeof Mixed, Cp, Children, Choice, Seq, AttType, NDataDecl = "DTDNode";
 %typeof Names = "ArrayList";
 
 %goal DTD;
@@ -457,9 +457,13 @@ GEDecl
 		{:
 			return new DTDGeneralEntityDeclNode(n);
 		:}
-	|	ENTITY NAME.n ExternalID NDataDecl GREATER_THAN
+	|	ENTITY NAME.n ExternalID NDataDecl.nd GREATER_THAN
 		{:
-			return new DTDGeneralEntityDeclNode(n);
+			DTDGeneralEntityDeclNode result = new DTDGeneralEntityDeclNode(n);
+			
+			result.addChild(nd);
+			
+			return result;
 		:}
 	;
 
@@ -483,7 +487,10 @@ ExternalID
 	;
 
 NDataDecl
-	=	NDATA NAME
+	=	NDATA NAME.n
+		{:
+			return new DTDNDataDeclNode(n);
+		:}
 	;
 
 // Notations

@@ -544,12 +544,18 @@ public class DTDParser extends Parser implements IParser {
 					
 			return new DTDGeneralEntityDeclNode(n);
 			}
-			case 66: // GEDecl = ENTITY NAME.n ExternalID NDataDecl GREATER_THAN
+			case 66: // GEDecl = ENTITY NAME.n ExternalID NDataDecl.nd GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
+					final Symbol _symbol_nd = _symbols[offset + 4];
+					final DTDNode nd = (DTDNode) _symbol_nd.value;
 					
-			return new DTDGeneralEntityDeclNode(n);
+			DTDGeneralEntityDeclNode result = new DTDGeneralEntityDeclNode(n);
+			
+			result.addChild(nd);
+			
+			return result;
 			}
 			case 67: // PEDecl = ENTITY PERCENT NAME.n STRING.s GREATER_THAN
 			{
@@ -569,6 +575,13 @@ public class DTDParser extends Parser implements IParser {
 					final String n = (String) _symbol_n.value;
 					
 			return new DTDParsedEntityDeclNode(n);
+			}
+			case 71: // NDataDecl = NDATA NAME.n
+			{
+					final Symbol _symbol_n = _symbols[offset + 2];
+					final String n = (String) _symbol_n.value;
+					
+			return new DTDNDataDeclNode(n);
 			}
 			case 72: // NotationDecl = NOTATION NAME.n ExternalID GREATER_THAN
 			{
@@ -633,7 +646,6 @@ public class DTDParser extends Parser implements IParser {
 				return _symbols[offset + 1];
 			}
 			case 69: // ExternalID = SYSTEM STRING
-			case 71: // NDataDecl = NDATA NAME
 			case 74: // PublicID = PUBLIC STRING
 			{
 				return _symbols[offset + 2];
