@@ -4,7 +4,7 @@ public class DTDAttributeNode extends DTDNode
 {
 	private String _name;
 	private String _mode;
-	
+
 	/**
 	 * DTDAttributeNode
 	 */
@@ -17,6 +17,15 @@ public class DTDAttributeNode extends DTDNode
 		this._mode = mode;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.aptana.editor.dtd.parsing.ast.DTDNode#accept(com.aptana.editor.dtd.parsing.ast.DTDTreeWalker)
+	 */
+	public void accept(DTDTreeWalker walker)
+	{
+		walker.visit(this);
+	}
+
 	/**
 	 * getMode
 	 */
@@ -24,7 +33,7 @@ public class DTDAttributeNode extends DTDNode
 	{
 		return this._mode;
 	}
-	
+
 	/**
 	 * getName
 	 * 
