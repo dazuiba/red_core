@@ -17,6 +17,7 @@ import com.aptana.editor.common.text.rules.WhitespaceDetector;
 import com.aptana.editor.dtd.parsing.lexer.DTDTokenType;
 import com.aptana.editor.dtd.text.rules.DTDEntityRule;
 import com.aptana.editor.dtd.text.rules.DTDNameDetector;
+import com.aptana.editor.dtd.text.rules.DTDNmtokenDetector;
 import com.aptana.editor.dtd.text.rules.DTDOperatorDetector;
 
 public class DTDSourceScanner extends RuleBasedScanner
@@ -114,6 +115,9 @@ public class DTDSourceScanner extends RuleBasedScanner
 		
 		// Name
 		rules.add(new WordRule(new DTDNameDetector(), createToken(DTDTokenType.NAME)));
+		
+		// Nmtoken
+		rules.add(new WordRule(new DTDNmtokenDetector(), createToken(DTDTokenType.NMTOKEN)));
 		
 		// EntityRef
 		//rules.add(new DTDEntityRule('&', createToken(DTDTokenType.PE_REF)));

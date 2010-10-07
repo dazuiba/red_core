@@ -17,30 +17,30 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9pDbWbOLLKGn$$tllTGAnL3HKCYGXHbbNt7C71ftsdVixBDziNI4XNtNL3S5HLH4P7sihB" +
-		"T5ilsLIDDepGjiwAQ$lUyGrqU3tdKr$Tvx$UxCtFcpDmvS#xxtW6CmLYCObHX4Ign7gin4z" +
-		"Dn4oPZELQY7DEm1cjHWGrOY76OYbMOWKbOWGKenHoKOHtcOmcce0HpCG#pCGjBiSpdZEDzp" +
-		"kY7zkY0GZZH1ctH3aVXSbo1us7Y1Ey#6OtRjCVX4ULzj43#bE#mKVbwe3lknEteoBfpS2LS" +
-		"E1h7e1g1Y4O$Z80$YZ0K9#9ST480Wd0gJiFfE0DduYoSZND44ALcXg4BUYAbIIPFspsxDux" +
-		"5hStumZ0OmxMUhcMcbjd8mqcOg2gFG5ya8maPw8nO3C4e3CGWJ40VHA8h4f2A6CGX2#5SHI" +
-		"$SmrKSXtWaCYu2LpCk2MbAZr1w4YvZxW6u5XSWbvs#23VWOjo1eLA3ORWVtN0pnY1OzY94l" +
-		"aSe#kDavECKTkOyd8zBSI4UmYMu2hVW6bo7kt4zRiHTk1VtuG4yA8zZ9BCyWeSn6lPhB0pk" +
-		"gxK$BkvLmnvPlR1Ms97TxyHE1N25NRYcG5RHdQi8ugu5yui8OPsXh22CdG$d6djpBNt#Xum" +
-		"nx6ySkn$FhYQoKydSvrJcJsT#xxw1z7dtU1zriXUczldHSZIfEvEx7Sclm9$hosNz1gkrQd" +
-		"SrgHPwPZHtCvjVbsScJxjXjicEDETpqDUWUqhZxyeDrkvIlpMJMZ2Zh7vcgewRocTfNIdzr" +
-		"Pm0TjuQCNYdCSv9dw5kfxepLEvypk$F#UueWr7M$eRoQUrQbifiggWCVfCE5Pt5Pnvtrnhj" +
-		"JA$9$0xU9dyzrbo7VgPPFh5Td0tKZ79$dOMatD9R0wyIzMK3cxMzHyi3Rca4QNidAINyJHW" +
-		"Xb0MKFKWe2RFbgoK7TQoXntPuUUyk3tjVOzimzVX#RRVHigsMxRJioSTshNUmvHj9jdha33" +
-		"zSBsppUf48qbxRaSHVwp7DnCGIFnAdxNvQnckPGBfftK62gLJfMZVfyK0#YYYJz7Yz7a$HC" +
-		"esaarIIGJ8vM4UPhVqvjdeIhIz4vudmPTr76hoilStvbx73V9XZYLeVvWstwSN$OJrb7dQ5" +
-		"bfLQLjjysxIiiusrM6iBxzzhqtVx6BEbbU$Gtpk6sCRgRVgXbdCOVeV9Nw1bJMlgEXAmQdO" +
-		"B#KFgvJVvLNwHG$Ap79IVv4VPADNQUu3i9p#GVV2uf4w#LN87sIwVoCVoaNme7yWUsItVo2" +
-		"xPALzBhNn5xnVaS$8P#P9ygkBU9#$9DgM$8rlbRSgtv4rvGxR8w$AQl2gloClwNI#fvujai" +
-		"xmWxyhpyfpsF4OU9Kygwmazke5KQNqJUPOyur7$q#Gf#Ltfwqcbh9EribhAPPMib1LI9ijb" +
-		"cIoL9R9O5ib2MI3pfLJcoLmfaMAP8xDbbioK6J9TfibKcIAJPP9Cb0aoNefad8oLCL8eQwI" +
-		"2wKVmP6CGy7nZ4eCdcN#8RuO4E1inGE4Y3lvJEzI$TL#5QQEn7ScORCxDfXv56KKxXpA7jd" +
-		"K6YLQo0ODdAmTnykHW4kjiuB3Xv4d1Q06dEataAGoUrDoaSDoDIvq1BTBq#S8wMoJJPv6lJ" +
-		"aM68fPsBEV5KSPHvjBdnb1a7i4C#WjbFq8C");
+		"U9pDbWTqL4KKXl#tkw6eG90EGeHG4aqbX8H0GZ1HYBs3lHUmOU$qtdllX0w1X6P7nOeDiNU" +
+		"G8aN5Y8WA#llFsrdPR1AJuF4StfxltNldthapSsTUCe2JWtcOYjMOYtmKO3acOZpkncWin1" +
+		"8impZaOILMO0tcO2Z6OYacO1GMOpPcOWeMOHLcOJx6O1gcOmOcOn9oiQ3S6OUNEsCbL4Dr3" +
+		"88FbL45LN42Ri2DQ08FJYtPnxwuptgy8RrARkt6l$Wzrhc#Kz003#41rD2yE#8cXE54d8Ir" +
+		"g8TO9A8NmZ4CtT4Cbw8cQg4HpiLvE1yNu49SX8jn2OaODp8ITT0SASKoXTh#w5Ou6VUMuej" +
+		"43kwtUfgL7QpCm9deX97kpADm6jeY6UrH6$4u6$tG6Lqm0j4u7TSX2Qc8GmBIqKAhQ8bhj8" +
+		"g6Q8qswXU5MzGl6UrSFShLat6zScVXDdJ56QhqbRW3L#51TETgt8L7SItkmM3KHNqqve$8v" +
+		"W#u6aqHWKoSXSjmZYhK1vVZ2joC7hWLj#CHt8c7qHEFuN4yWIVHc#lGLva6e3y68l0CWQDz" +
+		"DViJfhqAx96fXLbX3LM$fYfLIokiex7hQVG6MaKZxLfZdOW8pREfHevKvLjeZQsqbkZ$8ME" +
+		"ywfYesYMfUicgUOfgsqxvsoj$oRukyfNiARdLfrfuhA#IB6#nUQThLyqP2DVwiZH$HxCrSm" +
+		"yhDblOo3Xawsnb5iiKQWUYFQf8QJwlV04zL3h$pDpHtCFSRyqZhR5wcNgcknNt#unMLp9SC" +
+		"OvMqT3w79rqdtvrNTrnTPzElSdTMV6T57#qbzbVZqw$sJMFVXcYWzjYHd5qZaq57UrkXawd" +
+		"uqPxD8AHjNMwFTfZVwjvfnalxIC$iBwF$tGE44kCNX7qJ163n4Phx$5BfucL4RPzfvWk#gk" +
+		"jgMGtoMOYKhGCohTT7BHz7TkshOHnTuNO#ulQZiUs5rgxifLLhAngPPHUMwrUFIXVRx4v96" +
+		"VqlzKYAAwLY17LRAu3qiEjVgIClWcYaaYqTcihuwrC4lMjxXNDfUJRt1jiUpsOlpPmagtTq" +
+		"CfKAzkB3Y9Df8iCDUwJpBJ#Ja7pQMDEYiqVLPxr7s$eqHb3nZ7sxL6E67DMTfGZhcUGFka$" +
+		"h2Stn5vgPPwL1K6#BLRk3chRUQnZs$w5GVhU2lRTLC5u#nqW9wZjS91#gEmS$c#$bFnThLn" +
+		"JaNaT3#XPxnVyauVv1t$dRpp4NtcGl$002vXllJ#BGl6Js8#GX$kurvNRn5P#pi$uAJ$Xnz" +
+		"p3tVoEkxYJExYTtyhxjVXAV2c#4L#u$JuI7$83Lt#Vc$cUvBjyXs$pBMxYcto3h$CrEzQhx" +
+		"liLiP4lyoM#o2tSm1UiTwrO8vvohS3QLecLLdzUF2UU3Ld3C#9f7d7rFB62oxcCYxc82xc0" +
+		"kPpFUPpBEPpDMPp96PpEQPpAAPpCIPp82HpFSHpBCHpDKHp94HpEOHpA8HpCGHp80UpFVbp" +
+		"A9KhVIxSTHq1t7ezmTBivIb8fj86l2DakOSAh$ze6HpSCWoU8edQC#dHKR4VfiPAniZCbCs" +
+		"MRUqcSAmCukczvXK#t2OzmT6Vm1k7JlS4f0nFZrPqYWEFIrf8glvymztveIBCt3tFhI97Fq" +
+		"DczCJak2R8J59SecIYP9PyVnoNzE2RdRmqgHie=");
 
 	private DTDScanner _scanner;
 	
@@ -526,29 +526,21 @@ public class DTDParser extends Parser implements IParser {
 			// TODO: add NmTokens
 			return new DTDEnumerationTypeNode();
 			}
-			case 60: // NmTokens = NmTokens PIPE NAME
-			{
-					((ArrayList) _symbols[offset + 1].value).add(_symbols[offset + 3].value); return _symbols[offset + 1];
-			}
-			case 61: // NmTokens = NAME
-			{
-					ArrayList lst = new ArrayList(); lst.add(_symbols[offset + 1].value); return new Symbol(lst);
-			}
-			case 64: // GEDecl = ENTITY NAME.n STRING GREATER_THAN
+			case 66: // GEDecl = ENTITY NAME.n STRING GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
 			return new DTDGeneralEntityDeclNode(n);
 			}
-			case 65: // GEDecl = ENTITY NAME.n ExternalID GREATER_THAN
+			case 67: // GEDecl = ENTITY NAME.n ExternalID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
 			return new DTDGeneralEntityDeclNode(n);
 			}
-			case 66: // GEDecl = ENTITY NAME.n ExternalID NDataDecl.nd GREATER_THAN
+			case 68: // GEDecl = ENTITY NAME.n ExternalID NDataDecl.nd GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
@@ -561,7 +553,7 @@ public class DTDParser extends Parser implements IParser {
 			
 			return result;
 			}
-			case 67: // PEDecl = ENTITY PERCENT NAME.n STRING.s GREATER_THAN
+			case 69: // PEDecl = ENTITY PERCENT NAME.n STRING.s GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 3];
 					final String n = (String) _symbol_n.value;
@@ -573,40 +565,40 @@ public class DTDParser extends Parser implements IParser {
 			
 			return new DTDParsedEntityDeclNode(n);
 			}
-			case 68: // PEDecl = ENTITY PERCENT NAME.n ExternalID GREATER_THAN
+			case 70: // PEDecl = ENTITY PERCENT NAME.n ExternalID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 3];
 					final String n = (String) _symbol_n.value;
 					
 			return new DTDParsedEntityDeclNode(n);
 			}
-			case 71: // NDataDecl = NDATA NAME.n
+			case 73: // NDataDecl = NDATA NAME.n
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
 			return new DTDNDataDeclNode(n);
 			}
-			case 72: // NotationDecl = NOTATION NAME.n ExternalID GREATER_THAN
+			case 74: // NotationDecl = NOTATION NAME.n ExternalID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
 			return new DTDNotationDeclNode(n);
 			}
-			case 73: // NotationDecl = NOTATION NAME.n PublicID GREATER_THAN
+			case 75: // NotationDecl = NOTATION NAME.n PublicID GREATER_THAN
 			{
 					final Symbol _symbol_n = _symbols[offset + 2];
 					final String n = (String) _symbol_n.value;
 					
 			return new DTDNotationDeclNode(n);
 			}
-			case 77: // IncludeSect = SECTION_START INCLUDE LBRACKET SECTION_END
+			case 79: // IncludeSect = SECTION_START INCLUDE LBRACKET SECTION_END
 			{
 					
  			return new DTDIncludeSectionNode();
 			}
-			case 78: // IncludeSect = SECTION_START INCLUDE LBRACKET Declarations.d SECTION_END
+			case 80: // IncludeSect = SECTION_START INCLUDE LBRACKET Declarations.d SECTION_END
 			{
 					final Symbol _symbol_d = _symbols[offset + 4];
 					final ArrayList _list_d = (ArrayList) _symbol_d.value;
@@ -626,12 +618,12 @@ public class DTDParser extends Parser implements IParser {
  			
  			return result;
 			}
-			case 79: // IgnoreSect = SECTION_START IGNORE LBRACKET SECTION_END
+			case 81: // IgnoreSect = SECTION_START IGNORE LBRACKET SECTION_END
 			{
 					
 			return new DTDIgnoreSectionNode();
 			}
-			case 80: // IgnoreSect = SECTION_START IGNORE LBRACKET IgnoreSectionBody SECTION_END
+			case 82: // IgnoreSect = SECTION_START IGNORE LBRACKET IgnoreSectionBody SECTION_END
 			{
 					
 			return new DTDIgnoreSectionNode();
@@ -647,62 +639,66 @@ public class DTDParser extends Parser implements IParser {
 			case 22: // Children = Choice
 			case 26: // Children = Seq
 			case 41: // Cp = Children
-			case 62: // EntityDecl = GEDecl
-			case 63: // EntityDecl = PEDecl
-			case 75: // ConditionalSect = IncludeSect
-			case 76: // ConditionalSect = IgnoreSect
-			case 83: // IgnoreSectionBody = IgnoreToken
-			case 84: // IgnoreSectionBody = ConditionalSect
-			case 85: // IgnoreToken = ANY
-			case 86: // IgnoreToken = ATTLIST
-			case 87: // IgnoreToken = CDATA_TYPE
-			case 88: // IgnoreToken = COMMA
-			case 89: // IgnoreToken = COMMENT
-			case 90: // IgnoreToken = ELEMENT
-			case 91: // IgnoreToken = EMPTY
-			case 92: // IgnoreToken = ENTITY
-			case 93: // IgnoreToken = ENTITIES_TYPE
-			case 94: // IgnoreToken = ENTITY_TYPE
-			case 95: // IgnoreToken = FIXED
-			case 96: // IgnoreToken = GREATER_THAN
-			case 97: // IgnoreToken = ID_TYPE
-			case 98: // IgnoreToken = IDREF_TYPE
-			case 99: // IgnoreToken = IDREFS_TYPE
-			case 100: // IgnoreToken = IGNORE
-			case 101: // IgnoreToken = IMPLIED
-			case 102: // IgnoreToken = INCLUDE
-			case 103: // IgnoreToken = LBRACKET
-			case 104: // IgnoreToken = LPAREN
-			case 105: // IgnoreToken = NAME
-			case 106: // IgnoreToken = NDATA
-			case 107: // IgnoreToken = NMTOKEN_TYPE
-			case 108: // IgnoreToken = NMTOKENS_TYPE
-			case 109: // IgnoreToken = NOTATION
-			case 110: // IgnoreToken = NOTATION_TYPE
-			case 111: // IgnoreToken = PCDATA
-			case 112: // IgnoreToken = PE_REF
-			case 113: // IgnoreToken = PERCENT
-			case 114: // IgnoreToken = PI
-			case 115: // IgnoreToken = PIPE
-			case 116: // IgnoreToken = PLUS
-			case 117: // IgnoreToken = PUBLIC
-			case 118: // IgnoreToken = QUESTION
-			case 119: // IgnoreToken = REQUIRED
-			case 120: // IgnoreToken = RPAREN
-			case 121: // IgnoreToken = STAR
-			case 122: // IgnoreToken = STRING
-			case 123: // IgnoreToken = SYSTEM
+			case 62: // NmTokens = NMTOKEN
+			case 63: // NmTokens = NAME
+			case 64: // EntityDecl = GEDecl
+			case 65: // EntityDecl = PEDecl
+			case 77: // ConditionalSect = IncludeSect
+			case 78: // ConditionalSect = IgnoreSect
+			case 85: // IgnoreSectionBody = IgnoreToken
+			case 86: // IgnoreSectionBody = ConditionalSect
+			case 87: // IgnoreToken = ANY
+			case 88: // IgnoreToken = ATTLIST
+			case 89: // IgnoreToken = CDATA_TYPE
+			case 90: // IgnoreToken = COMMA
+			case 91: // IgnoreToken = COMMENT
+			case 92: // IgnoreToken = ELEMENT
+			case 93: // IgnoreToken = EMPTY
+			case 94: // IgnoreToken = ENTITY
+			case 95: // IgnoreToken = ENTITIES_TYPE
+			case 96: // IgnoreToken = ENTITY_TYPE
+			case 97: // IgnoreToken = FIXED
+			case 98: // IgnoreToken = GREATER_THAN
+			case 99: // IgnoreToken = ID_TYPE
+			case 100: // IgnoreToken = IDREF_TYPE
+			case 101: // IgnoreToken = IDREFS_TYPE
+			case 102: // IgnoreToken = IGNORE
+			case 103: // IgnoreToken = IMPLIED
+			case 104: // IgnoreToken = INCLUDE
+			case 105: // IgnoreToken = LBRACKET
+			case 106: // IgnoreToken = LPAREN
+			case 107: // IgnoreToken = NAME
+			case 108: // IgnoreToken = NDATA
+			case 109: // IgnoreToken = NMTOKEN_TYPE
+			case 110: // IgnoreToken = NMTOKENS_TYPE
+			case 111: // IgnoreToken = NOTATION
+			case 112: // IgnoreToken = NOTATION_TYPE
+			case 113: // IgnoreToken = PCDATA
+			case 114: // IgnoreToken = PE_REF
+			case 115: // IgnoreToken = PERCENT
+			case 116: // IgnoreToken = PI
+			case 117: // IgnoreToken = PIPE
+			case 118: // IgnoreToken = PLUS
+			case 119: // IgnoreToken = PUBLIC
+			case 120: // IgnoreToken = QUESTION
+			case 121: // IgnoreToken = REQUIRED
+			case 122: // IgnoreToken = RPAREN
+			case 123: // IgnoreToken = STAR
+			case 124: // IgnoreToken = STRING
+			case 125: // IgnoreToken = SYSTEM
 			{
 				return _symbols[offset + 1];
 			}
-			case 69: // ExternalID = SYSTEM STRING
-			case 74: // PublicID = PUBLIC STRING
-			case 81: // IgnoreSectionBody = IgnoreSectionBody IgnoreToken
-			case 82: // IgnoreSectionBody = IgnoreSectionBody ConditionalSect
+			case 71: // ExternalID = SYSTEM STRING
+			case 76: // PublicID = PUBLIC STRING
+			case 83: // IgnoreSectionBody = IgnoreSectionBody IgnoreToken
+			case 84: // IgnoreSectionBody = IgnoreSectionBody ConditionalSect
 			{
 				return _symbols[offset + 2];
 			}
-			case 70: // ExternalID = PUBLIC STRING STRING
+			case 60: // NmTokens = NmTokens PIPE NMTOKEN
+			case 61: // NmTokens = NmTokens PIPE NAME
+			case 72: // ExternalID = PUBLIC STRING STRING
 			{
 				return _symbols[offset + 3];
 			}

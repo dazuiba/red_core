@@ -62,7 +62,7 @@
 %terminals STAR, PLUS, FIXED, IMPLIED, REQUIRED, COMMA, CDATA_TYPE, ID_TYPE, IDREF_TYPE;
 %terminals IDREFS_TYPE, ENTITY_TYPE, ENTITIES_TYPE, NMTOKEN_TYPE, NMTOKENS_TYPE, NDATA;
 %terminals NOTATION_TYPE, PE_REF, NAME, PERCENT, STRING, LBRACKET;
-%terminals COMMENT, SECTION_START, SECTION_END, IGNORE, INCLUDE;
+%terminals COMMENT, SECTION_START, SECTION_END, IGNORE, INCLUDE, NMTOKEN;
 
 %typeof NAME, PI, STRING, IMPLIED, FIXED, REQUIRED = "String";
 %typeof Mixed, Cp, Children, Choice, Seq, AttType, NDataDecl = "DTDNode";
@@ -434,10 +434,10 @@ AttType
 		:}
 	;
 
-// NOTE: NAME is not the same as NMTOKEN, but we're using it here
-
 NmTokens
-	=	NmTokens PIPE NAME
+	=	NmTokens PIPE NMTOKEN
+	|	NmTokens PIPE NAME
+	|	NMTOKEN
 	|	NAME
 	;
 

@@ -46,7 +46,8 @@ public enum DTDTokenType
 	ENTITY_TYPE("keyword.operator.dtd"),	// 38
 	ENTITIES_TYPE("keyword.operator.dtd"),	// 39
 	NMTOKEN_TYPE("keyword.operator.dtd"),	// 40
-	NMTOKENS_TYPE("keyword.operator.dtd");	// 41	
+	NMTOKENS_TYPE("keyword.operator.dtd"),	// 41
+	NMTOKEN("keyword.operator.dtd");	// 42
 	
 	
 	//ENTITY_REF("source.dtd"),
