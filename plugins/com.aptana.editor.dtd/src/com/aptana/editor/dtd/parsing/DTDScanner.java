@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
@@ -31,6 +33,8 @@ public class DTDScanner extends Scanner
 			return this.fDocument;
 		}
 	}
+	
+	private static final Pattern ENTITY = Pattern.compile("%([^; \\t\\n]+);");
 	
 	private DTDParserScanner _sourceScanner;
 	private IDocument _document;
@@ -190,7 +194,35 @@ public class DTDScanner extends Scanner
 
 		Symbol result = this.createSymbol(data);
 
-		if (data == DTDTokenType.PE_REF)
+		if (data == DTDTokenType.STRING)
+		{
+			String text = (String) result.value;
+			StringBuffer buffer = new StringBuffer();
+			Matcher m = ENTITY.matcher(text);
+			
+			while (m.find())
+			{
+				String name = m.group(1);
+				String newText = this.getValue(name);
+				
+				if (newText == null)
+				{
+					newText = name;
+				}
+				
+				m.appendReplacement(buffer, newText);
+			}
+			
+			m.appendTail(buffer);
+			
+			result = new Symbol(
+				result.getId(),
+				result.getStart(),
+				result.getEnd(),
+				buffer.toString()
+			);
+		}
+		else if (data == DTDTokenType.PE_REF)
 		{
 			// grab key minus the leading '%' and trailing ';'
 			String key = (String) result.value;
