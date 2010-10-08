@@ -37,5 +37,5 @@ package com.aptana.editor.idl;
 
 public interface IIDLConstants
 {
-	public String CONTENT_TYPE_IDL = "com.aptana.contenttype.idl";
+	public String CONTENT_TYPE_IDL = "com.aptana.contenttype.idl"; //$NON-NLS-1$
 }
