@@ -5,5 +5,5 @@ Bundle-SymbolicName: com.aptana.editor.idl.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Aptana, Inc.
 Fragment-Host: com.aptana.editor.idl
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.junit
