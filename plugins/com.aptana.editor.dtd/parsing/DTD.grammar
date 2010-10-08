@@ -159,7 +159,7 @@ Mixed
 			
 			return zom;
 		:}
-	|	LPAREN PCDATA Names.n RPAREN STAR
+	|	LPAREN PCDATA PIPE Names.n RPAREN STAR
 		{:
 			DTDPCDataNode data = new DTDPCDataNode();
 			DTDZeroOrMoreNode zom = new DTDZeroOrMoreNode();

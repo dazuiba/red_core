@@ -104,7 +104,7 @@ public class DTDParserTests extends TestCase
 	 */
 	public void testZeroOrMorePCDataAndNamesElement()
 	{
-		String source = "<!ELEMENT svg (#PCDATA circle)*>";
+		String source = "<!ELEMENT svg (#PCDATA | circle)*>";
 		
 		IParseNode root = this.parse(
 			source,

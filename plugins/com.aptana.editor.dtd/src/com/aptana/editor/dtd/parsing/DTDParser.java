@@ -17,30 +17,30 @@ import com.aptana.parsing.IParseState;
 public class DTDParser extends Parser implements IParser {
 
 	static final ParsingTables PARSING_TABLES = new ParsingTables(
-		"U9pDbWTqL4KKXl#tkw6eG90EGeHG4aqbX8H0GZ1HYBs3lHUmOU$qtdllX0w1X6P7nOeDiNU" +
-		"G8aN5Y8WA#llFsrdPR1AJuF4StfxltNldthapSsTUCe2JWtcOYjMOYtmKO3acOZpkncWin1" +
-		"8impZaOILMO0tcO2Z6OYacO1GMOpPcOWeMOHLcOJx6O1gcOmOcOn9oiQ3S6OUNEsCbL4Dr3" +
-		"88FbL45LN42Ri2DQ08FJYtPnxwuptgy8RrARkt6l$Wzrhc#Kz003#41rD2yE#8cXE54d8Ir" +
-		"g8TO9A8NmZ4CtT4Cbw8cQg4HpiLvE1yNu49SX8jn2OaODp8ITT0SASKoXTh#w5Ou6VUMuej" +
-		"43kwtUfgL7QpCm9deX97kpADm6jeY6UrH6$4u6$tG6Lqm0j4u7TSX2Qc8GmBIqKAhQ8bhj8" +
-		"g6Q8qswXU5MzGl6UrSFShLat6zScVXDdJ56QhqbRW3L#51TETgt8L7SItkmM3KHNqqve$8v" +
-		"W#u6aqHWKoSXSjmZYhK1vVZ2joC7hWLj#CHt8c7qHEFuN4yWIVHc#lGLva6e3y68l0CWQDz" +
-		"DViJfhqAx96fXLbX3LM$fYfLIokiex7hQVG6MaKZxLfZdOW8pREfHevKvLjeZQsqbkZ$8ME" +
-		"ywfYesYMfUicgUOfgsqxvsoj$oRukyfNiARdLfrfuhA#IB6#nUQThLyqP2DVwiZH$HxCrSm" +
-		"yhDblOo3Xawsnb5iiKQWUYFQf8QJwlV04zL3h$pDpHtCFSRyqZhR5wcNgcknNt#unMLp9SC" +
-		"OvMqT3w79rqdtvrNTrnTPzElSdTMV6T57#qbzbVZqw$sJMFVXcYWzjYHd5qZaq57UrkXawd" +
-		"uqPxD8AHjNMwFTfZVwjvfnalxIC$iBwF$tGE44kCNX7qJ163n4Phx$5BfucL4RPzfvWk#gk" +
-		"jgMGtoMOYKhGCohTT7BHz7TkshOHnTuNO#ulQZiUs5rgxifLLhAngPPHUMwrUFIXVRx4v96" +
-		"VqlzKYAAwLY17LRAu3qiEjVgIClWcYaaYqTcihuwrC4lMjxXNDfUJRt1jiUpsOlpPmagtTq" +
-		"CfKAzkB3Y9Df8iCDUwJpBJ#Ja7pQMDEYiqVLPxr7s$eqHb3nZ7sxL6E67DMTfGZhcUGFka$" +
-		"h2Stn5vgPPwL1K6#BLRk3chRUQnZs$w5GVhU2lRTLC5u#nqW9wZjS91#gEmS$c#$bFnThLn" +
-		"JaNaT3#XPxnVyauVv1t$dRpp4NtcGl$002vXllJ#BGl6Js8#GX$kurvNRn5P#pi$uAJ$Xnz" +
-		"p3tVoEkxYJExYTtyhxjVXAV2c#4L#u$JuI7$83Lt#Vc$cUvBjyXs$pBMxYcto3h$CrEzQhx" +
-		"liLiP4lyoM#o2tSm1UiTwrO8vvohS3QLecLLdzUF2UU3Ld3C#9f7d7rFB62oxcCYxc82xc0" +
-		"kPpFUPpBEPpDMPp96PpEQPpAAPpCIPp82HpFSHpBCHpDKHp94HpEOHpA8HpCGHp80UpFVbp" +
-		"A9KhVIxSTHq1t7ezmTBivIb8fj86l2DakOSAh$ze6HpSCWoU8edQC#dHKR4VfiPAniZCbCs" +
-		"MRUqcSAmCukczvXK#t2OzmT6Vm1k7JlS4f0nFZrPqYWEFIrf8glvymztveIBCt3tFhI97Fq" +
-		"DczCJak2R8J59SecIYP9PyVnoNzE2RdRmqgHie=");
+		"U9pDbdTyL4KKXS$RtH01aT12G6e02IKX8K0Wf54COEyDx1rxxnXw2xtttdl7WWLxLspOK55" +
+		"1KB5X0PN3cTb9N9Q59EWVUVlxzjoPU#VEdPctoG1UBkPWCcPZBLPZ6TPWFCRYDep40Yp6Ke" +
+		"p12gp4Sgp3B0p1Q2p24ep32Cp4T4p2Ggp23Cp5A4p1L4p3H4p0FCmlTiRyOcSiWmeu0GCHG" +
+		"3IEGrcKmrMu6atWGvl8FlR6NSxZ3niLkVTY7a1bL4SIMk9Ud8ZQk0SLLNSEha4KokFumzfr" +
+		"KH$denfwuqwSZZDm9ix2sJW7v#8y4easKqFL6ACQYygrmTPK4wVWRZSoeJ33UcUrHmqCTNQ" +
+		"cqsoSYgheYcuORZEa8OFVenckH2LKGIqaenDQOHZkGrCqnnNeYooqG0fIqHgDq1QFuYGqHa" +
+		"zfErNQKvKsqQUDrSlqdOkEeZEkmuD8nqLQSNVqmCs8vHf5tuhBSGDkno34SGyQe0xgyGV4e" +
+		"mDEHXTSYDDmWNelmRLu1DVZHboAEt0JRi43k1yFuM7qGd#kns3qGPvozSC0U3fHSp9HEgM2" +
+		"qp7xOzPMKJjPIMTKHIkkXbYTLPnsfAREgfPEguxEevxgYzUC3RKsiwu4hUB$pzX2kvgYlK$" +
+		"LphRM7gLf7zjfdlQQ9xAlgtoHFP5x$O2gRgOJIrHUKtbutU5j4rD7vnIdTOJN2vSfIRayvI" +
+		"ugLx2cwjgpQeKZ2pIpqFBhpGhtrbRLPi#26KnDFkrvXjtJQ7qwY4pbDNlkIMEjPSZMRo76Z" +
+		"gXYrPFwNRq5QaxIa2vYRQmXHYsVeWDwmxlOa$FPk2pDvRCZC$GsPiblCkIA#ZQYgSuye8$9" +
+		"rj566gkghIjW8u2DUR1FFx7Os2L1pmgnHVHrxMr1zUASrdFzoqL$iKDzzKK3sHEaTKKZqJW" +
+		"avvTYlxDxEDqUOUwTOUrTXxOzl#i$uDfbd4OxBUSqGLHmTiMGV4OsX#LiSgIz28jh9f94ZC" +
+		"krLtPbvojVnDXaKLQak7PBfwbEMuaQpeuIyJBotJohdGuIU#Hhw#8gEKrtcY4oHPR85Zdg$" +
+		"4NQqVaxXTJJd7fSteJYhB#qeSUyRrd7EBPxCMBomjexZnAxASIUzX$MD2kiFT$fKgShGtpB" +
+		"dUu9wTjnh7D7oBMxX6EtbZ3U$HRGBQIF8VQ#edDuWQFa7#DqRKdgAWtesHWK$iE$k9$x#2V" +
+		"$uE$yZNlvArTpbVFgrysVnK$YHnpsy3lkjgg$llo27$CZRkM7$82x#2rtSWU$uTVyYjlbtI" +
+		"O#4v#ApyKdTjpxuZs#Q#rt#3RVahx9D$WwN#EhV8KlyoM#wEPwmNu$BvxZPZxBPxY5J$Cfv" +
+		"rqdrWgxBcvmlIl52cTl4a#A9yBMyBXuZ7zRM$znk8nBkOGBkO3pEOzpEOUpEOipEOFJEOrJ" +
+		"EOMJEOaJEO7ZEOvZEOQZEOeZEOB3EOpv7CeX7Cn17CW1xCz#xCi#NCn5IjzBDnvFGFSUd$1" +
+		"qm$cNr2FG2e53w6mf8$pw$stmTDCm#48ujDrSOx8LcoqxKPgeTeuqHsrp$qcoMe2dEvTV17" +
+		"GpyGbpL$274D3DmIi24#FNlQA0u1sZZQEj$46YTAyBacxlC7vxwqYJpz15TWl56vBLJbPSY" +
+		"jJSeZh95yIpP9PYkXq42pz0m0==");
 
 	private DTDScanner _scanner;
 	
@@ -179,9 +179,9 @@ public class DTDParser extends Parser implements IParser {
 			
 			return zom;
 			}
-			case 18: // Mixed = LPAREN PCDATA Names.n RPAREN STAR
+			case 18: // Mixed = LPAREN PCDATA PIPE Names.n RPAREN STAR
 			{
-					final Symbol _symbol_n = _symbols[offset + 3];
+					final Symbol _symbol_n = _symbols[offset + 4];
 					final ArrayList n = (ArrayList) _symbol_n.value;
 					
 			DTDPCDataNode data = new DTDPCDataNode();

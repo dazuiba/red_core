@@ -8,11 +8,11 @@ public enum DTDTokenType
 	EOF(""),	// 0
 	NAME("source.dtd"),	// 1
 	GREATER_THAN("source.dtd"), // 2
-	STRING("keyword.operator.dtd"),	// 3
-	LPAREN("source.dtd"),	 // 4
+	LPAREN("source.dtd"),	 // 3
+	STRING("keyword.operator.dtd"),	// 4
 	RPAREN("source.dtd"),	// 5
-	STAR("source.dtd"),	// 6
-	PIPE("source.dtd"),	// 7
+	PIPE("source.dtd"),	// 6
+	STAR("source.dtd"),	// 7
 	ENTITY("keyword.operator.dtd"),	// 8
 	ELEMENT("keyword.operator.dtd"),	// 9
 	SECTION_START("keyword.operator.dtd"),	// 10
@@ -28,10 +28,10 @@ public enum DTDTokenType
 	LBRACKET("keyword.operator.dtd"),	// 20
 	SECTION_END("keyword.operator.dtd"),	// 21
 	COMMA("source.dtd"),	// 22
-	PERCENT("keyword.operator.dtd"),	// 23
-	EMPTY("keyword.operator.dtd"),	// 24
-	ANY("keyword.operator.dtd"),	// 25
-	PCDATA("keyword.operator.dtd"),	// 26
+	PCDATA("keyword.operator.dtd"),	// 23
+	PERCENT("keyword.operator.dtd"),	// 24
+	EMPTY("keyword.operator.dtd"),	// 25
+	ANY("keyword.operator.dtd"),	// 26
 	INCLUDE("keyword.operator.dtd"),	// 27
 	IGNORE("keyword.operator.dtd"),	// 28
 	FIXED("keyword.operator.dtd"),	// 29
