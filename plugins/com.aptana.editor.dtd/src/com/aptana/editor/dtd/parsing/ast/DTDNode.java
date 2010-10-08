@@ -38,8 +38,9 @@ public class DTDNode extends ParseNode
 		// recognized properly
 	}
 
-	/**
-	 * getNodeType
+	/*
+	 * (non-Javadoc)
+	 * @see com.aptana.parsing.ast.ParseNode#getNodeType()
 	 */
 	public short getNodeType()
 	{
