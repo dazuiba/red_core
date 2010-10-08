@@ -7,6 +7,7 @@ import java.util.Stack;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
@@ -124,7 +125,7 @@ public class DTDScanner extends Scanner
 
 		while (this._nestedScanners.size() > 0)
 		{
-			DTDSourceScanner nestedScanner = this._nestedScanners.peek();
+			DTDParserScanner nestedScanner = this._nestedScanners.peek();
 
 			token = nestedScanner.nextToken();
 			
@@ -132,6 +133,18 @@ public class DTDScanner extends Scanner
 			{
 				this._nestedScanners.pop();
 				token = null;
+				
+				if (Platform.inDevelopmentMode())
+				{
+					int end = nestedScanner.getTokenOffset() + nestedScanner.getTokenLength();
+					int length = nestedScanner.getDocument().getLength();
+					
+					if (end != length)
+					{
+						System.out.println("end = " + end + ", length = " + length);
+						System.out.println(nestedScanner.getDocument().get());
+					}
+				}
 			}
 			else
 			{
