@@ -51,14 +51,14 @@ public class IDLParser extends Parser implements IParser {
 		"0jsPpDi9N8Xk66CE8pr6O3yYbAucha4VV7SDgsnHJIK0lzN8$iXHoE4X0lSVEH1LN50BtV4" +
 		"n03c0yO7m1Y9TnJKOdSDescL8XzwCzw3V0qxbTosTpiS=");
 
-	private IDLScanner _scanner;
-	
 	/*
 	 * (non-Javadoc)
 	 * @see com.aptana.parsing.IParser#parse(com.aptana.parsing.IParseState)
 	 */
 	public synchronized IParseRootNode parse(IParseState parseState) throws java.lang.Exception
 	{
+		IDLScanner scanner = new IDLScanner();
+		
 		// grab source
 		char[] characters = parseState.getSource();
 
@@ -66,10 +66,10 @@ public class IDLParser extends Parser implements IParser {
 		String source = (characters != null) ? new String(characters) : "";
 
 		// send source to the scanner
-		this._scanner.setSource(source);
+		scanner.setSource(source);
 
 		// parse
-		IParseRootNode result = (IParseRootNode) parse(this._scanner);
+		IParseRootNode result = (IParseRootNode) parse(scanner);
 		
 		// save reference to result
 		parseState.setParseResult(result);
@@ -79,9 +79,6 @@ public class IDLParser extends Parser implements IParser {
 
 	public IDLParser() {
 		super(PARSING_TABLES);
-
-
-		this._scanner = new IDLScanner();
 	}
 
 	protected Symbol invokeReduceAction(int rule_num, int offset) {

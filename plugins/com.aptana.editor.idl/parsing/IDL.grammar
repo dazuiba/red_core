@@ -11,14 +11,14 @@
 %implements "IParser";
 
 %embed {:
-	private IDLScanner _scanner;
-	
 	/*
 	 * (non-Javadoc)
 	 * @see com.aptana.parsing.IParser#parse(com.aptana.parsing.IParseState)
 	 */
 	public synchronized IParseRootNode parse(IParseState parseState) throws java.lang.Exception
 	{
+		IDLScanner scanner = new IDLScanner();
+		
 		// grab source
 		char[] characters = parseState.getSource();
 
@@ -26,20 +26,16 @@
 		String source = (characters != null) ? new String(characters) : "";
 
 		// send source to the scanner
-		this._scanner.setSource(source);
+		scanner.setSource(source);
 
 		// parse
-		IParseRootNode result = (IParseRootNode) parse(this._scanner);
+		IParseRootNode result = (IParseRootNode) parse(scanner);
 		
 		// save reference to result
 		parseState.setParseResult(result);
 		
 		return result;
 	}
-:};
-
-%init {:
-		this._scanner = new IDLScanner();
 :};
 
 %terminals ANY, ATTRIBUTE, BOOLEAN, CONST, DOMSTRING, EXCEPTION, FLOAT, GETRAISES, IN, INTERFACE, LONG;
