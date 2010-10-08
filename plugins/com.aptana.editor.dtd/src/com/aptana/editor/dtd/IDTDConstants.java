@@ -37,5 +37,5 @@ package com.aptana.editor.dtd;
 
 public interface IDTDConstants
 {
-	public String CONTENT_TYPE_DTD = "com.aptana.contenttype.dtd";
+	public String CONTENT_TYPE_DTD = "com.aptana.contenttype.dtd"; //$NON-NLS-1$
 }

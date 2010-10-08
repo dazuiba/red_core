@@ -51,20 +51,20 @@ public class DTDDocumentProvider extends CommonDocumentProvider
 	public void connect(Object element) throws CoreException
 	{
 		super.connect(element);
-		
+
 		IDocument document = this.getDocument(element);
-		
+
 		if (document != null)
 		{
 			IDocumentPartitioner partitioner = new FastPartitioner(new DTDPartitionScanner(), DTDSourceConfiguration.CONTENT_TYPES);
-			
+
 			partitioner.connect(document);
 			document.setDocumentPartitioner(partitioner);
-			
+
 			CommonEditorPlugin.getDefault().getDocumentScopeManager().registerConfiguration(document, DTDSourceConfiguration.getDefault());
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.CommonDocumentProvider#getDefaultContentType(java.lang.String)

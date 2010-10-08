@@ -9,7 +9,7 @@
             default="true"
             extensions="dtd"
             id="com.aptana.editor.dtd"
-            name="Aptana DTD Editor">
+            name="%editor.name">
          <contentTypeBinding
                contentTypeId="com.aptana.contenttype.dtd">
          </contentTypeBinding>
@@ -21,7 +21,7 @@
             base-type="org.eclipse.core.runtime.text"
             file-extensions="dtd"
             id="com.aptana.contenttype.dtd"
-            name="DTD Source"
+            name="%content-type.name"
             priority="normal">
       </content-type>
    </extension>

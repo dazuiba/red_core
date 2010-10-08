@@ -1,3 +1,37 @@
+/**
+ * This file Copyright (c) 2005-2010 Aptana, Inc. This program is
+ * dual-licensed under both the Aptana Public License and the GNU General
+ * Public license. You may elect to use one or the other of these licenses.
+ * 
+ * This program is distributed in the hope that it will be useful, but
+ * AS-IS and WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, TITLE, or
+ * NONINFRINGEMENT. Redistribution, except as permitted by whichever of
+ * the GPL or APL you select, is prohibited.
+ *
+ * 1. For the GPL license (GPL), you can redistribute and/or modify this
+ * program under the terms of the GNU General Public License,
+ * Version 3, as published by the Free Software Foundation.  You should
+ * have received a copy of the GNU General Public License, Version 3 along
+ * with this program; if not, write to the Free Software Foundation, Inc., 51
+ * Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+ * 
+ * Aptana provides a special exception to allow redistribution of this file
+ * with certain other free and open source software ("FOSS") code and certain additional terms
+ * pursuant to Section 7 of the GPL. You may view the exception and these
+ * terms on the web at http://www.aptana.com/legal/gpl/.
+ * 
+ * 2. For the Aptana Public License (APL), this program and the
+ * accompanying materials are made available under the terms of the APL
+ * v1.0 which accompanies this distribution, and is available at
+ * http://www.aptana.com/legal/apl/.
+ * 
+ * You may view the GPL, Aptana's exception and additional terms, and the
+ * APL in the file titled license.html at the root of the corresponding
+ * plugin containing this source file.
+ * 
+ * Any modifications to this file must keep this entire header intact.
+ */
 package com.aptana.editor.dtd.parsing;
 
 import java.io.IOException;
@@ -28,15 +62,15 @@ public class DTDScanner extends Scanner
 		{
 			return new Token(type);
 		}
-		
+
 		protected IDocument getDocument()
 		{
 			return this.fDocument;
 		}
 	}
-	
-	private static final Pattern ENTITY = Pattern.compile("%([^; \\t\\n]+);");
-	
+
+	private static final Pattern ENTITY = Pattern.compile("%([^; \\t\\n]+);"); //$NON-NLS-1$
+
 	private DTDParserScanner _sourceScanner;
 	private IDocument _document;
 	private Map<String, String> _entities;
@@ -77,7 +111,7 @@ public class DTDScanner extends Scanner
 	{
 		DTDParserScanner scanner;
 		IDocument document;
-		
+
 		if (this._nestedScanners.size() > 0)
 		{
 			scanner = this._nestedScanners.peek();
@@ -88,7 +122,7 @@ public class DTDScanner extends Scanner
 			scanner = this._sourceScanner;
 			document = this._document;
 		}
-		
+
 		int offset = scanner.getTokenOffset();
 		int length = scanner.getTokenLength();
 		DTDTokenType type = (data == null) ? DTDTokenType.EOF : (DTDTokenType) data;
@@ -113,7 +147,7 @@ public class DTDScanner extends Scanner
 			throw new Scanner.Exception(e.getLocalizedMessage());
 		}
 	}
-	
+
 	/**
 	 * getToken
 	 * 
@@ -128,20 +162,20 @@ public class DTDScanner extends Scanner
 			DTDParserScanner nestedScanner = this._nestedScanners.peek();
 
 			token = nestedScanner.nextToken();
-			
+
 			if (token.isWhitespace() == false && token.getData() == null)
 			{
 				this._nestedScanners.pop();
 				token = null;
-				
+
 				if (Platform.inDevelopmentMode())
 				{
 					int end = nestedScanner.getTokenOffset() + nestedScanner.getTokenLength();
 					int length = nestedScanner.getDocument().getLength();
-					
+
 					if (end != length)
 					{
-						System.out.println("end = " + end + ", length = " + length);
+						System.out.println("end = " + end + ", length = " + length); //$NON-NLS-1$ //$NON-NLS-2$
 						System.out.println(nestedScanner.getDocument().get());
 					}
 				}
@@ -188,7 +222,7 @@ public class DTDScanner extends Scanner
 	{
 		return (data != null && ((DTDTokenType) data) == DTDTokenType.COMMENT);
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see beaver.Scanner#nextToken()
@@ -212,28 +246,23 @@ public class DTDScanner extends Scanner
 			String text = (String) result.value;
 			StringBuffer buffer = new StringBuffer();
 			Matcher m = ENTITY.matcher(text);
-			
+
 			while (m.find())
 			{
 				String name = m.group(1);
 				String newText = this.getValue(name);
-				
+
 				if (newText == null)
 				{
 					newText = name;
 				}
-				
+
 				m.appendReplacement(buffer, newText);
 			}
-			
+
 			m.appendTail(buffer);
-			
-			result = new Symbol(
-				result.getId(),
-				result.getStart(),
-				result.getEnd(),
-				buffer.toString()
-			);
+
+			result = new Symbol(result.getId(), result.getStart(), result.getEnd(), buffer.toString());
 		}
 		else if (data == DTDTokenType.PE_REF)
 		{
