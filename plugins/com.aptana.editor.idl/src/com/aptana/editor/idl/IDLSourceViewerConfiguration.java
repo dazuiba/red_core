@@ -87,7 +87,6 @@ public class IDLSourceViewerConfiguration extends CommonSourceViewerConfiguratio
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.ITopContentTypesProvider#getTopContentTypes()
 	 */
-	@Override
 	public String[][] getTopContentTypes()
 	{
 		return IDLSourceConfiguration.getDefault().getTopContentTypes();

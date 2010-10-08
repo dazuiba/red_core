@@ -40,7 +40,10 @@ public class DTDOperatorDetector implements IWordDetector
 {
 	private int _position;
 
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordPart(char)
+	 */
 	public boolean isWordPart(char c)
 	{
 		this._position++;
@@ -74,7 +77,10 @@ public class DTDOperatorDetector implements IWordDetector
 		return false;
 	}
 
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordStart(char)
+	 */
 	public boolean isWordStart(char c)
 	{
 		this._position = 0;

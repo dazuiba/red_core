@@ -87,7 +87,6 @@ public class DTDSourceViewerConfiguration extends CommonSourceViewerConfiguratio
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.ITopContentTypesProvider#getTopContentTypes()
 	 */
-	@Override
 	public String[][] getTopContentTypes()
 	{
 		return DTDSourceConfiguration.getDefault().getTopContentTypes();

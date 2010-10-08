@@ -57,7 +57,6 @@ public class DTDEntityDetector implements IWordDetector
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordPart(char)
 	 */
-	@Override
 	public boolean isWordPart(char c)
 	{
 		boolean result = false;
@@ -89,7 +88,6 @@ public class DTDEntityDetector implements IWordDetector
 	 * (non-Javadoc)
 	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordStart(char)
 	 */
-	@Override
 	public boolean isWordStart(char c)
 	{
 		this._index = 0;

@@ -38,13 +38,19 @@ import org.eclipse.jface.text.rules.IWordDetector;
 
 class IDLNumberDetector implements IWordDetector
 {
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordStart(char)
+	 */
 	public boolean isWordStart(char c)
 	{
 		return Character.isDigit(c) || c == '-';
 	}
 
-	@Override
+	/*
+	 * (non-Javadoc)
+	 * @see org.eclipse.jface.text.rules.IWordDetector#isWordPart(char)
+	 */
 	public boolean isWordPart(char c)
 	{
 		if (isWordStart(c) || c == '.')

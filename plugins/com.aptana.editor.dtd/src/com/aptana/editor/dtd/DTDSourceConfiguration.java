@@ -100,7 +100,6 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.IPartitioningConfiguration#createSubPartitionScanner()
 	 */
-	@Override
 	public ISubPartitionScanner createSubPartitionScanner()
 	{
 		return new SubPartitionScanner(partitioningRules, CONTENT_TYPES, new Token(DEFAULT));
@@ -110,7 +109,6 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.IPartitioningConfiguration#getContentTypes()
 	 */
-	@Override
 	public String[] getContentTypes()
 	{
 		return CONTENT_TYPES;
@@ -120,7 +118,6 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.IPartitioningConfiguration#getDocumentContentType(java.lang.String)
 	 */
-	@Override
 	public String getDocumentContentType(String contentType)
 	{
 		if (contentType.startsWith(PREFIX))
@@ -150,7 +147,6 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.IPartitioningConfiguration#getPartitioningRules()
 	 */
-	@Override
 	public IPredicateRule[] getPartitioningRules()
 	{
 		return partitioningRules;
@@ -171,7 +167,6 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	 * (non-Javadoc)
 	 * @see com.aptana.editor.common.ITopContentTypesProvider#getTopContentTypes()
 	 */
-	@Override
 	public String[][] getTopContentTypes()
 	{
 		return TOP_CONTENT_TYPES;
@@ -183,7 +178,6 @@ public class DTDSourceConfiguration implements IPartitioningConfiguration, ISour
 	 * com.aptana.editor.common.ISourceViewerConfiguration#setupPresentationReconciler(org.eclipse.jface.text.presentation
 	 * .PresentationReconciler, org.eclipse.jface.text.source.ISourceViewer)
 	 */
-	@Override
 	public void setupPresentationReconciler(PresentationReconciler reconciler, ISourceViewer sourceViewer)
 	{
 		DefaultDamagerRepairer dr = new ThemeingDamagerRepairer(getDTDScanner());
