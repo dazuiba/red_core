@@ -13,7 +13,7 @@
 
 %embed {:
 	private DTDScanner _scanner;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.aptana.parsing.IParser#parse(com.aptana.parsing.IParseState)
@@ -21,7 +21,7 @@
 	public synchronized IParseRootNode parse(IParseState parseState) throws java.lang.Exception
 	{
 		this._scanner = new DTDScanner();
-		
+
 		// grab source
 		char[] characters = parseState.getSource();
 
@@ -35,10 +35,10 @@
 		{
 			// parse
 			IParseRootNode result = (IParseRootNode) parse(this._scanner);
-			
+
 			// save reference to result
 			parseState.setParseResult(result);
-			
+
 			return result;
 		}
 		finally
@@ -47,7 +47,7 @@
 			this._scanner = null;
 		}
 	}
-	
+
 	protected void addChildren(IParseNode node, ArrayList children)
 	{
 		if (node != null && children != null)
@@ -116,7 +116,7 @@ MarkupDecl
 	|	PI.p
 	{:
 		String content = p.substring(2, p.length() - 2);
-		
+
 		return new DTDProcessingInstructionNode(content);
 	:}
 	|	COMMENT
@@ -128,33 +128,33 @@ ElementDecl
 	=	ELEMENT NAME.n EMPTY GREATER_THAN
 		{:
 			DTDNode decl = new DTDElementDeclNode(n);
-			
+
 			decl.addChild(new DTDEmptyNode());
-			
+
 			return decl;
 		:}
 	|	ELEMENT NAME.n ANY GREATER_THAN
 		{:
 			DTDNode decl = new DTDElementDeclNode(n);
-			
+
 			decl.addChild(new DTDAnyNode());
-			
+
 			return decl;
 		:}
 	|	ELEMENT NAME.n Mixed.m GREATER_THAN
 		{:
 			DTDNode decl = new DTDElementDeclNode(n);
-			
+
 			decl.addChild(m);
-			
+
 			return decl;
 		:}
 	|	ELEMENT NAME.n Children.c GREATER_THAN
 		{:
 			DTDNode decl = new DTDElementDeclNode(n);
-			
+
 			decl.addChild(c);
-			
+
 			return decl;
 		:}
 	;
@@ -164,19 +164,19 @@ Mixed
 		{:
 			DTDPCDataNode data = new DTDPCDataNode();
 			DTDZeroOrMoreNode zom = new DTDZeroOrMoreNode();
-			
+
 			zom.addChild(data);
-			
+
 			return zom;
 		:}
 	|	LPAREN PCDATA PIPE Names.n RPAREN STAR
 		{:
 			DTDPCDataNode data = new DTDPCDataNode();
 			DTDZeroOrMoreNode zom = new DTDZeroOrMoreNode();
-			
+
 			zom.addChild(data);
 			this.addChildren(zom, n);
-			
+
 			return zom;
 		:}
 	|	LPAREN PCDATA RPAREN
@@ -184,14 +184,14 @@ Mixed
 			return new DTDPCDataNode();
 		:}
 	;
-	
+
 Names
 	=	Names PIPE NAME
 		{:
 			String name = (String) _symbols[offset + 3].value;
 			DTDElementNode element = new DTDElementNode(name);
 			((ArrayList) _symbols[offset + 1].value).add(element);
-			
+
 			return _symbols[offset + 1];
 		:}
 	|	NAME
@@ -199,9 +199,9 @@ Names
 			ArrayList lst = new ArrayList();
 			String name = (String) _symbols[offset + 1].value;
 			DTDElementNode element = new DTDElementNode(name);
-			
+
 			lst.add(element);
-			
+
 			return new Symbol(lst);
 		:}
 	;
@@ -211,50 +211,50 @@ Children
 	|	Choice.c QUESTION
 		{:
 			DTDOptionalNode result = new DTDOptionalNode();
-			
+
 			result.addChild(c);
-			
+
 			return result;
 		:}
 	|	Choice.c STAR
 		{:
 			DTDZeroOrMoreNode result = new DTDZeroOrMoreNode();
-			
+
 			result.addChild(c);
-			
+
 			return result;
 		:}
 	|	Choice.c PLUS
 		{:
 			DTDOneOrMoreNode result = new DTDOneOrMoreNode();
-			
+
 			result.addChild(c);
-			
+
 			return result;
 		:}
 	|	Seq
 	|	Seq.s QUESTION
 		{:
 			DTDOptionalNode result = new DTDOptionalNode();
-			
+
 			result.addChild(s);
-			
+
 			return result;
 		:}
 	|	Seq.s STAR
 		{:
 			DTDZeroOrMoreNode result = new DTDZeroOrMoreNode();
-			
+
 			result.addChild(s);
-			
+
 			return result;
 		:}
 	|	Seq.s PLUS
 		{:
 			DTDOneOrMoreNode result = new DTDOneOrMoreNode();
-			
+
 			result.addChild(s);
-			
+
 			return result;
 		:}
 	;
@@ -265,12 +265,12 @@ Choice
 			ArrayList cps = (ArrayList) _symbols[offset + 3].value;
 			DTDOrExpressionNode result = new DTDOrExpressionNode();
 
-			// pre-pend leading cp			
+			// pre-pend leading cp
 			cps.add(0, c);
-			
+
 			// add all children to or-expr
 			this.addChildren(result, cps);
-			
+
 			return result;
 		:}
 	;
@@ -279,15 +279,15 @@ ChoiceCps
 	=	ChoiceCps PIPE Cp.c
 		{:
 			((ArrayList) _symbols[offset + 1].value).add(c);
-			
+
 			return _symbols[offset + 1];
 		:}
 	|	PIPE Cp
 		{:
 			ArrayList lst = new ArrayList();
-			
+
 			lst.add(_symbols[offset + 2]);
-			
+
 			return new Symbol(lst);
 		:}
 	;
@@ -302,29 +302,29 @@ Seq
 			ArrayList cps = (ArrayList) _symbols[offset + 3].value;
 			DTDAndExpressionNode result = new DTDAndExpressionNode();
 
-			// pre-pend leading cp			
+			// pre-pend leading cp
 			cps.add(0, c);
-			
+
 			// add all children to or-expr
 			this.addChildren(result, cps);
-			
+
 			return result;
 		:}
 	;
-	
+
 SeqCps
 	=	SeqCps COMMA Cp.c
 		{:
 			((ArrayList) _symbols[offset + 1].value).add(c);
-			
+
 			return _symbols[offset + 1];
 		:}
 	|	COMMA Cp
 		{:
 			ArrayList lst = new ArrayList();
-			
+
 			lst.add(_symbols[offset + 2]);
-			
+
 			return new Symbol(lst);
 		:}
 	;
@@ -337,19 +337,19 @@ Cp
 	|	NAME.n QUESTION
 		{:
 			DTDOptionalNode node = new DTDOptionalNode();
-			
+
 			node.addChild(new DTDElementNode(n));
 		:}
 	|	NAME.n STAR
 		{:
 			DTDZeroOrMoreNode node = new DTDZeroOrMoreNode();
-			
+
 			node.addChild(new DTDElementNode(n));
 		:}
 	|	NAME.n PLUS
 		{:
 			DTDOneOrMoreNode node = new DTDOneOrMoreNode();
-			
+
 			node.addChild(new DTDElementNode(n));
 		:}
 	|	Children
@@ -367,13 +367,13 @@ AttlistDecl
 			Symbol _symbol_a = _symbols[offset + 3];
 			ArrayList defs = (ArrayList) _symbol_a.value;
 			DTDAttListDeclNode result = new DTDAttListDeclNode(n);
-			
+
 			this.addChildren(result, defs);
-			
+
 			return result;
 		:}
 	;
-	
+
 AttDefs
 	=	AttDefs AttDef
 	|	AttDef
@@ -470,9 +470,9 @@ GEDecl
 	|	ENTITY NAME.n ExternalID NDataDecl.nd GREATER_THAN
 		{:
 			DTDGeneralEntityDeclNode result = new DTDGeneralEntityDeclNode(n);
-			
+
 			result.addChild(nd);
-			
+
 			return result;
 		:}
 	;
@@ -482,7 +482,7 @@ PEDecl
 		{:
 			String value = s.substring(1, s.length() - 1);
 			this._scanner.register(n, value);
-			
+
 			return new DTDParsedEntityDeclNode(n);
 		:}
 	|	ENTITY PERCENT NAME.n ExternalID GREATER_THAN
@@ -528,26 +528,26 @@ ConditionalSect
 	;
 
 IncludeSect
- 	=	SECTION_START INCLUDE LBRACKET SECTION_END
- 		{:
- 			return new DTDIncludeSectionNode();
- 		:}
- 	|	SECTION_START INCLUDE LBRACKET Declarations.d SECTION_END
- 		{:
- 			DTDIncludeSectionNode result = new DTDIncludeSectionNode();
- 			
- 			for (Symbol s : d)
- 			{
- 				Object v = s.value;
- 				
- 				if (v instanceof IParseNode)
- 				{
- 					result.addChild((IParseNode) v);
- 				}
- 			}
- 			
- 			return result;
- 		:}
+	=	SECTION_START INCLUDE LBRACKET SECTION_END
+		{:
+			return new DTDIncludeSectionNode();
+			:}
+	|	SECTION_START INCLUDE LBRACKET Declarations.d SECTION_END
+		{:
+			DTDIncludeSectionNode result = new DTDIncludeSectionNode();
+
+			for (Symbol s : d)
+			{
+				Object v = s.value;
+
+				if (v instanceof IParseNode)
+				{
+					result.addChild((IParseNode) v);
+				}
+			}
+
+			return result;
+		:}
 	;
 
 IgnoreSect
