@@ -50,6 +50,8 @@ public class DTDParser extends Parser implements IParser {
 	 */
 	public synchronized IParseRootNode parse(IParseState parseState) throws java.lang.Exception
 	{
+		this._scanner = new DTDScanner();
+		
 		// grab source
 		char[] characters = parseState.getSource();
 
@@ -59,13 +61,21 @@ public class DTDParser extends Parser implements IParser {
 		// send source to the scanner
 		this._scanner.setSource(source);
 
-		// parse
-		IParseRootNode result = (IParseRootNode) parse(this._scanner);
-		
-		// save reference to result
-		parseState.setParseResult(result);
-		
-		return result;
+		try
+		{
+			// parse
+			IParseRootNode result = (IParseRootNode) parse(this._scanner);
+			
+			// save reference to result
+			parseState.setParseResult(result);
+			
+			return result;
+		}
+		finally
+		{
+			// loose reference for GC
+			this._scanner = null;
+		}
 	}
 	
 	protected void addChildren(IParseNode node, ArrayList children)
